@@ -1,17 +1,17 @@
 # Maintainer: Extrems <extrems@extremscorner.org>
 
-_pkgname=libogc2
-pkgname="${_pkgname}-git"
-pkgver=r2054.b54f960
-pkgrel=3
-pkgdesc='C library for GameCube and Wii targeting devkitPPC.'
+_pkgname=libfat
+pkgname="libogc2-${_pkgname}-git"
+pkgver=r253.c867be5
+pkgrel=1
+pkgdesc='FAT library for GameCube and Wii.'
 arch=('any')
 url="https://github.com/extremscorner/${_pkgname}"
-license=('custom')
+license=('BSD-3-Clause')
 groups=('gamecube-dev' 'wii-dev')
-depends=('devkitPPC>=r42' 'ppc-libmad')
-provides=("${_pkgname}")
-conflicts=("${_pkgname}")
+depends=('devkitPPC>=r42' 'libogc2')
+provides=("libogc2-${_pkgname}")
+conflicts=("libogc2-${_pkgname}")
 options=(!strip libtool staticlibs)
 source=("git+${url}.git")
 sha256sums=('SKIP')
@@ -22,9 +22,9 @@ pkgver() {
 }
 
 build() {
-	make -C "${srcdir}/${_pkgname}"
+	make -C "${srcdir}/${_pkgname}" ogc-release
 }
 
 package() {
-	make -C "${srcdir}/${_pkgname}" DESTDIR="${pkgdir}" install
+	make -C "${srcdir}/${_pkgname}" DESTDIR="${pkgdir}" ogc-install
 }
