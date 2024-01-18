@@ -3,7 +3,7 @@
 _pkgname=libntfs
 pkgname="libogc2-${_pkgname}-git"
 pkgver=r16.ed1fb27
-pkgrel=1
+pkgrel=2
 pkgdesc='Port of the NTFS-3G driver to the Nintendo GameCube/Wii.'
 arch=('any')
 url="https://github.com/extremscorner/${_pkgname}"
@@ -22,9 +22,12 @@ pkgver() {
 }
 
 build() {
-	make -C "${srcdir}/${_pkgname}"
+	cd "${srcdir}/${_pkgname}"
+	make
 }
 
 package() {
-	make -C "${srcdir}/${_pkgname}" DESTDIR="${pkgdir}" install
+	cd "${srcdir}/${_pkgname}"
+	make DESTDIR="${pkgdir}" install
+	install -Dm 644 LICENSE -t "${pkgdir}/opt/devkitpro/libogc2/share/licenses/${_pkgname}"
 }
