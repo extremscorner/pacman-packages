@@ -1,0 +1,27 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=({gamecube,wii}-examples)
+pkgname=libogc2-examples
+pkgver=20240118
+pkgrel=1
+pkgdesc='C library for GameCube and Wii targeting devkitPPC. (examples)'
+arch=('any')
+url='https://github.com/extremscorner/libogc2'
+license=('custom')
+groups=('gamecube-dev' 'wii-dev')
+depends=('devkitPPC' 'libogc2' 'libogc2-libfat' 'ppc-libmad' 'ppc-libvorbisidec')
+options=(!strip libtool staticlibs)
+
+for i in ${!_pkgname[@]}; do
+	source+=("${_pkgname[i]}-${pkgver}.tar.gz::https://github.com/extremscorner/${_pkgname[i]}/archive/refs/tags/v${pkgver}.tar.gz")
+done
+
+sha256sums=('f92eb1c34fda34820cc78443f17c7f327df1b1974a0bc1fda873d82f179a404c'
+			'8c6afa95101f6336a630841722fce6a5e5b26a827c44fbf11338dd3ce6e2291f')
+
+package() {
+	mkdir -p "${pkgdir}/opt/devkitpro/libogc2/share/doc/libogc2/examples"
+	for i in ${!_pkgname[@]}; do
+		cp -r "${_pkgname[i]}-${pkgver}" "${pkgdir}/opt/devkitpro/libogc2/share/doc/libogc2/examples/${_pkgname[i]%-examples}"
+	done
+}
