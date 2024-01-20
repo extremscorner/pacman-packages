@@ -3,13 +3,15 @@
 _pkgname=({gamecube,wii}-examples)
 pkgname=libogc2-examples
 pkgver=20240118
-pkgrel=1
+pkgrel=2
 pkgdesc='C library for GameCube and Wii targeting devkitPPC. (examples)'
 arch=('any')
 url='https://github.com/extremscorner/libogc2'
 license=('custom')
 groups=('gamecube-dev' 'wii-dev')
-depends=('devkitPPC' 'libogc2' 'libogc2-libfat' 'ppc-libmad' 'ppc-libvorbisidec')
+depends=('devkitPPC' 'gamecube-tools' 'libogc2' 'libogc2-libfat' 'ppc-libmad' 'ppc-libvorbisidec')
+optdepends=('devkitPPC-gdb: for debugging'
+			'wiiload: for run target')
 options=(!strip libtool staticlibs)
 
 for i in ${!_pkgname[@]}; do
