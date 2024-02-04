@@ -3,7 +3,7 @@
 _pkgname=({gamecube,wii}-examples)
 pkgname=libogc2-examples
 pkgver=20240118
-pkgrel=3
+pkgrel=4
 pkgdesc='C library for GameCube and Wii targeting devkitPPC. (examples)'
 arch=('any')
 url='https://github.com/extremscorner/libogc2'
@@ -28,8 +28,8 @@ prepare() {
 }
 
 package() {
-	mkdir -p "${pkgdir}/opt/devkitpro/libogc2/share/doc/libogc2/examples"
+	mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/share/doc/libogc2/examples"
 	for i in ${!_pkgname[@]}; do
-		cp -r "${_pkgname[i]}-${pkgver}" "${pkgdir}/opt/devkitpro/libogc2/share/doc/libogc2/examples/${_pkgname[i]%-examples}"
+		cp -r "${_pkgname[i]}-${pkgver}" "${pkgdir}${DEVKITPRO}/libogc2/share/doc/libogc2/examples/${_pkgname[i]%-examples}"
 	done
 }

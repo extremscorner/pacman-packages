@@ -3,7 +3,7 @@
 _pkgname=libfat
 pkgname="libogc2-${_pkgname}-git"
 pkgver=r253.c867be5
-pkgrel=3
+pkgrel=4
 pkgdesc='FAT library for GameCube and Wii.'
 arch=('any')
 url="https://github.com/extremscorner/${_pkgname}"
@@ -29,5 +29,5 @@ build() {
 
 package() {
 	cd "${srcdir}/${_pkgname}"
-	make DESTDIR="${pkgdir}" ogc-install
+	DESTDIR="${pkgdir}" make ogc-install
 }
