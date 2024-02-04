@@ -1,0 +1,39 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=zlib-ng
+pkgname=(ppc-${_pkgname}{,-compat})
+pkgver=2.1.6
+pkgrel=1
+pkgdesc='zlib replacement with optimizations for "next generation" systems.'
+arch=('any')
+url="https://github.com/zlib-ng/${_pkgname}"
+license=('Zlib')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('a5d504c0d52e2e2721e7e7d86988dec2e290d723ced2307145dedd06aeb6fef2')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZLIB_ENABLE_TESTS=OFF
+	powerpc-eabi-cmake -B build-compat -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZLIB_ENABLE_TESTS=OFF -DZLIB_COMPAT=ON
+	cmake --build build
+	cmake --build build-compat
+}
+
+package_ppc-zlib-ng() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	DESTDIR="${pkgdir}" cmake --install build
+}
+
+package_ppc-zlib-ng-compat() {
+	pkgdesc+=' (zlib compat)'
+	provides=('ppc-zlib')
+	conflicts=('ppc-zlib')
+
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	DESTDIR="${pkgdir}" cmake --install build-compat
+}
