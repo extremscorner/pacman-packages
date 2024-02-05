@@ -1,0 +1,35 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libpsoarchive
+pkgname="ppc-${_pkgname}"
+pkgver=r19.f6d5181
+pkgrel=1
+pkgdesc='Library for reading and writing various archive formats used in the Phantasy Star Online series of games.'
+arch=('any')
+url="https://github.com/extremscorner/${_pkgname}"
+license=('LGPL-2.1-only' 'LGPL-3.0-only')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("git+${url}.git#commit=f6d5181d0bf0e3ed1aa2abe2880670219765d207")
+sha256sums=('SKIP')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	./autogen.sh
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 COPYING* -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
