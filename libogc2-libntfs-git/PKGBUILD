@@ -2,8 +2,8 @@
 
 _pkgname=libntfs
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r16.ed1fb27
-pkgrel=4
+pkgver=r17.c269815
+pkgrel=1
 pkgdesc='Port of the NTFS-3G driver to the Nintendo GameCube/Wii.'
 arch=('any')
 url="https://github.com/extremscorner/${_pkgname}"
