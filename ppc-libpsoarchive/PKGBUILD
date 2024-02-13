@@ -3,14 +3,14 @@
 _pkgname=libpsoarchive
 pkgname="ppc-${_pkgname}"
 pkgver=r20.53113b3
-pkgrel=1
+pkgrel=2
 pkgdesc='Library for reading and writing various archive formats used in the Phantasy Star Online series of games.'
 arch=('any')
 url="https://github.com/extremscorner/${_pkgname}"
 license=('LGPL-2.1-only' 'LGPL-3.0-only')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('dkp-toolchain-vars')
+makedepends=('dkp-toolchain-vars' 'git')
 options=(!strip libtool staticlibs)
 source=("git+${url}.git#commit=53113b3347c9e3b650b1278b06ba8950fc4b3d23")
 sha256sums=('SKIP')
