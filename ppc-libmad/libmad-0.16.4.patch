@@ -1,0 +1,11 @@
+--- libmad/CMakeLists.txt.orig	2023-09-24 01:51:31.000000000 +0000
++++ libmad/CMakeLists.txt	2023-09-24 01:51:31.000000000 +0000
+@@ -84,7 +84,7 @@
+ elseif(CMAKE_SYSTEM_PROCESSOR MATCHES ".*(sparc|SPARC).*")
+   message(STATUS "Using SPARC fixed point math")
+   option(FPM_SPARC "SPARC fixed point math" ON)
+-elseif(CMAKE_SYSTEM_PROCESSOR MATCHES ".(ppc|PPC|powerpc).*")
++elseif(CMAKE_SYSTEM_PROCESSOR MATCHES ".*(ppc|PPC|powerpc).*")
+   message(STATUS "Using PowerPC fixed point math")
+   option(FPM_PPC "PowerPC fixed point math" ON)
+ else()

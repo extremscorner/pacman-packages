@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libmad
+pkgname="ppc-${_pkgname}"
+pkgver=0.16.4
+pkgrel=1
+pkgdesc='A high-quality MPEG audio decoder.'
+arch=('any')
+url="https://codeberg.org/tenacityteam/${_pkgname}"
+license=('GPL-2.0-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('f4eb229452252600ce48f3c2704c9e6d97b789f81e31c37b0c67dd66f445ea35'
+			'11fbc95febe4dac0300a099c6c0ec5fd69a830cb9e6408ac9b086f702e70c9a0')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}"
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
