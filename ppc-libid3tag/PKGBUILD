@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libid3tag
+pkgname="ppc-${_pkgname}"
+pkgver=0.16.3
+pkgrel=1
+pkgdesc='A library for reading and (eventually) writing ID3 tags, both ID3v1 and the various versions of ID3v2.'
+arch=('any')
+url="https://codeberg.org/tenacityteam/${_pkgname}"
+license=('GPL-2.0-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-zlib')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
+sha256sums=('0561009778513a95d91dac33cee8418d6622f710450a7cb56a74636d53b588cb')
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZLIB_ROOT="${PORTLIBS_PREFIX}"
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
