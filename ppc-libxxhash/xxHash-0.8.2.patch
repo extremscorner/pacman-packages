@@ -1,0 +1,15 @@
+--- xxHash-0.8.2/xxhash.h.orig	2023-07-21 10:01:35.000000000 +0000
++++ xxHash-0.8.2/xxhash.h	2023-07-21 10:01:35.000000000 +0000
+@@ -1999,9 +1999,9 @@
+ 
+ #ifndef XXH_FORCE_ALIGN_CHECK  /* can be defined externally */
+    /* don't check on sizeopt, x86, aarch64, or arm when unaligned access is available */
+-#  if XXH_SIZE_OPT >= 1 || \
+-      defined(__i386)  || defined(__x86_64__) || defined(__aarch64__) || defined(__ARM_FEATURE_UNALIGNED) \
+-   || defined(_M_IX86) || defined(_M_X64)     || defined(_M_ARM64)    || defined(_M_ARM) /* visual */
++#  if XXH_SIZE_OPT >= 1 \
++   || defined(__i386)  || defined(__x86_64__) || defined(__aarch64__) || defined(__ARM_FEATURE_UNALIGNED) || defined(__PPC__) \
++   || defined(_M_IX86) || defined(_M_X64)     || defined(_M_ARM64)    || defined(_M_ARM)                  || defined(_M_PPC) /* visual */
+ #    define XXH_FORCE_ALIGN_CHECK 0
+ #  else
+ #    define XXH_FORCE_ALIGN_CHECK 1

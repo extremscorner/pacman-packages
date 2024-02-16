@@ -1,0 +1,38 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=xxHash
+pkgname="ppc-lib${_pkgname,,}"
+pkgver=0.8.2
+pkgrel=1
+pkgdesc='Extremely fast non-cryptographic hash algorithm.'
+arch=('any')
+url="https://github.com/Cyan4973/${_pkgname}"
+license=('BSD-2-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('baee0c6afd4f03165de7a4e67988d16f0f2b257b51d0e3cb91909302a26a79c4'
+			'a56b7874d2be7fbdac9fdbec33afc4e2fca1dfa3216bfbbd059c5b390ade109e')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	CFLAGS="${CFLAGS/-O2/-O3}"
+	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
+	powerpc-eabi-cmake cmake_unofficial -B build -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DXXHASH_BUILD_XXHSUM=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
