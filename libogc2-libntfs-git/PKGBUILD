@@ -2,7 +2,7 @@
 
 _pkgname=libntfs
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r17.c269815
+pkgver=r18.ae00fc8
 pkgrel=1
 pkgdesc='Port of the NTFS-3G driver to the Nintendo GameCube/Wii.'
 arch=('any')
@@ -30,5 +30,7 @@ build() {
 package() {
 	cd "${srcdir}/${_pkgname}"
 	DESTDIR="${pkgdir}" make install
+	mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/share/doc/${_pkgname}"
+	cp -r example "${pkgdir}${DEVKITPRO}/libogc2/share/doc/${_pkgname}"
 	install -Dm 644 LICENSE -t "${pkgdir}${DEVKITPRO}/libogc2/share/licenses/${_pkgname}"
 }
