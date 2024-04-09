@@ -1,0 +1,23 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+# Contributor: WinterMute <davem@devkitpro.org>
+# Contributor: fincs <fincs@devkitpro.org>
+
+pkgname=libogc2-cmake
+pkgver=1.2.1
+pkgrel=1
+pkgdesc='CMake support files for libogc(2)'
+arch=('any')
+url='https://github.com/extremscorner/libogc2'
+groups=('gamecube-dev' 'wii-dev')
+depends=('devkitppc-cmake' 'gamecube-tools')
+provides=('ogc-cmake')
+conflicts=('ogc-cmake')
+source=('ogc-common.cmake'
+		'libogc.cmake')
+sha256sums=('5236e997230e112092445c88f2d16a646e7b0e90c45cb72d1dbe0dca8cb13174'
+			'038420bc082efcf0c088a1bc63354f4f13d6b2fb29ee2a8ef5f4f689b495de83')
+
+package() {
+	install -Dm 644 ogc-common.cmake -t "${pkgdir}${DEVKITPRO}/cmake"
+	install -Dm 644 libogc.cmake -t "${pkgdir}${DEVKITPRO}/cmake/Platform"
+}
