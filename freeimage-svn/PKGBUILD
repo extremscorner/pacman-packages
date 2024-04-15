@@ -1,0 +1,41 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=freeimage
+pkgname="${_pkgname}-svn"
+pkgver=r1909
+pkgrel=1
+pkgdesc='Library project for developers who would like to support popular graphics image formats.'
+arch=('x86_64')
+url="https://${_pkgname}.sourceforge.io/"
+license=('GPL-2.0-or-later' 'custom:FIPL')
+makedepends=('dos2unix' 'subversion')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+options=(!strip !buildflags staticlibs)
+source=("${_pkgname}::svn+https://svn.code.sf.net/p/${_pkgname}/svn/FreeImage/trunk")
+sha256sums=('SKIP')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	sh gensrclist.sh
+	sh genfipsrclist.sh
+}
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	local ver="$(svnversion)"
+	printf "r%s" "${ver//[[:alpha:]]}"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	make -f Makefile.gnu
+	make -f Makefile.fip
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	DESTDIR="${pkgdir}" make -f Makefile.gnu install
+	DESTDIR="${pkgdir}" make -f Makefile.fip install
+	install -Dm 644 license-fi.txt "${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+}
