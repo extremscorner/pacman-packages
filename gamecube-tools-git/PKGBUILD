@@ -1,0 +1,40 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=gamecube-tools
+pkgname="${_pkgname}-git"
+pkgver=r85.846a04a
+pkgrel=1
+pkgdesc='Tools for GameCube and Wii projects.'
+arch=('x86_64')
+url="https://github.com/extremscorner/${_pkgname}"
+license=('GPL-2.0-or-later')
+groups=('gamecube-dev' 'wii-dev')
+makedepends=('freeimage' 'git')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	./autogen.sh
+}
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	CPPFLAGS+=' -DFREEIMAGE_LIB'
+	LDFLAGS+=' --static -s -Wl,--gc-sections'
+	./configure --prefix="${DEVKITPRO}/tools" --host="${CHOST}"
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 LICENSE -t "${pkgdir}${DEVKITPRO}/licenses/${_pkgname}"
+}
