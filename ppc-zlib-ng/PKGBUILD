@@ -2,8 +2,8 @@
 
 _pkgname=zlib-ng
 pkgname=(ppc-${_pkgname}{,-compat})
-pkgver=2.1.6
-pkgrel=2
+pkgver=2.1.7
+pkgrel=1
 pkgdesc='zlib replacement with optimizations for "next generation" systems.'
 arch=('any')
 url="https://github.com/zlib-ng/${_pkgname}"
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('a5d504c0d52e2e2721e7e7d86988dec2e290d723ced2307145dedd06aeb6fef2')
+sha256sums=('59e68f67cbb16999842daeb517cdd86fc25b177b4affd335cd72b76ddc2a46d8')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
