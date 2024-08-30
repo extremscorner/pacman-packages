@@ -2,7 +2,7 @@
 
 _pkgname=freeimage
 pkgname="${_pkgname}-svn"
-pkgver=r1909
+pkgver=r1911
 pkgrel=1
 pkgdesc='Library project for developers who would like to support popular graphics image formats.'
 arch=('x86_64')
@@ -12,11 +12,17 @@ makedepends=('dos2unix' 'subversion')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
 options=(!strip !buildflags staticlibs)
-source=("${_pkgname}::svn+https://svn.code.sf.net/p/${_pkgname}/svn/FreeImage/trunk")
-sha256sums=('SKIP')
+source=("${_pkgname}::svn+https://svn.code.sf.net/p/${_pkgname}/svn/FreeImage/trunk"
+		'LibJXR.patch'
+		'ZLib.patch')
+sha256sums=('SKIP'
+			'a481ef7127c4676c79c5d4bc1f41913e83d206026784d084ff2722b824708942'
+			'70a3a5470b106e6bf36d43f51c84b33ada748ad4002757fb13aa6c7f33ecaab2')
 
 prepare() {
 	cd "${srcdir}/${_pkgname}"
+	svn patch "${srcdir}/LibJXR.patch"
+	svn patch "${srcdir}/ZLib.patch"
 	sh gensrclist.sh
 	sh genfipsrclist.sh
 }
