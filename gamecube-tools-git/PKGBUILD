@@ -2,10 +2,10 @@
 
 _pkgname=gamecube-tools
 pkgname="${_pkgname}-git"
-pkgver=r85.846a04a
-pkgrel=1
+pkgver=r87.7f5e5f8
+pkgrel=2
 pkgdesc='Tools for GameCube and Wii projects.'
-arch=('x86_64')
+arch=("${CARCH}")
 url="https://github.com/extremscorner/${_pkgname}"
 license=('GPL-2.0-or-later')
 groups=('gamecube-dev' 'wii-dev')
