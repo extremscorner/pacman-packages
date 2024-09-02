@@ -1,16 +1,17 @@
 # Maintainer: Extrems <extrems@extremscorner.org>
 
+_target=aarch64-linux-gnu
 _pkgname=freeimage
-pkgname="${_pkgname}-svn"
+pkgname="${_target}-${_pkgname}-svn"
 pkgver=r1911
-pkgrel=2
+pkgrel=1
 pkgdesc='Library project for developers who would like to support popular graphics image formats.'
-arch=("${CARCH}")
+arch=('any')
 url="https://${_pkgname}.sourceforge.io/"
 license=('GPL-2.0-or-later' 'custom:FIPL')
-makedepends=('dos2unix' 'subversion')
-provides=("${_pkgname}")
-conflicts=("${_pkgname}")
+makedepends=("${_target}-gcc" 'dos2unix' 'subversion')
+provides=("${_target}-${_pkgname}")
+conflicts=("${_target}-${_pkgname}")
 options=(!strip !buildflags staticlibs)
 source=("${_pkgname}::svn+https://svn.code.sf.net/p/${_pkgname}/svn/FreeImage/trunk"
 		'LibJXR.patch'
@@ -38,6 +39,9 @@ pkgver() {
 
 build() {
 	cd "${srcdir}/${_pkgname}"
+	export CC="${_target}-gcc"
+	export CXX="${_target}-g++"
+	export AR="${_target}-ar"
 	make -f Makefile.gnu
 	make -f Makefile.fip
 }
@@ -45,7 +49,9 @@ build() {
 package() {
 	cd "${srcdir}/${_pkgname}"
 	export DESTDIR="${pkgdir}"
+	export INCDIR="${pkgdir}/usr/${_target}/include"
+	export INSTALLDIR="${pkgdir}/usr/${_target}/lib"
 	make -f Makefile.gnu install
 	make -f Makefile.fip install
-	install -Dm 644 license-fi.txt "${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+	install -Dm 644 license-fi.txt "${pkgdir}/usr/${_target}/share/licenses/${_pkgname}/LICENSE"
 }
