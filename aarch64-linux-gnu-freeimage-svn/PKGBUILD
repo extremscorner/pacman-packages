@@ -1,19 +1,19 @@
 # Maintainer: Extrems <extrems@extremscorner.org>
 
 _target=aarch64-linux-gnu
-_pkgname=freeimage
-pkgname="${_target}-${_pkgname}-svn"
+_pkgname=FreeImage
+pkgname="${_target}-${_pkgname,,}-svn"
 pkgver=r1911
-pkgrel=1
+pkgrel=2
 pkgdesc='Library project for developers who would like to support popular graphics image formats.'
 arch=('any')
-url="https://${_pkgname}.sourceforge.io/"
-license=('GPL-2.0-or-later' 'custom:FIPL')
+url='https://freeimage.sourceforge.io/'
+license=('FreeImage' 'GPL-2.0-or-later')
 makedepends=("${_target}-gcc" 'dos2unix' 'subversion')
-provides=("${_target}-${_pkgname}")
-conflicts=("${_target}-${_pkgname}")
+provides=("${_target}-${_pkgname,,}")
+conflicts=("${_target}-${_pkgname,,}")
 options=(!strip !buildflags staticlibs)
-source=("${_pkgname}::svn+https://svn.code.sf.net/p/${_pkgname}/svn/FreeImage/trunk"
+source=("${_pkgname}::svn+https://svn.code.sf.net/p/freeimage/svn/FreeImage/trunk"
 		'LibJXR.patch'
 		'LibPNG.patch'
 		'ZLib.patch')
@@ -53,5 +53,5 @@ package() {
 	export INSTALLDIR="${pkgdir}/usr/${_target}/lib"
 	make -f Makefile.gnu install
 	make -f Makefile.fip install
-	install -Dm 644 license-fi.txt "${pkgdir}/usr/${_target}/share/licenses/${_pkgname}/LICENSE"
+	install -Dm 644 license*.txt -t "${pkgdir}/usr/${_target}/share/licenses/${_pkgname,,}"
 }

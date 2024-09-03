@@ -3,10 +3,10 @@
 _pkgname=double-conversion
 pkgname="ppc-lib${_pkgname}"
 pkgver=3.3.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Efficient binary-decimal and decimal-binary conversion routines for IEEE doubles.'
 arch=('any')
-url="https://github.com/google/${_pkgname}"
+url='https://github.com/google/double-conversion'
 license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')

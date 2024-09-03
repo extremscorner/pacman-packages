@@ -3,10 +3,10 @@
 _pkgname=libid3tag
 pkgname="ppc-${_pkgname}"
 pkgver=0.16.3
-pkgrel=1
+pkgrel=2
 pkgdesc='A library for reading and (eventually) writing ID3 tags, both ID3v1 and the various versions of ID3v2.'
 arch=('any')
-url="https://codeberg.org/tenacityteam/${_pkgname}"
+url='https://codeberg.org/tenacityteam/libid3tag'
 license=('GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-zlib')

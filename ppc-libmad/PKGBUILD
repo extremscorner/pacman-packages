@@ -3,10 +3,10 @@
 _pkgname=libmad
 pkgname="ppc-${_pkgname}"
 pkgver=0.16.4
-pkgrel=1
+pkgrel=2
 pkgdesc='A high-quality MPEG audio decoder.'
 arch=('any')
-url="https://codeberg.org/tenacityteam/${_pkgname}"
+url='https://codeberg.org/tenacityteam/libmad'
 license=('GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')

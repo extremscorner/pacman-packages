@@ -2,11 +2,11 @@
 
 _pkgname=libogc2
 pkgname=(${_pkgname}{,-docs}-git)
-pkgver=r2062.6c699b9
-pkgrel=1
+pkgver=r2119.15f8f31
+pkgrel=2
 pkgdesc='C library for GameCube and Wii targeting devkitPPC.'
 arch=('any')
-url="https://github.com/extremscorner/${_pkgname}"
+url='https://github.com/extremscorner/libogc2'
 license=('custom')
 groups=('gamecube-dev' 'wii-dev')
 depends=('devkitPPC>=r42' 'gamecube-tools' 'ppc-libmad')
