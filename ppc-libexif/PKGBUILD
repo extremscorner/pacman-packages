@@ -1,0 +1,35 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libexif
+pkgname="ppc-${_pkgname}"
+pkgver=0.6.24
+pkgrel=1
+pkgdesc='A library for parsing, editing, and saving EXIF data.'
+arch=('any')
+url='https://github.com/libexif/libexif'
+license=('LGPL-2.0-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('e5f15eeab693028cfdc4c0d78f024e1ca78baa0e1f636dc443395e9fbb0a2b7a')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	autoreconf -i
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-docs
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
