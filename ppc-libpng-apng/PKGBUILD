@@ -1,0 +1,38 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libpng
+pkgname="ppc-${_pkgname}-apng"
+pkgver=1.6.43
+pkgrel=1
+pkgdesc='A collection of routines used to create PNG format graphics files.'
+arch=('any')
+url='https://sourceforge.net/projects/libpng-apng/'
+license=('libpng-2.0')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-zlib')
+makedepends=('dkp-toolchain-vars')
+provides=("ppc-${_pkgname}")
+conflicts=("ppc-${_pkgname}")
+options=(!strip libtool staticlibs)
+source=("https://downloads.sourceforge.net/sourceforge/libpng/${_pkgname}-${pkgver}.tar.xz"
+		"https://downloads.sourceforge.net/sourceforge/libpng-apng/${_pkgname}-${pkgver}-apng.patch.gz")
+sha256sums=('6a5ca0652392a2d7c9db2ae5b40210843c0bbc081cbd410825ab00cc59f14a6c'
+			'd107579e90d55386d00e6086ea750942f22a04b9ab476bba0c660770cefafe22')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}-apng.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-tests --disable-tools
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
