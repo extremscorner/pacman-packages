@@ -2,8 +2,8 @@
 
 _pkgname=gamecube-tools
 pkgname="${_pkgname}-git"
-pkgver=r87.7f5e5f8
-pkgrel=3
+pkgver=r88.2eecc96
+pkgrel=1
 pkgdesc='Tools for GameCube and Wii projects.'
 arch=("${CARCH}")
 url='https://github.com/extremscorner/gamecube-tools'
