@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libdeflate
+pkgname="ppc-${_pkgname}"
+pkgver=1.21
+pkgrel=1
+pkgdesc='Heavily optimized library for DEFLATE/zlib/gzip compression and decompression.'
+arch=('any')
+url='https://github.com/ebiggers/libdeflate'
+license=('MIT')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('50827d312c0413fbd41b0628590cd54d9ad7ebf88360cba7c0e70027942dbd01')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DLIBDEFLATE_BUILD_GZIP=OFF -DLIBDEFLATE_BUILD_SHARED_LIB=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
