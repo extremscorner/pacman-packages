@@ -3,7 +3,7 @@
 _pkgname=zlib-ng
 pkgname=(ppc-${_pkgname}{,-compat})
 pkgver=2.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='zlib replacement with optimizations for "next generation" systems.'
 arch=('any')
 url='https://github.com/zlib-ng/zlib-ng'

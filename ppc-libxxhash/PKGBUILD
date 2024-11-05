@@ -3,7 +3,7 @@
 _pkgname=xxHash
 pkgname="ppc-lib${_pkgname,,}"
 pkgver=0.8.2
-pkgrel=2
+pkgrel=3
 pkgdesc='Extremely fast non-cryptographic hash algorithm.'
 arch=('any')
 url='https://github.com/Cyan4973/xxHash'
