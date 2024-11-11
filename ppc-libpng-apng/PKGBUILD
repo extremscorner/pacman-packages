@@ -3,7 +3,7 @@
 _pkgname=libpng
 pkgname="ppc-${_pkgname}-apng"
 pkgver=1.6.44
-pkgrel=2
+pkgrel=3
 pkgdesc='A collection of routines used to create PNG format graphics files.'
 arch=('any')
 url='https://sourceforge.net/projects/libpng-apng/'

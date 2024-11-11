@@ -2,8 +2,8 @@
 
 _pkgname=libfat
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r261.2020e97
-pkgrel=3
+pkgver=r263.864f802
+pkgrel=2
 pkgdesc='FAT library for GameCube and Wii.'
 arch=('any')
 url='https://github.com/extremscorner/libfat'
