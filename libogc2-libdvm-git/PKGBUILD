@@ -1,0 +1,43 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libdvm
+pkgname="libogc2-${_pkgname}-git"
+pkgver=r25.921d008
+pkgrel=1
+pkgdesc='FAT and disk/volume management library for GameCube and Wii.'
+arch=('any')
+url='https://github.com/extremscorner/libdvm'
+license=('ZPL-2.1')
+groups=('gamecube-dev' 'wii-dev')
+depends=('devkitPPC>=r42' 'libogc2')
+makedepends=('catnip' 'cmake' 'git' 'libogc2-cmake')
+provides=("libogc2-${_pkgname}" 'libogc2-libfat')
+conflicts=("libogc2-${_pkgname}" 'libogc2-libfat')
+options=(!strip libtool staticlibs !buildflags)
+source=("git+${url}.git"
+		'git+https://github.com/devkitPro/fatfs-mod.git')
+sha256sums=('SKIP'
+			'SKIP')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	git submodule init
+	git config submodule.fatfs.url "${srcdir}/fatfs-mod"
+	git -c protocol.file.allow=always submodule update
+}
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	catnip build cube wii
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	DESTDIR="${pkgdir}" catnip install cube wii
+	install -Dm 644 COPYING -t "${pkgdir}${DEVKITPRO}/libogc2/share/licenses/${_pkgname}"
+}
