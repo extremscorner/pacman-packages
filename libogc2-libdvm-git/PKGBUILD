@@ -2,7 +2,7 @@
 
 _pkgname=libdvm
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r25.921d008
+pkgver=r30.a47421c
 pkgrel=1
 pkgdesc='FAT and disk/volume management library for GameCube and Wii.'
 arch=('any')
@@ -15,7 +15,7 @@ provides=("libogc2-${_pkgname}" 'libogc2-libfat')
 conflicts=("libogc2-${_pkgname}" 'libogc2-libfat')
 options=(!strip libtool staticlibs !buildflags)
 source=("git+${url}.git"
-		'git+https://github.com/devkitPro/fatfs-mod.git')
+		'git+https://github.com/extremscorner/fatfs-mod.git')
 sha256sums=('SKIP'
 			'SKIP')
 
