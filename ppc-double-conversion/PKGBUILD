@@ -1,9 +1,9 @@
 # Maintainer: Extrems <extrems@extremscorner.org>
 
 _pkgname=double-conversion
-pkgname="ppc-lib${_pkgname}"
+pkgname="ppc-${_pkgname}"
 pkgver=3.3.0
-pkgrel=4
+pkgrel=5
 pkgdesc='Efficient binary-decimal and decimal-binary conversion routines for IEEE doubles.'
 arch=('any')
 url='https://github.com/google/double-conversion'
@@ -11,6 +11,9 @@ license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
 makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+provides=("ppc-lib${_pkgname}")
+conflicts=("ppc-lib${_pkgname}")
+replaces=("ppc-lib${_pkgname}")
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('04ec44461850abbf33824da84978043b22554896b552c5fd11a9c5ae4b4d296e')
