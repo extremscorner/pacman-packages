@@ -2,8 +2,8 @@
 
 _pkgname=libdeflate
 pkgname="ppc-${_pkgname}"
-pkgver=1.22
-pkgrel=3
+pkgver=1.23
+pkgrel=1
 pkgdesc='Heavily optimized library for DEFLATE/zlib/gzip compression and decompression.'
 arch=('any')
 url='https://github.com/ebiggers/libdeflate'
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('7f343c7bf2ba46e774d8a632bf073235e1fd27723ef0a12a90f8947b7fe851d6')
+sha256sums=('1ab18349b9fb0ce8a0ca4116bded725be7dcbfa709e19f6f983d99df1fb8b25f')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
