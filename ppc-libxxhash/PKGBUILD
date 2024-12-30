@@ -2,8 +2,8 @@
 
 _pkgname=xxHash
 pkgname="ppc-lib${_pkgname,,}"
-pkgver=0.8.2
-pkgrel=4
+pkgver=0.8.3
+pkgrel=1
 pkgdesc='Extremely fast non-cryptographic hash algorithm.'
 arch=('any')
 url='https://github.com/Cyan4973/xxHash'
@@ -14,8 +14,8 @@ makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('baee0c6afd4f03165de7a4e67988d16f0f2b257b51d0e3cb91909302a26a79c4'
-			'a56b7874d2be7fbdac9fdbec33afc4e2fca1dfa3216bfbbd059c5b390ade109e')
+sha256sums=('aae608dfe8213dfd05d909a57718ef82f30722c392344583d3f39050c7f29a80'
+			'4780ed666dde5a35ba33d9c88593980f328cd24f1a5d17266a9bb3e9abf324c1')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"

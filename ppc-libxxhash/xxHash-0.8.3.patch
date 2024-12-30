@@ -1,6 +1,6 @@
---- xxHash-0.8.2/xxhash.h.orig	2023-07-21 10:01:35.000000000 +0000
-+++ xxHash-0.8.2/xxhash.h	2023-07-21 10:01:35.000000000 +0000
-@@ -1999,9 +1999,9 @@
+--- xxHash-0.8.3/xxhash.h.orig	2024-12-29 20:58:19.000000000 +0000
++++ xxHash-0.8.3/xxhash.h	2024-12-29 20:58:19.000000000 +0000
+@@ -2313,9 +2313,9 @@
  
  #ifndef XXH_FORCE_ALIGN_CHECK  /* can be defined externally */
     /* don't check on sizeopt, x86, aarch64, or arm when unaligned access is available */
