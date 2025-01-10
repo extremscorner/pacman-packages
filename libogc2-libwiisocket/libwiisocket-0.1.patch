@@ -1,0 +1,52 @@
+--- libwiisocket-v0.1/Makefile.orig	2021-02-27 21:31:52.000000000 +0000
++++ libwiisocket-v0.1/Makefile	2021-02-27 21:31:52.000000000 +0000
+@@ -8,7 +8,7 @@
+ 
+ TOPDIR ?= $(CURDIR)
+ 
+-include $(DEVKITPPC)/wii_rules
++include $(DEVKITPRO)/libogc2/wii_rules
+ 
+ #-------------------------------------------------------------------------------
+ # library version
+@@ -28,7 +28,7 @@
+ INCLUDES	:=	include
+ 
+ # Here be dragons
+-INSTALL		?=	$(DEVKITPRO)/libogc
++INSTALL		?=	$(PORTLIBS_PATH)/wii
+ 
+ #-------------------------------------------------------------------------------
+ # options for code generation
+@@ -90,8 +90,8 @@
+ #-------------------------------------------------------------------------------
+ 
+ dist-bin: all
+-	@[ -d lib/wii ] || mkdir -p lib/wii
+-	@cp $(TARGET).a lib/wii/
++	@[ -d lib ] || mkdir -p lib
++	@cp $(TARGET).a lib
+ 	@tar --exclude=*~ -cjf $(TARGET)-$(VERSION).tar.bz2 include lib
+ 
+ dist-src:
+--- libwiisocket-v0.1/source/wiisocket_heap.c.orig	2021-02-27 21:31:52.000000000 +0000
++++ libwiisocket-v0.1/source/wiisocket_heap.c	2021-02-27 21:31:52.000000000 +0000
+@@ -34,16 +34,14 @@
+         return 0;
+     }
+     
+-    __wiisocket_heap_ptr = (void *)(((unsigned)SYS_GetArena2Hi() - WIISOCKET_HEAP_SIZE) & ~0x1f);
++    __wiisocket_heap_ptr = SYS_AllocArena2MemHi(WIISOCKET_HEAP_SIZE, 32);
+     
+-    if (__wiisocket_heap_ptr < SYS_GetArena2Lo())
++    if (!__wiisocket_heap_ptr)
+     {
+         _CPU_ISR_Restore(level);
+         return -1;
+     }
+     
+-    SYS_SetArena2Hi(__wiisocket_heap_ptr);
+-    
+     __lwp_heap_init(&__wiisocket_heap,
+                     __wiisocket_heap_ptr,
+                     WIISOCKET_HEAP_SIZE,

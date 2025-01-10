@@ -1,0 +1,31 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libwiisocket
+pkgname="wii-${_pkgname}"
+pkgver=0.1
+pkgrel=1
+pkgdesc='Standard socket library for the Nintendo Wii.'
+arch=('any')
+url='https://gitlab.com/4TU/libwiisocket'
+license=('GPL-2.0-or-later')
+groups=('wii-portlibs')
+depends=('devkitPPC' 'libogc2')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.bz2::${url}/-/archive/v${pkgver}/${_pkgname}-v${pkgver}.tar.bz2"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('fbfffff214cb05f5d8fbb8f67e38631c8017f15ed1355f4ed82ac9ee5bc417ca'
+			'3bcecd3b3b4dd4cdfd5f5f8a2658b243a5f01bcad3a9a359d96be0f28dbfa507')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-v${pkgver}"
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-v${pkgver}"
+	DESTDIR="${pkgdir}" make install
+}
