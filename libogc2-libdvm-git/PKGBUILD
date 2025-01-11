@@ -2,7 +2,7 @@
 
 _pkgname=libdvm
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r30.a47421c
+pkgver=r43.e9dba9c
 pkgrel=1
 pkgdesc='FAT and disk/volume management library for GameCube and Wii.'
 arch=('any')
@@ -10,7 +10,7 @@ url='https://github.com/extremscorner/libdvm'
 license=('ZPL-2.1')
 groups=('gamecube-dev' 'wii-dev')
 depends=('devkitPPC>=r42' 'libogc2')
-makedepends=('catnip' 'cmake' 'git' 'libogc2-cmake')
+makedepends=('catnip' 'cmake' 'gamecube-cmake' 'git' 'libogc2-cmake' 'wii-cmake')
 provides=("libogc2-${_pkgname}" 'libogc2-libfat')
 conflicts=("libogc2-${_pkgname}" 'libogc2-libfat')
 options=(!strip libtool staticlibs !buildflags)
@@ -33,11 +33,11 @@ pkgver() {
 
 build() {
 	cd "${srcdir}/${_pkgname}"
-	catnip build cube wii
+	catnip build gamecube wii
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}"
-	DESTDIR="${pkgdir}" catnip install cube wii
+	DESTDIR="${pkgdir}" catnip install gamecube wii
 	install -Dm 644 COPYING -t "${pkgdir}${DEVKITPRO}/libogc2/share/licenses/${_pkgname}"
 }
