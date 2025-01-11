@@ -1,17 +1,18 @@
 # Maintainer: Extrems <extrems@extremscorner.org>
 
 _pkgname=opengx
-pkgname=({gamecube,wii}-${_pkgname})
-pkgbase="libogc2-${_pkgname}"
+pkgname="libogc2-${_pkgname}"
 pkgver=0.15.0
-pkgrel=2
+pkgrel=1
 pkgdesc='OpenGL-like wrapper for Nintendo Wii/GameCube.'
 arch=('any')
 url='https://github.com/extremscorner/opengx'
 license=('BSD-3-Clause')
+groups=('gamecube-portlibs' 'wii-portlibs')
 depends=('devkitPPC' 'libogc2')
 makedepends=('catnip' 'cmake' 'gamecube-cmake' 'git' 'libogc2-cmake' 'wii-cmake')
-provides=("libogc2-${_pkgname}")
+provides=({gamecube,wii}-${_pkgname})
+conflicts=({gamecube,wii}-${_pkgname})
 options=(!strip libtool staticlibs !buildflags)
 source=("git+${url}.git#commit=96a47f79ce39c715e375c1c912ea41e7ead60e71")
 sha256sums=('SKIP')
@@ -21,16 +22,7 @@ build() {
 	catnip build
 }
 
-package_gamecube-opengx() {
-	groups=('gamecube-portlibs')
-
+package() {
 	cd "${srcdir}/${_pkgname}"
-	DESTDIR="${pkgdir}" catnip install gamecube
-}
-
-package_wii-opengx() {
-	groups=('wii-portlibs')
-
-	cd "${srcdir}/${_pkgname}"
-	DESTDIR="${pkgdir}" catnip install wii
+	DESTDIR="${pkgdir}" catnip install
 }
