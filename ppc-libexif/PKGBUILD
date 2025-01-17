@@ -2,8 +2,8 @@
 
 _pkgname=libexif
 pkgname="ppc-${_pkgname}"
-pkgver=0.6.24
-pkgrel=3
+pkgver=0.6.25
+pkgrel=1
 pkgdesc='A library for parsing, editing, and saving EXIF data.'
 arch=('any')
 url='https://github.com/libexif/libexif'
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('e5f15eeab693028cfdc4c0d78f024e1ca78baa0e1f636dc443395e9fbb0a2b7a')
+sha256sums=('b23af41f37019b8d591d4d9b42ba52fd30709b6767341aa887f9afe400c8408a')
 
 prepare() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
