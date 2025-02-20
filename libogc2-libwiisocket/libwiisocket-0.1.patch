@@ -36,7 +36,7 @@
      }
      
 -    __wiisocket_heap_ptr = (void *)(((unsigned)SYS_GetArena2Hi() - WIISOCKET_HEAP_SIZE) & ~0x1f);
-+    __wiisocket_heap_ptr = SYS_AllocArena2MemHi(WIISOCKET_HEAP_SIZE, 32);
++    __wiisocket_heap_ptr = SYS_AllocArenaMem2Hi(WIISOCKET_HEAP_SIZE, 32);
      
 -    if (__wiisocket_heap_ptr < SYS_GetArena2Lo())
 +    if (!__wiisocket_heap_ptr)
