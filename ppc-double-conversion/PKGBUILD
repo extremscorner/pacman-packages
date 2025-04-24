@@ -3,7 +3,7 @@
 _pkgname=double-conversion
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Efficient binary-decimal and decimal-binary conversion routines for IEEE doubles.'
 arch=('any')
 url='https://github.com/google/double-conversion'
@@ -21,7 +21,7 @@ sha256sums=('fe54901055c71302dcdc5c3ccbe265a6c191978f3761ce1414d0895d6b0ea90e')
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 	cmake --build build
 }
 
