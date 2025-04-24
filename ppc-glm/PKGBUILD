@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=glm
+pkgname="ppc-${_pkgname}"
+pkgver=1.0.1
+pkgrel=1
+pkgdesc='C++ mathematics library for 3D software based on the OpenGL Shading Language (GLSL) specification.'
+arch=('any')
+url='https://github.com/g-truc/glm'
+license=('MIT')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('9f3174561fd26904b23f0db5e560971cbf9b3cbda0b280f04d5c379d03bf234c')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_DATAROOTDIR="${PORTLIBS_PREFIX}/lib/cmake" -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DGLM_BUILD_TESTS=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 copying.txt -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
