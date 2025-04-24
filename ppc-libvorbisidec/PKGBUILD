@@ -1,0 +1,35 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libvorbisidec
+pkgname="ppc-${_pkgname}"
+pkgver=r133.820fb32
+pkgrel=1
+pkgdesc='A fixed-point version of the Ogg Vorbis decoder.'
+arch=('any')
+url='https://www.xiph.org/vorbis/'
+license=('BSD-3-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-libogg')
+makedepends=('dkp-toolchain-vars' 'git' 'ppc-pkg-config')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}::git+https://gitlab.xiph.org/xiph/tremor.git#commit=820fb3237ea81af44c9cc468c8b4e20128e3e5ad")
+sha256sums=('SKIP')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	./autogen.sh
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
