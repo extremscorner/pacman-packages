@@ -3,7 +3,7 @@
 _pkgname=libvorbisidec
 pkgname="ppc-${_pkgname}"
 pkgver=r133.820fb32
-pkgrel=1
+pkgrel=2
 pkgdesc='A fixed-point version of the Ogg Vorbis decoder.'
 arch=('any')
 url='https://www.xiph.org/vorbis/'
@@ -17,7 +17,8 @@ sha256sums=('SKIP')
 
 prepare() {
 	cd "${srcdir}/${_pkgname}"
-	./autogen.sh
+	source "${DEVKITPRO}/ppcvars.sh"
+	ACLOCAL_PATH="${PORTLIBS_PREFIX}/share/aclocal" ./autogen.sh
 }
 
 build() {
