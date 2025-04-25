@@ -11,3 +11,6 @@ export LDFLAGS="-L${PORTLIBS_CUBE}/lib -L${PORTLIBS_PPC}/lib -L${DEVKITPRO}/libo
 export LIBS="-logc -lm"
 
 export PATH=${PORTLIBS_CUBE}/bin:${PORTLIBS_PPC}/bin:$PATH
+export ACLOCAL_PATH=${PORTLIBS_CUBE}/share/aclocal:${PORTLIBS_PPC}/share/aclocal
+
+export PKG_CONFIG=$(which ${TOOL_PREFIX}pkg-config)

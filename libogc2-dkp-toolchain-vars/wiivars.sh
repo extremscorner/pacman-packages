@@ -11,3 +11,6 @@ export LDFLAGS="-L${PORTLIBS_WII}/lib -L${PORTLIBS_PPC}/lib -L${DEVKITPRO}/libog
 export LIBS="-logc -lm"
 
 export PATH=${PORTLIBS_WII}/bin:${PORTLIBS_PPC}/bin:$PATH
+export ACLOCAL_PATH=${PORTLIBS_WII}/share/aclocal:${PORTLIBS_PPC}/share/aclocal
+
+export PKG_CONFIG=$(which ${TOOL_PREFIX}pkg-config)
