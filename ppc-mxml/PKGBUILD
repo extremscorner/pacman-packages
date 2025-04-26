@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=mxml
+pkgname="ppc-${_pkgname}"
+pkgver=3.3.1
+pkgrel=2
+pkgdesc='A small XML parsing library.'
+arch=('any')
+url='https://github.com/michaelrsweet/mxml'
+license=('Apache-2.0')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('59eba16ce43765f2e2a6cf4873a58d317be801f1e929647d85da9f171e41e9ac')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-threads
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DSTROOT="${pkgdir}" make install
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
