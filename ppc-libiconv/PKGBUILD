@@ -1,0 +1,38 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libiconv
+pkgname="ppc-${_pkgname}"
+pkgver=1.18
+pkgrel=1
+pkgdesc='GNU charset conversion library.'
+arch=('any')
+url='https://www.gnu.org/software/libiconv/'
+license=('LGPL-2.1-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://ftp.gnu.org/pub/gnu/libiconv/${_pkgname}-${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('3b08f5f4f9b4eb82f151a7040bfd6fe6c6fb922efe4b1659c66ea933276965e8'
+			'661eda41702700aebf534a8a33c5891f3ac748c066ec2aa1991d30639daee41b')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	sed -i '/cd src/d' Makefile.in
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --enable-extra-encodings
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 COPYING.LIB -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}

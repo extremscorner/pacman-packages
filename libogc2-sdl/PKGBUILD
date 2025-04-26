@@ -3,21 +3,22 @@
 _pkgname=SDL
 pkgname="libogc2-${_pkgname,,}"
 pkgver=1.2.15
-pkgrel=4
+pkgrel=5
 pkgdesc='A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard.'
 arch=('any')
 url='https://www.libsdl.org/'
 license=('LGPL-2.1-or-later')
 groups=('gamecube-portlibs' 'gamecube-sdl-libs' 'wii-portlibs' 'wii-sdl-libs')
 depends=('devkitPPC' 'libogc2' 'libogc2-libfat')
-makedepends=('gamecube-glu' 'gamecube-pkg-config' 'git' 'libogc2-dkp-toolchain-vars' 'libogc2-opengx' 'wii-glu' 'wii-pkg-config')
+makedepends=('gamecube-glu' 'gamecube-pkg-config' 'git' 'libogc2-dkp-toolchain-vars' 'libogc2-opengx' 'ppc-libiconv' 'wii-glu' 'wii-pkg-config')
 optdepends=('gamecube-glu: OpenGL support'
 			'libogc2-opengx: OpenGL support'
+			'ppc-libiconv: iconv support'
 			'wii-glu: OpenGL support')
 provides=({gamecube,wii}-${_pkgname,,})
 conflicts=({gamecube,wii}-${_pkgname,,})
 options=(!strip libtool staticlibs)
-source=("git+https://github.com/extremscorner/SDL.git#commit=e64104ad9dde0d7c5be57b82ccca3aab2dee8c36")
+source=("git+https://github.com/extremscorner/SDL.git#commit=a05b01f361e3d4b41ec72d24ab71229d22d2c595")
 sha256sums=('SKIP')
 
 prepare() {
@@ -30,7 +31,7 @@ build() {
 		mkdir -p "${srcdir}/${_pkgname}/build-${platform}"
 		cd "${srcdir}/${_pkgname}/build-${platform}"
 		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
-		../configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --enable-nintendo-${platform}
+		../configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --enable-nintendo-${platform} ac_cv_func_iconv=yes
 		make
 	done
 }
