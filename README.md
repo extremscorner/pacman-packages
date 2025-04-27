@@ -30,3 +30,6 @@ Append to `/etc/pacman.conf` relative to MSYS2 installation.
 [extremscorner-devkitpro]
 Server = https://packages.extremscorner.org/devkitpro/windows/$arch
 ```
+
+Some packages are updates for existing devkitPro packages. To use these, `[extremscorner-devkitpro]` must be placed before `[dkp-libs]`.
+You can switch back to devkitPro-provided packages at any time by swapping the order around and using `sudo (dkp-)pacman -Syuu`.
