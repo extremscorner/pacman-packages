@@ -13,4 +13,5 @@ export LIBS="-logc -lm"
 export PATH=${PORTLIBS_CUBE}/bin:${PORTLIBS_PPC}/bin:$PATH
 export ACLOCAL_PATH=${PORTLIBS_CUBE}/share/aclocal:${PORTLIBS_PPC}/share/aclocal
 
+export CMAKE=$(which ${TOOL_PREFIX}cmake)
 export PKG_CONFIG=$(which ${TOOL_PREFIX}pkg-config)

@@ -2,16 +2,16 @@
 # Contributor: WinterMute <davem@devkitpro.org>
 
 pkgname=libogc2-dkp-toolchain-vars
-pkgver=1.0.4
-pkgrel=2
+pkgver=20250501
+pkgrel=1
 pkgdesc='Helper scripts to set variables for devkitPro toolchains.'
 arch=('any')
 url='https://github.com/extremscorner/libogc2'
 depends=('dkp-toolchain-vars')
 source=('gamecubevars.sh'
 		'wiivars.sh')
-sha256sums=('ada3930c2231a36584952038924a84700a27d0ce9e5b8636c3bcad1846400785'
-			'6eaa7dce40d3c88c3d4d0eeda5010f76ee6fe8010ee9dc346f8a649ec9b9bcbc')
+sha256sums=('91ad86ad4db9a1875612805541318f9e40591da3f639a7f7d8e205ce100a4644'
+			'f438f0a01b66b7f73f9a5f2a62f59f18f33cf42544b65f4c7cb48a885689e256')
 
 package() {
 	install -Dm 644 *vars.sh -t "${pkgdir}${DEVKITPRO}/libogc2"
