@@ -1,0 +1,29 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=devkitPPC
+pkgname="${_pkgname,,}-licenses"
+pkgver=r46.1
+pkgrel=1
+pkgdesc='devkitPPC license files.'
+arch=('any')
+url='https://github.com/devkitPro/buildscripts'
+groups=('gamecube-dev' 'wii-dev' 'wiiu-dev')
+depends=("${_pkgname}")
+source=('COPYING'
+		'COPYING.LIB'
+		'COPYING.LIBGLOSS'
+		'COPYING.NEWLIB'
+		'COPYING.RUNTIME'
+		'COPYING3'
+		'COPYING3.LIB')
+sha256sums=('231f7edcc7352d7734a96eef0b8030f77982678c516876fcb81e25b32d68564c'
+			'a9bdde5616ecdd1e980b44f360600ee8783b1f99b8cc83a2beb163a0a390e861'
+			'f3b7f3e4426b1fa6f60198dae7adfedd94b77b28db2d108adc0253575011e0ff'
+			'9a59b4ee3af067045fe0ea78786201c42d54756fe48cbccf44f3dfc398474717'
+			'9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74'
+			'8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903'
+			'a853c2ffec17057872340eee242ae4d96cbf2b520ae27d903e1b2fef1a5f9d1c')
+
+package() {
+	install -Dm 644 COPYING* -t "${pkgdir}${DEVKITPRO}/licenses/${_pkgname}"
+}
