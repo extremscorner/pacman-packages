@@ -3,7 +3,7 @@
 _pkgname=libvorbisidec
 pkgname="ppc-${_pkgname}"
 pkgver=r133.820fb32
-pkgrel=3
+pkgrel=4
 epoch=1
 pkgdesc='A fixed-point version of the Ogg Vorbis decoder.'
 arch=('any')

@@ -3,7 +3,7 @@
 _pkgname=libwiisocket
 pkgname="libogc2-${_pkgname}"
 pkgver=0.1
-pkgrel=2
+pkgrel=3
 pkgdesc='Standard socket library for the Nintendo Wii.'
 arch=('any')
 url='https://gitlab.com/4TU/libwiisocket'

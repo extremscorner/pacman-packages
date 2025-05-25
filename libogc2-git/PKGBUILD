@@ -2,7 +2,7 @@
 
 _pkgname=libogc2
 pkgname=(${_pkgname}{,-docs}-git)
-pkgver=r2148.889653e
+pkgver=r2237.fd5410c
 pkgrel=1
 pkgdesc='C library for GameCube and Wii targeting devkitPPC.'
 arch=('any')

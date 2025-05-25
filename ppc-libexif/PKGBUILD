@@ -3,7 +3,7 @@
 _pkgname=libexif
 pkgname="ppc-${_pkgname}"
 pkgver=0.6.25
-pkgrel=1
+pkgrel=2
 pkgdesc='A library for parsing, editing, and saving EXIF data.'
 arch=('any')
 url='https://github.com/libexif/libexif'
