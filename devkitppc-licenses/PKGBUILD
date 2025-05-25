@@ -2,7 +2,7 @@
 
 _pkgname=devkitPPC
 pkgname="${_pkgname,,}-licenses"
-pkgver=r46.1
+pkgver=r47
 pkgrel=1
 pkgdesc='devkitPPC license files.'
 arch=('any')
@@ -18,8 +18,8 @@ source=('COPYING'
 		'COPYING3.LIB')
 sha256sums=('231f7edcc7352d7734a96eef0b8030f77982678c516876fcb81e25b32d68564c'
 			'a9bdde5616ecdd1e980b44f360600ee8783b1f99b8cc83a2beb163a0a390e861'
-			'f3b7f3e4426b1fa6f60198dae7adfedd94b77b28db2d108adc0253575011e0ff'
-			'9a59b4ee3af067045fe0ea78786201c42d54756fe48cbccf44f3dfc398474717'
+			'bdaffd5fff30cb5fc7a239a4fa0b95f703590f7b3813ca7f4e76ff46437aeb81'
+			'fcfb5ec69b6ab52676dcc4dab7cf4338c8000ef97812dadd35b8592a640a8419'
 			'9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74'
 			'8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903'
 			'a853c2ffec17057872340eee242ae4d96cbf2b520ae27d903e1b2fef1a5f9d1c')
