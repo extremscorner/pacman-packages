@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=mpg123
+pkgname="ppc-${_pkgname}"
+pkgver=1.33.0
+pkgrel=1
+pkgdesc='A real time MPEG 1.0/2.0/2.5 audio decoder for layers 1, 2 and 3.'
+arch=('any')
+url='https://www.mpg123.org/'
+license=('LGPL-2.1-only')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${url}/download/${_pkgname}-${pkgver}.tar.bz2")
+sha256sums=('2290e3aede6f4d163e1a17452165af33caad4b5f0948f99429cfa2d8385faa9d')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	powerpc-eabi-cmake ports/cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}"
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
