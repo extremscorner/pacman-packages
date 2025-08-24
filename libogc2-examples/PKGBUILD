@@ -2,7 +2,7 @@
 
 _pkgname=({gamecube,wii}-examples)
 pkgname=libogc2-examples
-pkgver=20250607
+pkgver=20250824
 pkgrel=1
 pkgdesc='C library for GameCube and Wii targeting devkitPPC. (examples)'
 arch=('any')
@@ -19,8 +19,8 @@ for i in ${!_pkgname[@]}; do
 	source+=("${_pkgname[i]}-${pkgver}.tar.gz::https://github.com/extremscorner/${_pkgname[i]}/archive/refs/tags/v${pkgver}.tar.gz")
 done
 
-sha256sums=('225f5d8f37b4c3c215054262c39fc089c7bf8b09da2af8e31d51117d4965c0c9'
-			'b58bac7ebef47cea10aafeb1fe6035562a84f1636b03d4669014c916d97a191e')
+sha256sums=('7e7eb40cb7a1963975a6774107086b0bf2f3ab7f32d9bcde5f7d5a9ea5bc1a5d'
+			'490589fbf335d8799de7890af70f800b666622431a17d5662f259b6a28c36df5')
 
 prepare() {
 	for i in ${!_pkgname[@]}; do
