@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=fmt
+pkgname="ppc-${_pkgname}"
+pkgver=11.2.0
+pkgrel=1
+pkgdesc='A modern formatting library for C++.'
+arch=('any')
+url='https://github.com/fmtlib/fmt'
+license=('MIT')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('bc23066d87ab3168f27cef3e97d545fa63314f5c79df5ea444d41d56f962c6af')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DFMT_TEST=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
