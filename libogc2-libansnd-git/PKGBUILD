@@ -2,15 +2,15 @@
 
 _pkgname=libansnd
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r5.9e59fc4
-pkgrel=1
+pkgver=r23.9a2ac63
+pkgrel=2
 pkgdesc='Another Sound Library for Wii and GameCube homebrew.'
 arch=('any')
 url='https://github.com/extremscorner/libansnd'
 license=('Zlib')
 groups=('gamecube-dev' 'wii-dev')
 depends=('devkitPPC' 'libogc2')
-makedepends=('catnip' 'cmake' 'gamecube-cmake' 'gamecube-tools-git' 'git' 'libogc2-cmake' 'wii-cmake')
+makedepends=('catnip' 'cmake' 'gamecube-tools-git' 'git' 'libogc2-cmake')
 provides=("libogc2-${_pkgname}")
 conflicts=("libogc2-${_pkgname}")
 options=(!strip libtool staticlibs !buildflags)
@@ -30,7 +30,9 @@ build() {
 package() {
 	cd "${srcdir}/${_pkgname}"
 	DESTDIR="${pkgdir}" catnip install
-	mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/share/doc/${_pkgname}"
-	cp -r examples "${pkgdir}${DEVKITPRO}/libogc2/share/doc/${_pkgname}"
-	install -Dm 644 LICENSE.md -t "${pkgdir}${DEVKITPRO}/libogc2/share/licenses/${_pkgname}"
+	for platform in gamecube wii; do
+		mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/${_pkgname}"
+		cp -r examples "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/${_pkgname}"
+		install -Dm 644 LICENSE.md -t "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/licenses/${_pkgname}"
+	done
 }

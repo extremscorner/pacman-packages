@@ -1,0 +1,19 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+# Contributor: WinterMute <davem@devkitpro.org>
+
+pkgname=libogc2-pkg-config
+pkgver=20251007
+pkgrel=1
+pkgdesc='pkg-config wrapper.'
+arch=('any')
+url='https://github.com/extremscorner/libogc2'
+groups=('gamecube-dev' 'wii-dev')
+source=('powerpc-eabi-pkg-config.in')
+sha256sums=('b712d32334ed9fed5d666aef113f056a579f9c56447221465c21196d32bf738a')
+
+package() {
+	for platform in gamecube wii; do
+		sed "s/@PLATFORM@/${platform}/g" powerpc-eabi-pkg-config.in > powerpc-eabi-pkg-config
+		install -Dm 755 powerpc-eabi-pkg-config -t "${pkgdir}${DEVKITPRO}/libogc2/${platform}/bin"
+	done
+}

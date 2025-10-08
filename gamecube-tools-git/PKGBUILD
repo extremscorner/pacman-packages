@@ -2,7 +2,7 @@
 
 _pkgname=gamecube-tools
 pkgname="${_pkgname}-git"
-pkgver=r88.2eecc96
+pkgver=r97.a9c0c7b
 pkgrel=1
 pkgdesc='Tools for GameCube and Wii projects.'
 arch=("${CARCH}")

@@ -2,7 +2,7 @@
 
 _pkgname=({gamecube,wii}-examples)
 pkgname=libogc2-examples
-pkgver=20250824
+pkgver=20251007
 pkgrel=1
 pkgdesc='C library for GameCube and Wii targeting devkitPPC. (examples)'
 arch=('any')
@@ -19,8 +19,8 @@ for i in ${!_pkgname[@]}; do
 	source+=("${_pkgname[i]}-${pkgver}.tar.gz::https://github.com/extremscorner/${_pkgname[i]}/archive/refs/tags/v${pkgver}.tar.gz")
 done
 
-sha256sums=('7e7eb40cb7a1963975a6774107086b0bf2f3ab7f32d9bcde5f7d5a9ea5bc1a5d'
-			'490589fbf335d8799de7890af70f800b666622431a17d5662f259b6a28c36df5')
+sha256sums=('e380effc6ee1bdcdaa34d635785dc02b3039aea400cba4f41bc0975fa55bb064'
+			'961b8b601304f68ef0f58e0659ae8482f8fb6f32806cd1c51adcae71dc019bd7')
 
 prepare() {
 	for i in ${!_pkgname[@]}; do
@@ -29,8 +29,9 @@ prepare() {
 }
 
 package() {
-	mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/share/doc/libogc2/examples"
 	for i in ${!_pkgname[@]}; do
-		cp -r "${_pkgname[i]}-${pkgver}" "${pkgdir}${DEVKITPRO}/libogc2/share/doc/libogc2/examples/${_pkgname[i]%-examples}"
+		local platform=${_pkgname[i]%-examples}
+		mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/libogc2"
+		cp -r "${_pkgname[i]}-${pkgver}" "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/libogc2/examples"
 	done
 }

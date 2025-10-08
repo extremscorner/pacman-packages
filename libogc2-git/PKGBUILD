@@ -2,7 +2,7 @@
 
 _pkgname=libogc2
 pkgname=(${_pkgname}{,-docs}-git)
-pkgver=r2237.fd5410c
+pkgver=r2295.c62bae0
 pkgrel=1
 pkgdesc='C library for GameCube and Wii targeting devkitPPC.'
 arch=('any')
@@ -41,6 +41,8 @@ package_libogc2-docs-git() {
 	depends=()
 
 	cd "${srcdir}/${_pkgname}"
-	mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/share/doc"
-	cp -r docs "${pkgdir}${DEVKITPRO}/libogc2/share/doc/${_pkgname}"
+	for platform in gamecube wii; do
+		mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc"
+		cp -r docs "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/${_pkgname}"
+	done
 }

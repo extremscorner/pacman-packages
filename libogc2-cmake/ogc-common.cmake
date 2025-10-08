@@ -23,18 +23,19 @@ list(APPEND CMAKE_TRY_COMPILE_PLATFORM_VARIABLES DKP_OGC_PLATFORM_LIBRARY)
 
 if("${DKP_OGC_PLATFORM_LIBRARY}" STREQUAL "libogc")
     set(OGC_ROOT "${DEVKITPRO}/libogc")
+    set(DKP_INSTALL_PREFIX_INIT ${DEVKITPRO}/portlibs/${OGC_CONSOLE})
 elseif("${DKP_OGC_PLATFORM_LIBRARY}" STREQUAL "libogc2")
-    set(OGC_ROOT "${DEVKITPRO}/libogc2")
+    set(OGC_SUBDIR "")
+    set(OGC_ROOT "${DEVKITPRO}/libogc2/${OGC_CONSOLE}")
+    set(DKP_INSTALL_PREFIX_INIT ${OGC_ROOT})
 else()
     message(FATAL_ERROR "Unsupported OGC platform library: '${DKP_OGC_PLATFORM_LIBRARY}'")
 endif()
 
-set(DKP_INSTALL_PREFIX_INIT ${DEVKITPRO}/portlibs/${OGC_CONSOLE})
-
 __dkp_platform_prefix(
+    ${OGC_ROOT}
     ${DEVKITPRO}/portlibs/${OGC_CONSOLE}
     ${DEVKITPRO}/portlibs/ppc
-    ${OGC_ROOT}
 )
 
 find_program(PKG_CONFIG_EXECUTABLE NAMES powerpc-eabi-pkg-config HINTS "${DEVKITPRO}/portlibs/${OGC_CONSOLE}/bin")

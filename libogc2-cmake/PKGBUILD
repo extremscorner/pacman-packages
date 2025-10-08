@@ -3,21 +3,27 @@
 # Contributor: fincs <fincs@devkitpro.org>
 
 pkgname=libogc2-cmake
-pkgver=1.2.1
+pkgver=20251007
 pkgrel=1
-pkgdesc='CMake support files for libogc(2)'
+pkgdesc='CMake support files for libogc(2).'
 arch=('any')
 url='https://github.com/extremscorner/libogc2'
 groups=('gamecube-dev' 'wii-dev')
-depends=('devkitppc-cmake' 'gamecube-tools')
+depends=('devkitppc-cmake' 'gamecube-cmake' 'gamecube-tools' 'libogc2-pkg-config' 'wii-cmake')
 provides=('ogc-cmake')
 conflicts=('ogc-cmake')
-source=('ogc-common.cmake'
-		'libogc.cmake')
-sha256sums=('5236e997230e112092445c88f2d16a646e7b0e90c45cb72d1dbe0dca8cb13174'
-			'038420bc082efcf0c088a1bc63354f4f13d6b2fb29ee2a8ef5f4f689b495de83')
+source=('libogc.cmake'
+		'ogc-common.cmake'
+		'powerpc-eabi-cmake.in')
+sha256sums=('a2065206e99016816b610392972162089bc6817274b6e506e63c4fbcc6d0f06f'
+			'dada287a6a014c624008abca179b8a7ca815eb580f4d328cfac2a33cff474903'
+			'0f0d3dda1f741a6e425c167048f6d82960342d6c50fd7909e3942c0e46c2664c')
 
 package() {
 	install -Dm 644 ogc-common.cmake -t "${pkgdir}${DEVKITPRO}/cmake"
 	install -Dm 644 libogc.cmake -t "${pkgdir}${DEVKITPRO}/cmake/Platform"
+	for Platform in GameCube Wii; do
+		sed "s/@PLATFORM@/${Platform}/g" powerpc-eabi-cmake.in > powerpc-eabi-cmake
+		install -Dm 755 powerpc-eabi-cmake -t "${pkgdir}${DEVKITPRO}/libogc2/${Platform,,}/bin"
+	done
 }

@@ -14,7 +14,7 @@
  
  # Here be dragons
 -INSTALL		?=	$(DEVKITPRO)/libogc
-+INSTALL		?=	$(PORTLIBS_PATH)/wii
++INSTALL		?=	$(DEVKITPRO)/libogc2/wii
  
  #-------------------------------------------------------------------------------
  # options for code generation
