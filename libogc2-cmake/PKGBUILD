@@ -3,7 +3,7 @@
 # Contributor: fincs <fincs@devkitpro.org>
 
 pkgname=libogc2-cmake
-pkgver=20251007
+pkgver=20251008
 pkgrel=1
 pkgdesc='CMake support files for libogc(2).'
 arch=('any')
@@ -16,7 +16,7 @@ source=('libogc.cmake'
 		'ogc-common.cmake'
 		'powerpc-eabi-cmake.in')
 sha256sums=('a2065206e99016816b610392972162089bc6817274b6e506e63c4fbcc6d0f06f'
-			'dada287a6a014c624008abca179b8a7ca815eb580f4d328cfac2a33cff474903'
+			'1aded17ff388c88c1b4a272d8b3eab90067d3c737b792309780393b7c2f921ed'
 			'0f0d3dda1f741a6e425c167048f6d82960342d6c50fd7909e3942c0e46c2664c')
 
 package() {

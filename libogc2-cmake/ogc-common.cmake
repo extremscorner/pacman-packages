@@ -38,7 +38,7 @@ __dkp_platform_prefix(
     ${DEVKITPRO}/portlibs/ppc
 )
 
-find_program(PKG_CONFIG_EXECUTABLE NAMES powerpc-eabi-pkg-config HINTS "${DEVKITPRO}/portlibs/${OGC_CONSOLE}/bin")
+find_program(PKG_CONFIG_EXECUTABLE NAMES powerpc-eabi-pkg-config HINTS "${DKP_INSTALL_PREFIX_INIT}/bin")
 if (NOT PKG_CONFIG_EXECUTABLE)
     message(FATAL_ERROR "Could not find powerpc-eabi-pkg-config: try installing ${OGC_CONSOLE}-pkg-config")
 endif()
