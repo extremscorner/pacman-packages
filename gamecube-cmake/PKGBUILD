@@ -1,0 +1,23 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+# Contributor: WinterMute <davem@devkitpro.org>
+
+pkgname=gamecube-cmake
+pkgver=1.0.1
+pkgrel=2
+pkgdesc='CMake support for Nintendo GameCube.'
+arch=('any')
+url='https://github.com/extremscorner/libogc2'
+groups=('gamecube-dev')
+depends=('gamecube-pkg-config' 'ogc-cmake')
+source=('GameCube.cmake'
+		'NintendoGameCube.cmake'
+		'powerpc-eabi-cmake')
+sha256sums=('ee258d8dc60fc6526116563c755ede223916c883e9a5266270855bcabb9f8c81'
+			'8f05eecc60bdfe6315e05be8cabbf7a5c882ce73e14a4d0efb4bcef4ece69553'
+			'6d32c21fe70b46520ec06a251a8d355f9fce9560e316fe996fa627158660d938')
+
+package() {
+	install -Dm 644 GameCube.cmake -t "${pkgdir}${DEVKITPRO}/cmake"
+	install -Dm 644 NintendoGameCube.cmake -t "${pkgdir}${DEVKITPRO}/cmake/Platform"
+	install -Dm 755 powerpc-eabi-cmake -t "${pkgdir}${DEVKITPRO}/portlibs/gamecube/bin"
+}
