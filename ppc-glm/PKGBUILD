@@ -2,8 +2,8 @@
 
 _pkgname=glm
 pkgname="ppc-${_pkgname}"
-pkgver=1.0.1
-pkgrel=2
+pkgver=1.0.2
+pkgrel=1
 pkgdesc='C++ mathematics library for 3D software based on the OpenGL Shading Language (GLSL) specification.'
 arch=('any')
 url='https://github.com/g-truc/glm'
@@ -13,12 +13,12 @@ depends=('devkitPPC')
 makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('9f3174561fd26904b23f0db5e560971cbf9b3cbda0b280f04d5c379d03bf234c')
+sha256sums=('19edf2e860297efab1c74950e6076bf4dad9de483826bc95e2e0f2c758a43f65')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_DATAROOTDIR="${PORTLIBS_PREFIX}/lib/cmake" -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DGLM_BUILD_TESTS=OFF
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_DATAROOTDIR="${PORTLIBS_PREFIX}/lib/cmake" -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}"
 	cmake --build build
 }
 
