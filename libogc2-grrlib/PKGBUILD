@@ -1,0 +1,52 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=GRRLIB
+pkgname=(libogc2-${_pkgname,,}{,-docs,-examples})
+pkgver=4.6.1
+pkgrel=1
+pkgdesc='C/C++ 2D/3D graphics library for Wii application developers.'
+arch=('any')
+url='https://grrlib.santo.fr/'
+license=('MIT')
+groups=('gamecube-dev' 'wii-dev')
+depends=('devkitPPC' 'libogc2' 'libogc2-libfat' 'ppc-freetype' 'ppc-libjpeg-turbo' 'ppc-libpng')
+makedepends=('catnip' 'cmake' 'doxygen' 'git' 'libogc2-cmake')
+options=(!strip libtool staticlibs !buildflags)
+source=("git+https://github.com/extremscorner/GRRLIB.git#commit=b07a14076f01d0449fbac59384327bba16ed7f18")
+sha256sums=('SKIP')
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	catnip build
+	doxygen grrlib.doxygen
+}
+
+package_libogc2-grrlib() {
+	cd "${srcdir}/${_pkgname}"
+	DESTDIR="${pkgdir}" catnip install
+	for platform in gamecube wii; do
+		install -Dm 644 LICENCE.md -t "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/licenses/${_pkgname}"
+	done
+}
+
+package_libogc2-grrlib-docs() {
+	pkgdesc+=' (documentation)'
+	depends=()
+
+	cd "${srcdir}/${_pkgname}"
+	for platform in gamecube wii; do
+		mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/${_pkgname}"
+		cp -r {html,latex} "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/${_pkgname}"
+	done
+}
+
+package_libogc2-grrlib-examples() {
+	pkgdesc+=' (examples)'
+
+	cd "${srcdir}/${_pkgname}"
+	for platform in gamecube wii; do
+		mkdir -p "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/doc/${_pkgname}"
+	done
+	mv examples/gamecube "${pkgdir}${DEVKITPRO}/libogc2/gamecube/share/doc/${_pkgname}/examples"
+	cp -r examples "${pkgdir}${DEVKITPRO}/libogc2/wii/share/doc/${_pkgname}"
+}
