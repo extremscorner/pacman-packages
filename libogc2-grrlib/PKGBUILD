@@ -3,7 +3,7 @@
 _pkgname=GRRLIB
 pkgname=(libogc2-${_pkgname,,}{,-docs,-examples})
 pkgver=4.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc='C/C++ 2D/3D graphics library for Wii application developers.'
 arch=('any')
 url='https://grrlib.santo.fr/'
@@ -22,6 +22,8 @@ build() {
 }
 
 package_libogc2-grrlib() {
+	optdepends=(${pkgbase}{-docs,-examples})
+
 	cd "${srcdir}/${_pkgname}"
 	DESTDIR="${pkgdir}" catnip install
 	for platform in gamecube wii; do
@@ -31,7 +33,7 @@ package_libogc2-grrlib() {
 
 package_libogc2-grrlib-docs() {
 	pkgdesc+=' (documentation)'
-	depends=()
+	depends=("${pkgbase}")
 
 	cd "${srcdir}/${_pkgname}"
 	for platform in gamecube wii; do
@@ -42,6 +44,7 @@ package_libogc2-grrlib-docs() {
 
 package_libogc2-grrlib-examples() {
 	pkgdesc+=' (examples)'
+	depends=("${pkgbase}")
 
 	cd "${srcdir}/${_pkgname}"
 	for platform in gamecube wii; do

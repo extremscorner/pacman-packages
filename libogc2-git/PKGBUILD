@@ -2,8 +2,8 @@
 
 _pkgname=libogc2
 pkgname=(${_pkgname}{,-docs}-git)
-pkgver=r2295.c62bae0
-pkgrel=1
+pkgver=r2310.b81d6f1
+pkgrel=2
 pkgdesc='C library for GameCube and Wii targeting devkitPPC.'
 arch=('any')
 url='https://github.com/extremscorner/libogc2'
@@ -27,6 +27,7 @@ build() {
 }
 
 package_libogc2-git() {
+	optdepends=(${_pkgname}{-docs-git,-examples})
 	provides=("${_pkgname}")
 	conflicts=("${_pkgname}")
 
@@ -36,9 +37,9 @@ package_libogc2-git() {
 
 package_libogc2-docs-git() {
 	pkgdesc+=' (documentation)'
+	depends=("${_pkgname}-git")
 	provides=("${_pkgname}-docs")
 	conflicts=("${_pkgname}-docs")
-	depends=()
 
 	cd "${srcdir}/${_pkgname}"
 	for platform in gamecube wii; do
