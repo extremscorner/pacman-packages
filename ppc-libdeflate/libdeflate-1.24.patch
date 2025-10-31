@@ -1,0 +1,14 @@
+--- libdeflate-1.24/common_defs.h.orig	2025-05-11 19:02:37.000000000 +0000
++++ libdeflate-1.24/common_defs.h	2025-05-11 19:02:37.000000000 +0000
+@@ -401,8 +401,9 @@
+  * efficiently on the target platform, otherwise 0.
+  */
+ #if (defined(__GNUC__) || defined(__clang__)) && \
+-	(defined(ARCH_X86_64) || defined(ARCH_X86_32) || \
+-	 defined(__ARM_FEATURE_UNALIGNED) || defined(__powerpc64__) || \
++	(defined(ARCH_X86_32) || defined(ARCH_X86_64) || \
++	 defined(__ARM_FEATURE_UNALIGNED) || \
++	 defined(__PPC__) || defined(__powerpc64__) || \
+ 	 defined(__riscv_misaligned_fast) || \
+ 	 /*
+ 	  * For all compilation purposes, WebAssembly behaves like any other CPU
