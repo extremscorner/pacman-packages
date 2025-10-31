@@ -1,0 +1,33 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=bzip2
+pkgname=ppc-libbz2
+pkgver=1.0.8
+pkgrel=3
+pkgdesc='A high-quality data compression program.'
+arch=('any')
+url='https://sourceware.org/bzip2/'
+license=('bzip2-1.0.6')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('dkp-toolchain-vars')
+provides=("ppc-${_pkgname}")
+conflicts=("ppc-${_pkgname}")
+replaces=("ppc-${_pkgname}")
+options=(!strip libtool staticlibs)
+source=("https://sourceware.org/pub/bzip2/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	make -e libbz2.a
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/ppcvars.sh"
+	install -Dm 644 bzlib.h -t "${pkgdir}${PORTLIBS_PREFIX}/include"
+	install -Dm 644 libbz2.a -t "${pkgdir}${PORTLIBS_PREFIX}/lib"
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
