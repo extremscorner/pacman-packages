@@ -3,21 +3,21 @@
 _pkgname=zlib-ng
 pkgname=(ppc-${_pkgname}{,-compat})
 pkgver=2.2.5
-pkgrel=1
+pkgrel=2
 pkgdesc='zlib replacement with optimizations for "next generation" systems.'
 arch=('any')
 url='https://github.com/zlib-ng/zlib-ng'
 license=('Zlib')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('5b3b022489f3ced82384f06db1e13ba148cbce38c7941e424d6cb414416acd18')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZLIB_ENABLE_TESTS=OFF
 	powerpc-eabi-cmake -B build-compat -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZLIB_ENABLE_TESTS=OFF -DZLIB_COMPAT=ON
 	cmake --build build
@@ -26,7 +26,7 @@ build() {
 
 package_ppc-zlib-ng() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build
 	install -Dm 644 LICENSE.md -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }
@@ -35,9 +35,10 @@ package_ppc-zlib-ng-compat() {
 	pkgdesc+=' (zlib compat)'
 	provides=('ppc-zlib')
 	conflicts=('ppc-zlib')
+	replaces=('ppc-zlib')
 
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build-compat
 	install -Dm 644 LICENSE.md -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

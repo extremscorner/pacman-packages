@@ -3,14 +3,14 @@
 _pkgname=libpsoarchive
 pkgname="ppc-${_pkgname}"
 pkgver=r20.53113b3
-pkgrel=7
+pkgrel=8
 pkgdesc='Library for reading and writing various archive formats used in the Phantasy Star Online series of games.'
 arch=('any')
 url='https://github.com/extremscorner/libpsoarchive'
 license=('LGPL-2.1-only' 'LGPL-3.0-only')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('dkp-toolchain-vars' 'git')
+makedepends=('git' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("git+${url}.git#commit=53113b3347c9e3b650b1278b06ba8950fc4b3d23")
 sha256sums=('332d4c23adf448c24862771c29a19fd69665fdb60badad6878e6538a9f4e6430')
@@ -22,14 +22,14 @@ prepare() {
 
 build() {
 	cd "${srcdir}/${_pkgname}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
 	make
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install
 	install -Dm 644 COPYING* -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

@@ -3,14 +3,14 @@
 _pkgname=brotli
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc='A generic-purpose lossless compression algorithm.'
 arch=('any')
 url='https://github.com/google/brotli'
 license=('MIT')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
@@ -23,14 +23,14 @@ prepare() {
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	powerpc-eabi-cmake -B build -DBROTLI_BUILD_TOOLS=OFF -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}"
 	cmake --build build
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build
 	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

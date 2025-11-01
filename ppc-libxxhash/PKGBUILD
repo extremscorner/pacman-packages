@@ -3,14 +3,14 @@
 _pkgname=xxHash
 pkgname="ppc-lib${_pkgname,,}"
 pkgver=0.8.3
-pkgrel=2
+pkgrel=3
 pkgdesc='Extremely fast non-cryptographic hash algorithm.'
 arch=('any')
 url='https://github.com/Cyan4973/xxHash'
 license=('BSD-2-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
@@ -23,7 +23,7 @@ prepare() {
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	CFLAGS="${CFLAGS/-O2/-O3}"
 	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
 	powerpc-eabi-cmake cmake_unofficial -B build -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DXXHASH_BUILD_XXHSUM=OFF
@@ -32,7 +32,7 @@ build() {
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build
 	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

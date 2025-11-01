@@ -3,21 +3,21 @@
 _pkgname=fftw
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.10
-pkgrel=2
+pkgrel=3
 pkgdesc='A library for computing the discrete Fourier transform (DFT).'
 arch=('any')
 url='https://www.fftw.org/'
 license=('GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${url}/${_pkgname}-${pkgver}.tar.gz")
 sha256sums=('56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	CFLAGS="${CFLAGS/-O2/-O3}"
 	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
 	powerpc-eabi-cmake -B build-single -DBUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DENABLE_FLOAT=ON
@@ -28,7 +28,7 @@ build() {
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build-single
 	DESTDIR="${pkgdir}" cmake --install build-double
 	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"

@@ -3,14 +3,14 @@
 _pkgname=libexif
 pkgname="ppc-${_pkgname}"
 pkgver=0.6.25
-pkgrel=2
+pkgrel=3
 pkgdesc='A library for parsing, editing, and saving EXIF data.'
 arch=('any')
 url='https://github.com/libexif/libexif'
 license=('LGPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('dkp-toolchain-vars')
+makedepends=('libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('b23af41f37019b8d591d4d9b42ba52fd30709b6767341aa887f9afe400c8408a')
@@ -22,14 +22,14 @@ prepare() {
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-docs
 	make
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install
 	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

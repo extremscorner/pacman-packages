@@ -3,14 +3,14 @@
 _pkgname=double-conversion
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.1
-pkgrel=3
+pkgrel=4
 pkgdesc='Efficient binary-decimal and decimal-binary conversion routines for IEEE doubles.'
 arch=('any')
 url='https://github.com/google/double-conversion'
 license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'dkp-toolchain-vars')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
 provides=("ppc-lib${_pkgname}")
 conflicts=("ppc-lib${_pkgname}")
 replaces=("ppc-lib${_pkgname}")
@@ -20,14 +20,14 @@ sha256sums=('fe54901055c71302dcdc5c3ccbe265a6c191978f3761ce1414d0895d6b0ea90e')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 	cmake --build build
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build
 	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

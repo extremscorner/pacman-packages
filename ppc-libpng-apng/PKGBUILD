@@ -3,14 +3,14 @@
 _pkgname=libpng
 pkgname="ppc-${_pkgname}-apng"
 pkgver=1.6.50
-pkgrel=1
+pkgrel=2
 pkgdesc='A collection of routines used to create PNG format graphics files. (with APNG support)'
 arch=('any')
 url='https://sourceforge.net/projects/libpng-apng/'
 license=('libpng-2.0')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-zlib')
-makedepends=('dkp-toolchain-vars')
+makedepends=('libogc2-dkp-toolchain-vars')
 provides=("ppc-${_pkgname}")
 conflicts=("ppc-${_pkgname}")
 options=(!strip libtool staticlibs)
@@ -25,14 +25,14 @@ prepare() {
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-tests --disable-tools
 	make
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	source "${DEVKITPRO}/ppcvars.sh"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install LN_S='cp -pR'
 	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }
