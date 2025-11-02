@@ -3,7 +3,7 @@
 _pkgname=mxml
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.1
-pkgrel=4
+pkgrel=5
 pkgdesc='A small XML parsing library.'
 arch=('any')
 url='https://github.com/michaelrsweet/mxml'
@@ -26,5 +26,6 @@ package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DSTROOT="${pkgdir}" make install
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
 	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

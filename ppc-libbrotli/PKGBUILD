@@ -3,7 +3,7 @@
 _pkgname=brotli
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.2.0
-pkgrel=2
+pkgrel=3
 pkgdesc='A generic-purpose lossless compression algorithm.'
 arch=('any')
 url='https://github.com/google/brotli'
@@ -32,5 +32,6 @@ package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
 	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

@@ -3,7 +3,7 @@
 _pkgname=libexif
 pkgname="ppc-${_pkgname}"
 pkgver=0.6.25
-pkgrel=3
+pkgrel=4
 pkgdesc='A library for parsing, editing, and saving EXIF data.'
 arch=('any')
 url='https://github.com/libexif/libexif'
@@ -31,5 +31,6 @@ package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
 	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

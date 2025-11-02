@@ -3,7 +3,7 @@
 _pkgname=libpng
 pkgname="ppc-${_pkgname}-apng"
 pkgver=1.6.50
-pkgrel=2
+pkgrel=3
 pkgdesc='A collection of routines used to create PNG format graphics files. (with APNG support)'
 arch=('any')
 url='https://sourceforge.net/projects/libpng-apng/'
@@ -34,5 +34,6 @@ package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install LN_S='cp -pR'
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
 	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

@@ -3,7 +3,7 @@
 _pkgname=libiconv
 pkgname="ppc-${_pkgname}"
 pkgver=1.18
-pkgrel=3
+pkgrel=4
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'
@@ -34,5 +34,6 @@ package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
 	install -Dm 644 COPYING.LIB -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }
