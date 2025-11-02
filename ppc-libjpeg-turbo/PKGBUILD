@@ -1,0 +1,35 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libjpeg-turbo
+pkgname="ppc-${_pkgname}"
+pkgver=3.1.2
+pkgrel=1
+pkgdesc='JPEG image codec with accelerated baseline compression and decompression.'
+arch=('any')
+url='https://github.com/libjpeg-turbo/libjpeg-turbo'
+license=('BSD-3-Clause' 'IJG')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+provides=("ppc-libjpeg")
+conflicts=("ppc-libjpeg")
+replaces=("ppc-libjpeg")
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('560f6338b547544c4f9721b18d8b87685d433ec78b3c644c70d77adad22c55e6')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	CFLAGS="${CFLAGS/-O2/-O3}"
+	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DENABLE_SHARED=OFF -DHAVE_THREAD_LOCAL=OFF -DWITH_SIMD=OFF -DWITH_TOOLS=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 {LICENSE.md,README.ijg} -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
