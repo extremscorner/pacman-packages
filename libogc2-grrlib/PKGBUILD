@@ -3,7 +3,7 @@
 _pkgname=GRRLIB
 pkgname=(libogc2-${_pkgname,,}{,-docs,-examples})
 pkgver=4.6.1
-pkgrel=4
+pkgrel=5
 pkgdesc='C/C++ 2D/3D graphics library for Wii application developers.'
 arch=('any')
 url='https://grrlib.santo.fr/'
@@ -12,8 +12,8 @@ groups=('gamecube-dev' 'wii-dev')
 depends=('devkitPPC' 'libogc2' 'libogc2-libfat' 'ppc-freetype' 'ppc-libjpeg' 'ppc-libpng')
 makedepends=('catnip' 'cmake' 'doxygen' 'git' 'libogc2-cmake')
 options=(!strip libtool staticlibs !buildflags)
-source=('git+https://github.com/extremscorner/GRRLIB.git#commit=b07a14076f01d0449fbac59384327bba16ed7f18')
-sha256sums=('d5d1eff3593ed19571c38cb75bf3bfa29bb303fa8c9fe83cee9aeeda766033db')
+source=('git+https://github.com/extremscorner/GRRLIB.git#commit=ac914032ccdb3be0b8f63edb026d056f04f30c6f')
+sha256sums=('9af236696384ef42b93ba8c9cd940a6de5640b1fd26d0587df92222aa3f5c0f4')
 
 build() {
 	cd "${srcdir}/${_pkgname}"
