@@ -2,8 +2,8 @@
 
 _pkgname=libpng
 pkgname="ppc-${_pkgname}"
-pkgver=1.6.50
-pkgrel=3
+pkgver=1.6.51
+pkgrel=1
 pkgdesc='A collection of routines used to create PNG format graphics files.'
 arch=('any')
 url='https://www.libpng.org/pub/png/libpng.html'
@@ -13,7 +13,7 @@ depends=('devkitPPC' 'ppc-zlib')
 makedepends=('libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("https://downloads.sourceforge.net/sourceforge/libpng/${_pkgname}-${pkgver}.tar.xz")
-sha256sums=('4df396518620a7aa3651443e87d1b2862e4e88cad135a8b93423e01706232307')
+sha256sums=('a050a892d3b4a7bb010c3a95c7301e49656d72a64f1fc709a90b8aded192bed2')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
