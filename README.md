@@ -7,7 +7,6 @@ devkitPro cannot, and will not, provide support for these packages.
 
 ```
 sudo (dkp-)pacman-key --recv-keys C8A2759C315CFBC3429CC2E422B803BA8AA3D7CE --keyserver keyserver.ubuntu.com
-sudo (dkp-)pacman-key --finger C8A2759C315CFBC3429CC2E422B803BA8AA3D7CE
 sudo (dkp-)pacman-key --lsign-key C8A2759C315CFBC3429CC2E422B803BA8AA3D7CE
 ```
 
@@ -33,3 +32,7 @@ Server = https://packages.extremscorner.org/devkitpro/windows/$arch
 
 Some packages are updates for existing devkitPro packages. To use these, `[extremscorner-devkitpro]` must be placed before `[dkp-libs]`.
 You can switch back to devkitPro-provided packages at any time by swapping the order around and using `sudo (dkp-)pacman -Syuu`.
+
+## Building packages
+
+All packages can be built on Arch Linux, and most under MSYS2.
