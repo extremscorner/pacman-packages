@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libwebp
+pkgname="ppc-${_pkgname}"
+pkgver=1.6.0
+pkgrel=1
+pkgdesc='WebP image codec library.'
+arch=('any')
+url='https://developers.google.com/speed/webp/'
+license=('BSD-3-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://storage.googleapis.com/downloads.webmproject.org/releases/webp/${_pkgname}-${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('e4ab7009bf0629fd11982d4c2aa83964cf244cffba7347ecd39019a9e38c4564'
+			'258ac552b08584c6f50b97055165ec1fc9c80f7bcdf63da7d2c2b4d06ede67eb')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DWEBP_BUILD_CWEBP=OFF -DWEBP_BUILD_DWEBP=OFF -DWEBP_BUILD_EXTRAS=OFF -DWEBP_BUILD_GIF2WEBP=OFF -DWEBP_BUILD_IMG2WEBP=OFF -DWEBP_BUILD_VWEBP=OFF -DWEBP_BUILD_WEBPINFO=OFF -DWEBP_BUILD_WEBPMUX=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
