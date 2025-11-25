@@ -1,6 +1,23 @@
 --- libwebp-1.6.0/CMakeLists.txt.orig	2025-07-08 00:20:00.000000000 +0000
 +++ libwebp-1.6.0/CMakeLists.txt	2025-07-08 00:20:00.000000000 +0000
-@@ -795,7 +795,7 @@
+@@ -145,6 +145,16 @@
+   add_definitions(-DWEBP_DLL)
+ endif()
+ 
++# Compatibility with autoconf configure script's way of setting this
++if(CMAKE_C_BYTE_ORDER STREQUAL "BIG_ENDIAN")
++  set(WORDS_BIGENDIAN TRUE)
++elseif(CMAKE_C_BYTE_ORDER STREQUAL "LITTLE_ENDIAN")
++  set(WORDS_BIGENDIAN FALSE)
++else()
++  set(WORDS_BIGENDIAN FALSE)
++  message(WARNING "Endianness could not be determined.")
++endif()
++
+ # pkg-config variables used by *.pc.in.
+ set(prefix ${CMAKE_INSTALL_PREFIX})
+ set(exec_prefix "\${prefix}")
+@@ -795,7 +805,7 @@
    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -9,3 +26,19 @@
  install(EXPORT ${PROJECT_NAME}Targets NAMESPACE ${PROJECT_NAME}::
          DESTINATION ${ConfigPackageLocation})
  
+--- libwebp-1.6.0/cmake/config.h.in.orig	2025-07-08 00:20:00.000000000 +0000
++++ libwebp-1.6.0/cmake/config.h.in	2025-07-08 00:20:00.000000000 +0000
+@@ -108,12 +108,4 @@
+ 
+ /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+    significant byte first (like Motorola and SPARC, unlike Intel). */
+-#if defined AC_APPLE_UNIVERSAL_BUILD
+-# if defined __BIG_ENDIAN__
+-#  define WORDS_BIGENDIAN 1
+-# endif
+-#else
+-# ifndef WORDS_BIGENDIAN
+-#  undef WORDS_BIGENDIAN
+-# endif
+-#endif
++#cmakedefine WORDS_BIGENDIAN 1
