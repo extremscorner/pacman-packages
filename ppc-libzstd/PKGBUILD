@@ -1,0 +1,38 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=zstd
+pkgname="ppc-lib${_pkgname}"
+pkgver=1.5.7
+pkgrel=1
+pkgdesc='Zstandard - Fast real-time compression algorithm.'
+arch=('any')
+url='https://github.com/facebook/zstd'
+license=('BSD-3-Clause' 'GPL-2.0-only')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('37d7284556b20954e56e1ca85b80226768902e2edabd3b649e9e72c0c9012ee3'
+			'42eb0d49a01cab8cefcc4972a334c550a9572e1feee985baaa9af113d98a2425')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	CFLAGS="${CFLAGS/-O2/-O3}"
+	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
+	powerpc-eabi-cmake build/cmake -B build-cmake -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZSTD_BUILD_PROGRAMS=OFF -DZSTD_BUILD_SHARED=OFF -DZSTD_MULTITHREAD_SUPPORT=OFF
+	cmake --build build-cmake
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build-cmake
+	install -Dm 644 {COPYING,LICENSE} -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
