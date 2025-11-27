@@ -1,6 +1,14 @@
 --- libwebp-1.6.0/CMakeLists.txt.orig	2025-07-08 00:20:00.000000000 +0000
 +++ libwebp-1.6.0/CMakeLists.txt	2025-07-08 00:20:00.000000000 +0000
-@@ -145,6 +145,16 @@
+@@ -57,7 +57,6 @@
+   else()
+     set(CMAKE_FIND_LIBRARY_SUFFIXES .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
+   endif()
+-  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+   # vwebp does not compile on Ubuntu with static libraries so disabling it for
+   # now.
+   set(WEBP_BUILD_VWEBP OFF)
+@@ -145,6 +144,16 @@
    add_definitions(-DWEBP_DLL)
  endif()
  
@@ -17,7 +25,18 @@
  # pkg-config variables used by *.pc.in.
  set(prefix ${CMAKE_INSTALL_PREFIX})
  set(exec_prefix "\${prefix}")
-@@ -795,7 +805,7 @@
+@@ -423,10 +432,6 @@
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/webp/encode.h;\
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/webp/types.h")
+ 
+-# Make sure the OBJECT libraries are built with position independent code (it is
+-# not ON by default).
+-set_target_properties(webpdecode webpdspdecode webputilsdecode webpencode
+-                      webpdsp webputils PROPERTIES POSITION_INDEPENDENT_CODE ON)
+ configure_pkg_config("src/libwebp.pc")
+ 
+ # Build the webp demux library.
+@@ -795,7 +800,7 @@
    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
