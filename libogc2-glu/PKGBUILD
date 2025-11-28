@@ -3,7 +3,7 @@
 _pkgname=glu
 pkgname="libogc2-${_pkgname}"
 pkgver=9.0.3
-pkgrel=4
+pkgrel=5
 pkgdesc='Mesa OpenGL utility library.'
 arch=('any')
 url='https://gitlab.freedesktop.org/mesa/glu'
@@ -21,7 +21,7 @@ build() {
 		cd "${srcdir}/${_pkgname}-${pkgver}"
 		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
 		meson env2mfile -o meson.cross --cross --system=bare --subsystem=bare --kernel=none --cpu=ppc --cpu-family=ppc --endian=big
-		meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static --cross-file=meson.cross build-${platform}
+		meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static --cross-file=meson.cross build-${platform} -Db_staticpic=false
 		meson compile -C build-${platform}
 	done
 }
