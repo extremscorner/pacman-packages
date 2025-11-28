@@ -3,7 +3,7 @@
 _pkgname=libansnd
 pkgname=(libogc2-${_pkgname}{,-examples}-git)
 pkgver=r23.9a2ac63
-pkgrel=3
+pkgrel=4
 pkgdesc='Another Sound Library for Wii and GameCube homebrew.'
 arch=('any')
 url='https://github.com/extremscorner/libansnd'

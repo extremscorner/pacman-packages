@@ -4,7 +4,7 @@ export PORTLIBS_PREFIX=${DEVKITPRO}/libogc2/wii
 export PORTLIBS_WII=${PORTLIBS_ROOT}/wii
 export PORTLIBS_PPC=${PORTLIBS_ROOT}/ppc
 
-export CFLAGS="-O2 -mrvl -mcpu=750 -meabi -mhard-float -ffunction-sections -fdata-sections"
+export CFLAGS="-O2 -mrvl -mcpu=750 -meabi -msdata=sysv -mhard-float -ffunction-sections -fdata-sections"
 export CXXFLAGS="${CFLAGS}"
 export CPPFLAGS="-D__WII__ -I${PORTLIBS_PREFIX}/include -I${PORTLIBS_WII}/include -I${PORTLIBS_PPC}/include"
 export LDFLAGS="-L${PORTLIBS_PREFIX}/lib -L${PORTLIBS_WII}/lib -L${PORTLIBS_PPC}/lib"

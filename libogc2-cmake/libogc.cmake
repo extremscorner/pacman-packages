@@ -8,7 +8,7 @@ include_guard(GLOBAL)
 include(Platform/Generic-dkP)
 
 # Platform settings
-set(OGC_ARCH_SETTINGS "-DGEKKO -m${OGC_MACHINE} -mcpu=750 -meabi -mhard-float")
+set(OGC_ARCH_SETTINGS "-DGEKKO -m${OGC_MACHINE} -mcpu=750 -meabi -msdata=sysv -mhard-float")
 set(OGC_COMMON_FLAGS  "-ffunction-sections -fdata-sections")
 set(OGC_LINKER_FLAGS  "-L${OGC_ROOT}/lib/${OGC_SUBDIR} -L${DEVKITPRO}/portlibs/${OGC_CONSOLE}/lib -L${DEVKITPRO}/portlibs/ppc/lib")
 set(OGC_STANDARD_LIBRARIES "${OGC_EXTRA_LIBS} -logc -lm")
