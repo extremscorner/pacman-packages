@@ -2,8 +2,8 @@
 
 _pkgname=gamecube-tools
 pkgname="${_pkgname}-git"
-pkgver=r97.a9c0c7b
-pkgrel=1
+pkgver=r98.a5cb1e9
+pkgrel=2
 pkgdesc='Tools for GameCube and Wii projects.'
 arch=("${CARCH}")
 url='https://github.com/extremscorner/gamecube-tools'
@@ -27,8 +27,14 @@ pkgver() {
 
 build() {
 	cd "${srcdir}/${_pkgname}"
-	CPPFLAGS+=' -DFREEIMAGE_LIB'
-	LDFLAGS+=' --static -s -Wl,--gc-sections'
+	if [[ ${CHOST} == *-darwin* ]]; then
+		export CC="${CHOST}-clang"
+		export CXX="${CHOST}-clang++"
+		export OSXCROSS_MP_INC=1
+	else
+		CPPFLAGS+=' -DFREEIMAGE_LIB'
+		LDFLAGS+=' --static -s -Wl,--gc-sections'
+	fi
 	./configure --prefix="${DEVKITPRO}/tools" --host="${CHOST}"
 	make
 }
