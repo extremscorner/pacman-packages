@@ -3,14 +3,14 @@
 _pkgname=libwebp
 pkgname="ppc-${_pkgname}"
 pkgver=1.6.0
-pkgrel=3
+pkgrel=4
 pkgdesc='WebP image codec library.'
 arch=('any')
 url='https://developers.google.com/speed/webp/'
 license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("https://storage.googleapis.com/downloads.webmproject.org/releases/webp/${_pkgname}-${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")

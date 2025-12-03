@@ -3,14 +3,14 @@
 _pkgname=libpng
 pkgname="ppc-${_pkgname}-apng"
 pkgver=1.6.51
-pkgrel=1
+pkgrel=2
 pkgdesc='A collection of routines used to create PNG format graphics files. (with APNG support)'
 arch=('any')
 url='https://sourceforge.net/projects/libpng-apng/'
 license=('libpng-2.0')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-zlib')
-makedepends=('libogc2-dkp-toolchain-vars')
+makedepends=('libogc2-dkp-toolchain-vars' 'patch')
 provides=("ppc-${_pkgname}")
 conflicts=("ppc-${_pkgname}")
 options=(!strip libtool staticlibs)

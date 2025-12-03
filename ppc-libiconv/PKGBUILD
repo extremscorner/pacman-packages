@@ -3,14 +3,14 @@
 _pkgname=libiconv
 pkgname="ppc-${_pkgname}"
 pkgver=1.18
-pkgrel=4
+pkgrel=5
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'
 license=('LGPL-2.1-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('libogc2-dkp-toolchain-vars')
+makedepends=('libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("https://ftp.gnu.org/pub/gnu/libiconv/${_pkgname}-${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")

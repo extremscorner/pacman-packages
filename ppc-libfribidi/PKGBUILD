@@ -3,14 +3,14 @@
 _pkgname=fribidi
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.0.16
-pkgrel=3
+pkgrel=4
 pkgdesc='A Free Implementation of the Unicode Bidirectional Algorithm.'
 arch=('any')
 url='https://github.com/fribidi/fribidi'
 license=('LGPL-2.1-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('dkp-meson-scripts' 'dkp-toolchain-vars' 'meson')
+makedepends=('dkp-meson-scripts' 'dkp-toolchain-vars' 'gcc' 'meson')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('5a1d187a33daa58fcee2ad77f0eb9d136dd6fa4096239199ba31e850d397e8a8')

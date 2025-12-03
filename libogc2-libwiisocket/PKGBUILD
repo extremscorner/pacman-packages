@@ -3,13 +3,14 @@
 _pkgname=libwiisocket
 pkgname="libogc2-${_pkgname}"
 pkgver=0.1
-pkgrel=4
+pkgrel=5
 pkgdesc='Standard socket library for the Nintendo Wii.'
 arch=('any')
 url='https://gitlab.com/4TU/libwiisocket'
 license=('GPL-2.0-or-later')
 groups=('wii-portlibs')
 depends=('devkitPPC' 'libogc2')
+makedepends=('patch')
 provides=("wii-${_pkgname}")
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.bz2::${url}/-/archive/v${pkgver}/${_pkgname}-v${pkgver}.tar.bz2"

@@ -3,7 +3,7 @@
 _pkgname=opengx
 pkgname="libogc2-${_pkgname}"
 pkgver=0.17.0
-pkgrel=6
+pkgrel=7
 pkgdesc='OpenGL-like wrapper for Nintendo Wii/GameCube.'
 arch=('any')
 url='https://github.com/extremscorner/opengx'
@@ -13,8 +13,8 @@ depends=('devkitPPC' 'libogc2')
 makedepends=('catnip' 'cmake' 'git' 'libogc2-cmake')
 provides=({gamecube,wii}-${_pkgname})
 options=(!strip libtool staticlibs !buildflags)
-source=("git+${url}.git#commit=e79baf8569ca4031c4c789910de232288588ac36")
-sha256sums=('dc939f2b2cd17efc31e96e577c47fe2fdad44a7e483a549f1b7ac01bd4484f56')
+source=("git+${url}.git#commit=35d88137d423ff6bc64e3a5532950156b15f62c4")
+sha256sums=('cf56bb7ab63b6f8e99d87bf515262a613a54e98c5ce074eacd404fb8e1eccfd0')
 
 build() {
 	cd "${srcdir}/${_pkgname}"

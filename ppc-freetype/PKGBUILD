@@ -3,14 +3,14 @@
 _pkgname=freetype
 pkgname="ppc-${_pkgname}"
 pkgver=2.14.1
-pkgrel=1
+pkgrel=2
 pkgdesc='TrueType font rendering library.'
 arch=('any')
 url='https://www.freetype.org/'
 license=('FTL' 'GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-libbrotli' 'ppc-libbz2' 'ppc-libpng' 'ppc-zlib')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars' 'ppc-pkg-config')
 options=(!strip libtool staticlibs)
 source=("https://download.savannah.gnu.org/releases/freetype/${_pkgname}-${pkgver}.tar.xz")
 sha256sums=('32427e8c471ac095853212a37aef816c60b42052d4d9e48230bab3bdf2936ccc')
