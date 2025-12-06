@@ -3,7 +3,7 @@
 _pkgname=libansnd
 pkgname=(libogc2-${_pkgname}{,-examples}-git)
 pkgver=r23.9a2ac63
-pkgrel=4
+pkgrel=5
 pkgdesc='Another Sound Library for Wii and GameCube homebrew.'
 arch=('any')
 url='https://github.com/extremscorner/libansnd'
@@ -39,7 +39,7 @@ package_libogc2-libansnd-git() {
 
 package_libogc2-libansnd-examples-git() {
 	pkgdesc+=' (examples)'
-	depends=("libogc2-${_pkgname}-git" 'libogc2-cmake')
+	depends=("libogc2-${_pkgname}-git" 'libogc2-cmake' 'ppc-libvorbisidec')
 	provides=("libogc2-${_pkgname}-examples")
 	conflicts=("libogc2-${_pkgname}-examples")
 
