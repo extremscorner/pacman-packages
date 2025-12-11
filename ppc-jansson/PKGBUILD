@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=jansson
+pkgname="ppc-${_pkgname}"
+pkgver=2.14.1
+pkgrel=1
+pkgdesc='C library for encoding, decoding and manipulating JSON data.'
+arch=('any')
+url='https://github.com/akheron/jansson'
+license=('MIT')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('979210eaffdffbcf54cfc34d047fccde13f21b529a381df26db871d886f729a4'
+			'ce4c0a36b9cfff432307391f7ed958d56627eec54586f5870932c1f19453140f')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DJANSSON_BUILD_DOCS=OFF -DJANSSON_EXAMPLES=OFF -DJANSSON_WITHOUT_TESTS=ON -DUSE_DTOA=OFF -DUSE_URANDOM=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
