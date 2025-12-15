@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libmodplug
+pkgname="ppc-${_pkgname}"
+pkgver=0.8.9.0
+pkgrel=4
+pkgdesc='A MOD playing library.'
+arch=('any')
+url='https://modplug-xmms.sourceforge.net/'
+license=('custom')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://downloads.sourceforge.net/sourceforge/modplug-xmms/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('457ca5a6c179656d66c01505c0d95fafaead4329b9dbaa0f997d00a3508ad9de')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
