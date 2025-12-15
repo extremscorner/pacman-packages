@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=flac
+pkgname="ppc-lib${_pkgname}"
+pkgver=1.5.0
+pkgrel=1
+pkgdesc='Free Lossless Audio Codec.'
+arch=('any')
+url='https://www.xiph.org/flac/'
+license=('BSD-3-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-libogg')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+provides=("ppc-${_pkgname}")
+conflicts=("ppc-${_pkgname}")
+replaces=("ppc-${_pkgname}")
+options=(!strip libtool staticlibs)
+source=("https://ftp.osuosl.org/pub/xiph/releases/flac/${_pkgname}-${pkgver}.tar.xz")
+sha256sums=('f2c1c76592a82ffff8413ba3c4a1299b6c7ab06c734dee03fd88630485c2b920')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	CFLAGS="${CFLAGS/-O2/-O3 -DNDEBUG}"
+	CXXFLAGS="${CXXFLAGS/-O2/-O3 -DNDEBUG}"
+	powerpc-eabi-cmake -B build -DBUILD_DOCS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_PROGRAMS=OFF -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DENABLE_MULTITHREADING=OFF -DINSTALL_MANPAGES=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 src/libFLAC*/libFLAC*.m4 -t "${pkgdir}${PORTLIBS_PREFIX}/share/aclocal"
+	install -Dm 644 COPYING.Xiph -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
