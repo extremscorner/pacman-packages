@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=tiff
+pkgname="ppc-lib${_pkgname}"
+pkgver=4.7.1
+pkgrel=1
+pkgdesc='Library for manipulation of TIFF images.'
+arch=('any')
+url='http://www.simplesystems.org/libtiff/'
+license=('libtiff')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-libdeflate' 'ppc-libjpeg-turbo' 'ppc-libwebp' 'ppc-libzstd' 'ppc-zlib')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://download.osgeo.org/libtiff/${_pkgname}-${pkgver}.tar.xz")
+sha256sums=('b92017489bdc1db3a4c97191aa4b75366673cb746de0dce5d7a749d5954681ba')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}" -Dtiff-contrib=OFF -Dtiff-docs=OFF -Dtiff-tests=OFF -Dtiff-tools=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE.md -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
