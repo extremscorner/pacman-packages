@@ -2,7 +2,7 @@
 
 _pkgname=xz
 pkgname=ppc-liblzma
-pkgver=5.8.1
+pkgver=5.8.2
 pkgrel=1
 pkgdesc='A general-purpose data compression library.'
 arch=('any')
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('bdbc23fbf9098843357e71e49685724fda2c320c29cb1b25fd90505f14bb0b3d')
+sha256sums=('f21fdf2c1ee004de30ca40377a273e3369186e6b7ab7b50a410eaa2e2bbefafb')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
