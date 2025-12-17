@@ -1,0 +1,33 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=SDL2_image
+pkgname="libogc2-${_pkgname,,}"
+pkgver=2.8.8
+pkgrel=1
+pkgdesc='A simple library to load images of various formats as SDL surfaces. (Version 2)'
+arch=('any')
+url='https://github.com/libsdl-org/SDL_image'
+license=('Zlib')
+groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
+depends=('devkitPPC' 'libogc2-sdl2')
+makedepends=('cmake' 'libogc2-cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('2213b56fdaff2220d0e38c8e420cbe1a83c87374190cba8c70af2156097ce30a')
+
+build() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}-${pkgver}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2IMAGE_AVIF=OFF -DSDL2IMAGE_DEPS_SHARED=OFF -DSDL2IMAGE_SAMPLES=OFF -DSDL2IMAGE_TIF=OFF -DSDL2IMAGE_WEBP=OFF
+		cmake --build build-${platform}
+	done
+}
+
+package() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}-${pkgver}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" cmake --install build-${platform}
+	done
+}
