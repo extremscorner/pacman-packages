@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=wavpack
+pkgname="ppc-lib${_pkgname}"
+pkgver=5.8.1
+pkgrel=1
+pkgdesc='Audio compression format with lossless, lossy, and hybrid compression modes.'
+arch=('any')
+url='https://www.wavpack.com/'
+license=('BSD-3-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${url}/${_pkgname}-${pkgver}.tar.xz")
+sha256sums=('7322775498602c8850afcfc1ae38f99df4cbcd51386e873d6b0f8047e55c0c26')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DWAVPACK_BUILD_PROGRAMS=OFF -DWAVPACK_ENABLE_THREADS=OFF -DWAVPACK_INSTALL_DOCS=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
