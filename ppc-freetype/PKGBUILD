@@ -3,7 +3,7 @@
 _pkgname=freetype
 pkgname="ppc-${_pkgname}"
 pkgver=2.14.1
-pkgrel=3
+pkgrel=4
 pkgdesc='TrueType font rendering library.'
 arch=('any')
 url='https://www.freetype.org/'
@@ -26,5 +26,6 @@ package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 builds/unix/freetype2.m4 -t "${pkgdir}${PORTLIBS_PREFIX}/share/aclocal"
 	install -Dm 644 docs/{FTL,GPLv2}.TXT LICENSE.TXT -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }
