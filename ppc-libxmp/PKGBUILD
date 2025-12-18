@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libxmp
+pkgname="ppc-${_pkgname}"
+pkgver=4.6.3
+pkgrel=1
+pkgdesc='A library that renders module files to PCM data.'
+arch=('any')
+url='https://github.com/libxmp/libxmp'
+license=('MIT')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${url}/releases/download/${_pkgname}-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('b189a2ff3f3eef0008512e0fb27c2cdc27480bc1066b82590a84d02548fab96d')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DBUILD_LITE=ON -DBUILD_SHARED=OFF -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}"
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 docs/COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
