@@ -3,13 +3,13 @@
 _pkgname=SDL2_image
 pkgname="libogc2-${_pkgname,,}"
 pkgver=2.8.8
-pkgrel=1
+pkgrel=2
 pkgdesc='A simple library to load images of various formats as SDL surfaces. (Version 2)'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_image'
 license=('Zlib')
 groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
-depends=('devkitPPC' 'libogc2-sdl2')
+depends=('devkitPPC' 'libogc2-sdl2' 'ppc-libjpeg' 'ppc-libpng')
 makedepends=('cmake' 'libogc2-cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
@@ -19,7 +19,11 @@ build() {
 	for platform in gamecube wii; do
 		cd "${srcdir}/${_pkgname}-${pkgver}"
 		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
-		powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2IMAGE_AVIF=OFF -DSDL2IMAGE_DEPS_SHARED=OFF -DSDL2IMAGE_SAMPLES=OFF -DSDL2IMAGE_TIF=OFF -DSDL2IMAGE_WEBP=OFF
+		if [ ${platform} == gamecube ]; then
+			powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2IMAGE_AVIF=OFF -DSDL2IMAGE_DEPS_SHARED=OFF -DSDL2IMAGE_SAMPLES=OFF -DSDL2IMAGE_TIF=OFF -DSDL2IMAGE_WEBP=OFF
+		else
+			powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2IMAGE_AVIF=OFF -DSDL2IMAGE_BACKEND_STB=OFF -DSDL2IMAGE_DEPS_SHARED=OFF -DSDL2IMAGE_SAMPLES=OFF -DSDL2IMAGE_TIF=OFF -DSDL2IMAGE_WEBP=OFF
+		fi
 		cmake --build build-${platform}
 	done
 }
