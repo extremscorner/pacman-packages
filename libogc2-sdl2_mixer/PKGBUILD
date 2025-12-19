@@ -1,0 +1,33 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=SDL2_mixer
+pkgname="libogc2-${_pkgname,,}"
+pkgver=2.8.1
+pkgrel=1
+pkgdesc='A simple multi-channel audio mixer. (Version 2)'
+arch=('any')
+url='https://github.com/libsdl-org/SDL_mixer'
+license=('Zlib')
+groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
+depends=('devkitPPC' 'libogc2-sdl2' 'ppc-libxmp')
+makedepends=('cmake' 'libogc2-cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660')
+
+build() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}-${pkgver}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2MIXER_DEPS_SHARED=OFF -DSDL2MIXER_FLAC=OFF -DSDL2MIXER_MIDI_FLUIDSYNTH=OFF -DSDL2MIXER_MOD_XMP_LITE=ON -DSDL2MIXER_OPUS=OFF -DSDL2MIXER_SAMPLES=OFF -DSDL2MIXER_WAVPACK=OFF
+		cmake --build build-${platform}
+	done
+}
+
+package() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}-${pkgver}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" cmake --install build-${platform}
+	done
+}
