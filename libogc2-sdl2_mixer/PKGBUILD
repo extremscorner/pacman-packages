@@ -3,26 +3,32 @@
 _pkgname=SDL2_mixer
 pkgname="libogc2-${_pkgname,,}"
 pkgver=2.8.1
-pkgrel=2
+pkgrel=3
 pkgdesc='A simple multi-channel audio mixer. (Version 2)'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_mixer'
 license=('Zlib')
 groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
-depends=('devkitPPC' 'libogc2-sdl2' 'ppc-libflac' 'ppc-libmodplug' 'ppc-libvorbis' 'ppc-libxmp' 'ppc-opusfile')
-makedepends=('cmake' 'libogc2-cmake' 'libogc2-dkp-toolchain-vars')
+depends=('devkitPPC' 'libogc2-sdl2' 'ppc-libflac' 'ppc-libmodplug' 'ppc-libvorbisidec' 'ppc-libxmp' 'ppc-opusfile')
+makedepends=('cmake' 'libogc2-cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
-source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
-sha256sums=('cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660')
+source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660'
+			'69bfa1ad0f8cbbc028efc79af91278b2e2f9a6663869f2eb3b302731887dce90')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
 
 build() {
 	for platform in gamecube wii; do
 		cd "${srcdir}/${_pkgname}-${pkgver}"
 		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
 		if [ ${platform} == gamecube ]; then
-			powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2MIXER_DEPS_SHARED=OFF -DSDL2MIXER_MIDI_FLUIDSYNTH=OFF -DSDL2MIXER_MOD_XMP_LITE=ON -DSDL2MIXER_OPUS=OFF -DSDL2MIXER_SAMPLES=OFF -DSDL2MIXER_WAVPACK=OFF
+			powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2MIXER_DEPS_SHARED=OFF -DSDL2MIXER_MIDI_FLUIDSYNTH=OFF -DSDL2MIXER_MOD_XMP_LITE=ON -DSDL2MIXER_OPUS=OFF -DSDL2MIXER_SAMPLES=OFF -DSDL2MIXER_VORBIS=TREMOR -DSDL2MIXER_WAVPACK=OFF
 		else
-			powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2MIXER_DEPS_SHARED=OFF -DSDL2MIXER_FLAC_DRFLAC=OFF -DSDL2MIXER_FLAC_LIBFLAC=ON -DSDL2MIXER_MIDI_FLUIDSYNTH=OFF -DSDL2MIXER_MOD_MODPLUG=ON -DSDL2MIXER_MOD_XMP=OFF -DSDL2MIXER_SAMPLES=OFF -DSDL2MIXER_VORBIS=VORBISFILE -DSDL2MIXER_WAVPACK=OFF
+			powerpc-eabi-cmake -B build-${platform} -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DSDL2MIXER_DEPS_SHARED=OFF -DSDL2MIXER_FLAC_DRFLAC=OFF -DSDL2MIXER_FLAC_LIBFLAC=ON -DSDL2MIXER_MIDI_FLUIDSYNTH=OFF -DSDL2MIXER_MOD_MODPLUG=ON -DSDL2MIXER_MOD_XMP=OFF -DSDL2MIXER_SAMPLES=OFF -DSDL2MIXER_VORBIS=TREMOR -DSDL2MIXER_WAVPACK=OFF
 		fi
 		cmake --build build-${platform}
 	done

@@ -1,0 +1,11 @@
+--- SDL2_mixer-2.8.1/CMakeLists.txt.orig	2025-02-07 20:40:44.000000000 +0000
++++ SDL2_mixer-2.8.1/CMakeLists.txt	2025-02-07 20:40:44.000000000 +0000
+@@ -472,7 +472,7 @@
+         message(STATUS "Using system tremor")
+         find_package(tremor REQUIRED)
+         if(NOT SDL2MIXER_VORBIS_TREMOR_SHARED)
+-            list(APPEND PC_REQUIRES tremor)
++            list(APPEND PC_REQUIRES vorbisidec)
+         endif()
+     endif()
+     if(SDL2MIXER_VORBIS_TREMOR_SHARED)
