@@ -3,14 +3,14 @@
 _pkgname=freetype
 pkgname="ppc-${_pkgname}"
 pkgver=2.14.1
-pkgrel=4
+pkgrel=5
 pkgdesc='TrueType font rendering library.'
 arch=('any')
 url='https://www.freetype.org/'
 license=('FTL' 'GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-libbrotli' 'ppc-libbz2' 'ppc-libpng' 'ppc-zlib')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars' 'ppc-pkg-config')
+makedepends=('libogc2-dkp-toolchain-vars' 'meson' 'ppc-pkg-config')
 options=(!strip libtool staticlibs)
 source=("https://download.savannah.gnu.org/releases/freetype/${_pkgname}-${pkgver}.tar.xz")
 sha256sums=('32427e8c471ac095853212a37aef816c60b42052d4d9e48230bab3bdf2936ccc')
@@ -18,14 +18,14 @@ sha256sums=('32427e8c471ac095853212a37aef816c60b42052d4d9e48230bab3bdf2936ccc')
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}" -DFT_DISABLE_HARFBUZZ=ON
-	cmake --build build
+	meson env2mfile -o meson.cross --cross --system=bare --subsystem=bare --kernel=none --cpu=ppc --cpu-family=ppc --endian=big
+	meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static --cross-file=meson.cross build -Db_staticpic=false -Dharfbuzz=disabled
+	meson compile -C build
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	DESTDIR="${pkgdir}" cmake --install build
-	install -Dm 644 builds/unix/freetype2.m4 -t "${pkgdir}${PORTLIBS_PREFIX}/share/aclocal"
+	DESTDIR="${pkgdir}" meson install -C build
 	install -Dm 644 docs/{FTL,GPLv2}.TXT LICENSE.TXT -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }
