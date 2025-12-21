@@ -3,14 +3,14 @@
 _pkgname=zlib-ng
 pkgname=(ppc-${_pkgname}{,-compat})
 pkgver=2.3.2
-pkgrel=1
+pkgrel=2
 pkgdesc='zlib replacement with optimizations for "next generation" systems.'
 arch=('any')
 url='https://github.com/zlib-ng/zlib-ng'
 license=('Zlib')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('6a0561b50b8f5f6434a6a9e667a67026f2b2064a1ffa959c6b2dae320161c2a8')

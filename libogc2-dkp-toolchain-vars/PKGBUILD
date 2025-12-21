@@ -2,18 +2,18 @@
 # Contributor: WinterMute <davem@devkitpro.org>
 
 pkgname=libogc2-dkp-toolchain-vars
-pkgver=20251128
+pkgver=20251221
 pkgrel=1
 pkgdesc='Helper scripts to set variables for devkitPro toolchains.'
 arch=('any')
 url='https://github.com/extremscorner/libogc2'
-depends=('dkp-toolchain-vars')
+depends=('devkitppc-cmake' 'dkp-toolchain-vars' 'libogc2-cmake' 'libogc2-pkg-config' 'ppc-pkg-config')
 source=('gamecubevars.sh'
 		'ppcvars.sh'
 		'wiivars.sh')
-sha256sums=('8eea773ef8fbebc2db3ceec806df75408acf7f5420374b06c5b0b6b0b95e455c'
-			'0e5ca47622334def93aa008e29597ce852a312a15a3a27ea3a1515c3701a1d97'
-			'5d89654b8cc8fcbcaa6277288cdfd8cfdfe3df4a5292fc489d1758fcbd52b944')
+sha256sums=('9eac2de13bc2b591fd44340960466867d2fcd3add439d8730f289d7d4c0826a2'
+			'4e9f1c6c210897575d6d36bf50830f0d42d11c87b9bf53c2f4a7ccf94ce19df5'
+			'7280e2c97ef9b3cb15f6bd895034b69994356dc0ae4c5ade7e1e069c90aa9a16')
 
 package() {
 	install -Dm 644 *vars.sh -t "${pkgdir}${DEVKITPRO}/libogc2"

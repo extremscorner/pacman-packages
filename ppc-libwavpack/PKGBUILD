@@ -3,14 +3,14 @@
 _pkgname=wavpack
 pkgname="ppc-lib${_pkgname}"
 pkgver=5.8.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Audio compression format with lossless, lossy, and hybrid compression modes.'
 arch=('any')
 url='https://www.wavpack.com/'
 license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${url}/${_pkgname}-${pkgver}.tar.xz")
 sha256sums=('7322775498602c8850afcfc1ae38f99df4cbcd51386e873d6b0f8047e55c0c26')

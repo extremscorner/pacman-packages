@@ -3,14 +3,14 @@
 _pkgname=game-music-emu
 pkgname=ppc-libgme
 pkgver=0.6.4
-pkgrel=1
+pkgrel=2
 pkgdesc='Video game music file emulation/playback library.'
 arch=('any')
 url='https://github.com/libgme/game-music-emu'
 license=('LGPL-2.1-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-zlib')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars' 'ppc-pkg-config')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('f2360feb5a32ace226c583df4faf6eff74145c81264aaea11e17a1af2f6f101a')

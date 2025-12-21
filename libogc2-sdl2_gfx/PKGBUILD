@@ -3,14 +3,14 @@
 _pkgname=SDL2_gfx
 pkgname="libogc2-${_pkgname,,}"
 pkgver=1.0.4
-pkgrel=1
+pkgrel=2
 pkgdesc='SDL graphics drawing primitives and other support functions. (Version 2)'
 arch=('any')
 url='https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/'
 license=('Zlib')
 groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
 depends=('devkitPPC' 'libogc2-sdl2')
-makedepends=('libogc2-dkp-toolchain-vars' 'libogc2-pkg-config')
+makedepends=('libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("http://www.ferzkopp.net/Software/SDL2_gfx/${_pkgname}-${pkgver}.tar.gz")
 sha256sums=('63e0e01addedc9df2f85b93a248f06e8a04affa014a835c2ea34bfe34e576262')

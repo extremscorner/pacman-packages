@@ -3,14 +3,14 @@
 _pkgname=opus
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.6
-pkgrel=1
+pkgrel=2
 pkgdesc='Codec designed for interactive speech and audio transmission over the Internet.'
 arch=('any')
 url='https://www.opus-codec.org/'
 license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("https://ftp.osuosl.org/pub/xiph/releases/opus/${_pkgname}-${pkgver}.tar.gz")
 sha256sums=('b7637334527201fdfd6dd6a02e67aceffb0e5e60155bbd89175647a80301c92c')

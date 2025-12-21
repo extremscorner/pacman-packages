@@ -3,14 +3,14 @@
 _pkgname=double-conversion
 pkgname="ppc-${_pkgname}"
 pkgver=3.4.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Efficient binary-decimal and decimal-binary conversion routines for IEEE doubles.'
 arch=('any')
 url='https://github.com/google/double-conversion'
 license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 provides=("ppc-lib${_pkgname}")
 conflicts=("ppc-lib${_pkgname}")
 replaces=("ppc-lib${_pkgname}")

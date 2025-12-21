@@ -3,14 +3,14 @@
 _pkgname=mpg123
 pkgname="ppc-${_pkgname}"
 pkgver=1.33.4
-pkgrel=1
+pkgrel=2
 pkgdesc='A real time MPEG 1.0/2.0/2.5 audio decoder for layers 1, 2 and 3.'
 arch=('any')
 url='https://www.mpg123.org/'
 license=('LGPL-2.1-only')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${url}/download/${_pkgname}-${pkgver}.tar.bz2")
 sha256sums=('3ae8c9ff80a97bfc0e22e89fbcd74687eca4fc1db315b12607f27f01cb5a47d9')

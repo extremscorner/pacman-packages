@@ -3,14 +3,14 @@
 _pkgname=glm
 pkgname="ppc-${_pkgname}"
 pkgver=1.0.2
-pkgrel=2
+pkgrel=3
 pkgdesc='C++ mathematics library for 3D software based on the OpenGL Shading Language (GLSL) specification.'
 arch=('any')
 url='https://github.com/g-truc/glm'
 license=('MIT')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('19edf2e860297efab1c74950e6076bf4dad9de483826bc95e2e0f2c758a43f65')

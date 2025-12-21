@@ -3,14 +3,14 @@
 _pkgname=fftw
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.10
-pkgrel=3
+pkgrel=4
 pkgdesc='A library for computing the discrete Fourier transform (DFT).'
 arch=('any')
 url='https://www.fftw.org/'
 license=('GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${url}/${_pkgname}-${pkgver}.tar.gz")
 sha256sums=('56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467')

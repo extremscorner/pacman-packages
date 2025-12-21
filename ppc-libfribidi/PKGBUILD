@@ -3,27 +3,29 @@
 _pkgname=fribidi
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.0.16
-pkgrel=4
+pkgrel=5
 pkgdesc='A Free Implementation of the Unicode Bidirectional Algorithm.'
 arch=('any')
 url='https://github.com/fribidi/fribidi'
 license=('LGPL-2.1-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('dkp-meson-scripts' 'dkp-toolchain-vars' 'gcc' 'meson')
+makedepends=('gcc' 'libogc2-dkp-toolchain-vars' 'meson')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('5a1d187a33daa58fcee2ad77f0eb9d136dd6fa4096239199ba31e850d397e8a8')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
-	"${DEVKITPRO}/meson-cross.sh" ppc meson.cross build -Db_staticpic=false -Dbin=false -Ddocs=false -Dtests=false
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	meson env2mfile -o meson.cross --cross --system=bare --subsystem=bare --kernel=none --cpu=ppc --cpu-family=ppc --endian=big
+	meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static -Db_staticpic=false -Dbin=false -Ddocs=false -Dtests=false --cross-file=meson.cross build
 	meson compile -C build
 }
 
 package() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" meson install -C build
-	PORTLIBS_PREFIX="$("${DEVKITPRO}/portlibs_prefix.sh" ppc)"
 	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }

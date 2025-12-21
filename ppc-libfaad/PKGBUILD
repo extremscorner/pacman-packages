@@ -3,14 +3,14 @@
 _pkgname=faad2
 pkgname="ppc-lib${_pkgname%?}"
 pkgver=2.11.2
-pkgrel=1
+pkgrel=2
 pkgdesc='ISO AAC audio decoder.'
 arch=('any')
 url='https://github.com/knik0/faad2'
 license=('GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('3fcbd305e4abd34768c62050e18ca0986f7d9c5eca343fb98275418013065c0e')

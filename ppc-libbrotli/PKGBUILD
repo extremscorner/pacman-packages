@@ -3,14 +3,14 @@
 _pkgname=brotli
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.2.0
-pkgrel=4
+pkgrel=5
 pkgdesc='A generic-purpose lossless compression algorithm.'
 arch=('any')
 url='https://github.com/google/brotli'
 license=('MIT')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")

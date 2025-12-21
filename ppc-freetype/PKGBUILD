@@ -3,14 +3,14 @@
 _pkgname=freetype
 pkgname="ppc-${_pkgname}"
 pkgver=2.14.1
-pkgrel=5
+pkgrel=6
 pkgdesc='TrueType font rendering library.'
 arch=('any')
 url='https://www.freetype.org/'
 license=('FTL' 'GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-libbrotli' 'ppc-libbz2' 'ppc-libpng' 'ppc-zlib')
-makedepends=('libogc2-dkp-toolchain-vars' 'meson' 'ppc-pkg-config')
+makedepends=('libogc2-dkp-toolchain-vars' 'meson')
 options=(!strip libtool staticlibs)
 source=("https://download.savannah.gnu.org/releases/freetype/${_pkgname}-${pkgver}.tar.xz")
 sha256sums=('32427e8c471ac095853212a37aef816c60b42052d4d9e48230bab3bdf2936ccc')
@@ -19,7 +19,7 @@ build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	meson env2mfile -o meson.cross --cross --system=bare --subsystem=bare --kernel=none --cpu=ppc --cpu-family=ppc --endian=big
-	meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static --cross-file=meson.cross build -Db_staticpic=false -Dharfbuzz=disabled
+	meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static -Db_staticpic=false -Dharfbuzz=disabled --cross-file=meson.cross build
 	meson compile -C build
 }
 

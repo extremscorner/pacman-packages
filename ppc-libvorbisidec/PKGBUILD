@@ -3,7 +3,7 @@
 _pkgname=libvorbisidec
 pkgname="ppc-${_pkgname}"
 pkgver=r133.820fb32
-pkgrel=6
+pkgrel=7
 epoch=1
 pkgdesc='A fixed-point version of the Ogg Vorbis decoder.'
 arch=('any')
@@ -11,7 +11,7 @@ url='https://www.xiph.org/vorbis/'
 license=('BSD-3-Clause')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-libogg')
-makedepends=('git' 'libogc2-dkp-toolchain-vars' 'ppc-pkg-config')
+makedepends=('git' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}::git+https://gitlab.xiph.org/xiph/tremor.git#commit=820fb3237ea81af44c9cc468c8b4e20128e3e5ad")
 sha256sums=('4c9fbe484c1a279696ff58f615a57e27bd8a994eedcf80426d91732d25d93509')

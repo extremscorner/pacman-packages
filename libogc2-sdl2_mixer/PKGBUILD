@@ -3,14 +3,14 @@
 _pkgname=SDL2_mixer
 pkgname=(libogc2-${_pkgname,,}{,-full})
 pkgver=2.8.1
-pkgrel=4
+pkgrel=5
 pkgdesc='A simple multi-channel audio mixer. (Version 2)'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_mixer'
 license=('Zlib')
 groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
 depends=('devkitPPC' 'libogc2-sdl2' 'ppc-libflac' 'ppc-libmodplug' 'ppc-libvorbisidec' 'ppc-libxmp' 'ppc-opusfile')
-makedepends=('cmake' 'libogc2-cmake' 'libogc2-dkp-toolchain-vars' 'patch' 'ppc-libgme' 'ppc-libvorbis' 'ppc-libwavpack' 'ppc-mpg123')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch' 'ppc-libgme' 'ppc-libvorbis' 'ppc-libwavpack' 'ppc-mpg123')
 options=(!strip libtool staticlibs)
 source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")

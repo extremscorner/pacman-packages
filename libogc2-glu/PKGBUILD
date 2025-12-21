@@ -3,14 +3,14 @@
 _pkgname=glu
 pkgname="libogc2-${_pkgname}"
 pkgver=9.0.3
-pkgrel=5
+pkgrel=6
 pkgdesc='Mesa OpenGL utility library.'
 arch=('any')
 url='https://gitlab.freedesktop.org/mesa/glu'
 license=('SGI-B-1.1' 'SGI-B-2.0')
 groups=('gamecube-portlibs' 'wii-portlibs')
 depends=('devkitPPC' 'libogc2-opengx')
-makedepends=('libogc2-dkp-toolchain-vars' 'libogc2-pkg-config' 'meson')
+makedepends=('libogc2-dkp-toolchain-vars' 'meson')
 provides=({gamecube,wii}-${_pkgname})
 options=(!strip libtool staticlibs)
 source=("https://archive.mesa3d.org/glu/${_pkgname}-${pkgver}.tar.xz")
@@ -21,7 +21,7 @@ build() {
 		cd "${srcdir}/${_pkgname}-${pkgver}"
 		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
 		meson env2mfile -o meson.cross --cross --system=bare --subsystem=bare --kernel=none --cpu=ppc --cpu-family=ppc --endian=big
-		meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static --cross-file=meson.cross build-${platform} -Db_staticpic=false
+		meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static -Db_staticpic=false --cross-file=meson.cross build-${platform}
 		meson compile -C build-${platform}
 	done
 }
