@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=game-music-emu
+pkgname=ppc-libgme
+pkgver=0.6.4
+pkgrel=1
+pkgdesc='Video game music file emulation/playback library.'
+arch=('any')
+url='https://github.com/libgme/game-music-emu'
+license=('LGPL-2.1-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-zlib')
+makedepends=('cmake' 'devkitppc-cmake' 'libogc2-dkp-toolchain-vars' 'ppc-pkg-config')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('f2360feb5a32ace226c583df4faf6eff74145c81264aaea11e17a1af2f6f101a')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}" -DGME_BUILD_EXAMPLES=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 license.txt -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
