@@ -3,7 +3,7 @@
 _pkgname=SDL2
 pkgname="libogc2-${_pkgname,,}"
 pkgver=2.28.5
-pkgrel=15
+pkgrel=16
 pkgdesc='A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard. (Version 2)'
 arch=('any')
 url='https://www.libsdl.org/'
@@ -14,8 +14,8 @@ makedepends=('catnip' 'cmake' 'git' 'libogc2-cmake' 'libogc2-opengx')
 optdepends=('libogc2-opengx: OpenGL support')
 provides=({gamecube,wii}-${_pkgname,,})
 options=(!strip libtool staticlibs !buildflags)
-source=('git+https://github.com/extremscorner/SDL.git#commit=0995d48024a4d5f53bab735e7fbfbbeafd1d6324')
-sha256sums=('6c93070dd71bcc6c8874d5f76f263d3750755c0f6d68d69b746610f912bddb93')
+source=('git+https://github.com/extremscorner/SDL.git#commit=7f9dc8c0ec7b2db45266c3b9a090c4b39749871f')
+sha256sums=('3109620737c124ca547668f16ad0ada97526b39e23086691105be4abd2e7a9ce')
 
 build() {
 	cd "${srcdir}/${_pkgname%?}"
