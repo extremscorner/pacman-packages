@@ -3,7 +3,7 @@
 _pkgname=fmt
 pkgname="ppc-${_pkgname}"
 pkgver=12.1.0
-pkgrel=3
+pkgrel=4
 pkgdesc='A modern formatting library for C++.'
 arch=('any')
 url='https://github.com/fmtlib/fmt'

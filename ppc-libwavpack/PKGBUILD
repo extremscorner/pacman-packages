@@ -3,7 +3,7 @@
 _pkgname=wavpack
 pkgname="ppc-lib${_pkgname}"
 pkgver=5.8.1
-pkgrel=2
+pkgrel=3
 pkgdesc='Audio compression format with lossless, lossy, and hybrid compression modes.'
 arch=('any')
 url='https://www.wavpack.com/'

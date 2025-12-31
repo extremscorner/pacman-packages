@@ -3,7 +3,7 @@
 _pkgname=flac
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.5.0
-pkgrel=3
+pkgrel=4
 pkgdesc='Free Lossless Audio Codec.'
 arch=('any')
 url='https://www.xiph.org/flac/'

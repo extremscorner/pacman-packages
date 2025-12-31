@@ -3,7 +3,7 @@
 _pkgname=libwebp
 pkgname="ppc-${_pkgname}"
 pkgver=1.6.0
-pkgrel=5
+pkgrel=6
 pkgdesc='WebP image codec library.'
 arch=('any')
 url='https://developers.google.com/speed/webp/'

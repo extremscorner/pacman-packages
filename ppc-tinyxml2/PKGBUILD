@@ -3,7 +3,7 @@
 _pkgname=tinyxml2
 pkgname="ppc-${_pkgname}"
 pkgver=11.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc='A simple, small and efficient C++ XML parser.'
 arch=('any')
 url='https://github.com/leethomason/tinyxml2'

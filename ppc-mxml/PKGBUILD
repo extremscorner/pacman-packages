@@ -3,7 +3,7 @@
 _pkgname=mxml
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.1
-pkgrel=6
+pkgrel=7
 pkgdesc='A small XML parsing library.'
 arch=('any')
 url='https://github.com/michaelrsweet/mxml'

@@ -3,7 +3,7 @@
 _pkgname=xz
 pkgname=ppc-liblzma
 pkgver=5.8.2
-pkgrel=2
+pkgrel=3
 pkgdesc='A general-purpose data compression library.'
 arch=('any')
 url='https://github.com/tukaani-project/xz'

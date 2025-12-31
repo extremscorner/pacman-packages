@@ -3,7 +3,7 @@
 _pkgname=SDL2_mixer
 pkgname=(libogc2-${_pkgname,,}{,-full})
 pkgver=2.8.1
-pkgrel=5
+pkgrel=6
 pkgdesc='A simple multi-channel audio mixer. (Version 2)'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_mixer'

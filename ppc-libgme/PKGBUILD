@@ -3,7 +3,7 @@
 _pkgname=game-music-emu
 pkgname=ppc-libgme
 pkgver=0.6.4
-pkgrel=2
+pkgrel=3
 pkgdesc='Video game music file emulation/playback library.'
 arch=('any')
 url='https://github.com/libgme/game-music-emu'

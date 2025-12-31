@@ -3,7 +3,7 @@
 _pkgname=double-conversion
 pkgname="ppc-${_pkgname}"
 pkgver=3.4.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Efficient binary-decimal and decimal-binary conversion routines for IEEE doubles.'
 arch=('any')
 url='https://github.com/google/double-conversion'

@@ -3,7 +3,7 @@
 _pkgname=SDL2_gfx
 pkgname="libogc2-${_pkgname,,}"
 pkgver=1.0.4
-pkgrel=2
+pkgrel=3
 pkgdesc='SDL graphics drawing primitives and other support functions. (Version 2)'
 arch=('any')
 url='https://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/'
