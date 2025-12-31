@@ -2,7 +2,7 @@
 
 _pkgname=devkitPPC
 pkgname="${_pkgname,,}-licenses"
-pkgver=r47.1
+pkgver=r48
 pkgrel=1
 pkgdesc='devkitPPC license files.'
 arch=('any')
