@@ -3,13 +3,13 @@
 _pkgname=SDL2_image
 pkgname="libogc2-${_pkgname,,}"
 pkgver=2.8.8
-pkgrel=4
+pkgrel=5
 pkgdesc='A simple library to load images of various formats as SDL surfaces. (Version 2)'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_image'
 license=('Zlib')
 groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
-depends=('devkitPPC' 'libogc2-sdl2' 'ppc-libjpeg' 'ppc-libpng')
+depends=('devkitPPC' 'libogc2-sdl2' 'ppc-libjpeg-turbo' 'ppc-libpng')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
