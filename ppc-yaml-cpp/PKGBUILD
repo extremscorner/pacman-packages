@@ -1,0 +1,31 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=yaml-cpp
+pkgname="ppc-${_pkgname//-/_}"
+pkgver=0.8.0
+pkgrel=2
+pkgdesc='A YAML parser and emitter in C++ matching the YAML 1.2 spec.'
+arch=('any')
+url='https://github.com/jbeder/yaml-cpp'
+license=('MIT')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
+provides=("ppc-${_pkgname}")
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('fbe74bbdcee21d656715688706da3c8becfd946d92cd44705cc6098bb23b3a16')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DYAML_CPP_BUILD_TOOLS=OFF
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
