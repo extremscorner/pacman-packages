@@ -1,0 +1,11 @@
+--- jansson-2.15.0/CMakeLists.txt.orig	2026-01-24 20:54:44.000000000 +0000
++++ jansson-2.15.0/CMakeLists.txt	2026-01-24 20:54:44.000000000 +0000
+@@ -349,8 +349,6 @@
+       ${JANSSON_SRC}
+       ${JANSSON_HDR_PRIVATE}
+       ${JANSSON_HDR_PUBLIC})
+-   set_target_properties(jansson PROPERTIES
+-      POSITION_INDEPENDENT_CODE true)
+ endif()
+ 
+ 

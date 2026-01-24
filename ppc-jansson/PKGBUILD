@@ -2,8 +2,8 @@
 
 _pkgname=jansson
 pkgname="ppc-${_pkgname}"
-pkgver=2.14.1
-pkgrel=3
+pkgver=2.15.0
+pkgrel=1
 pkgdesc='C library for encoding, decoding and manipulating JSON data.'
 arch=('any')
 url='https://github.com/akheron/jansson'
@@ -14,8 +14,8 @@ makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('979210eaffdffbcf54cfc34d047fccde13f21b529a381df26db871d886f729a4'
-			'ce4c0a36b9cfff432307391f7ed958d56627eec54586f5870932c1f19453140f')
+sha256sums=('73ac12bbc62ff536e40c7a3e15ed007993c5ca4d23897de23f1906f891b5a4bb'
+			'f0d75766751d71d15bcde2ff2869356c470d3e528c63349cecefb61f92e32848')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
@@ -24,7 +24,7 @@ prepare() {
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DJANSSON_BUILD_DOCS=OFF -DJANSSON_EXAMPLES=OFF -DJANSSON_WITHOUT_TESTS=ON -DUSE_DTOA=OFF -DUSE_URANDOM=OFF
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DJANSSON_BUILD_DOCS=OFF -DJANSSON_EXAMPLES=OFF -DJANSSON_WITHOUT_TESTS=ON -DUSE_DTOA=OFF -DUSE_URANDOM=OFF
 	cmake --build build
 }
 
