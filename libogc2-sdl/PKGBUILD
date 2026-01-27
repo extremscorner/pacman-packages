@@ -3,7 +3,7 @@
 _pkgname=SDL
 pkgname="libogc2-${_pkgname,,}"
 pkgver=1.2.15
-pkgrel=19
+pkgrel=20
 pkgdesc='A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard.'
 arch=('any')
 url='https://www.libsdl.org/'
@@ -16,8 +16,8 @@ optdepends=('libogc2-glu: OpenGL support'
 			'ppc-libiconv: iconv support')
 provides=({gamecube,wii}-${_pkgname,,})
 options=(!strip libtool staticlibs)
-source=('git+https://github.com/extremscorner/SDL.git#commit=e667d32528e1d60c5b6b10b572586f801afa3bac')
-sha256sums=('b747033bfe59eec098560cd271bdd46c9b43729ca18d9e384a0e1169586a4822')
+source=('git+https://github.com/extremscorner/SDL.git#commit=f821998ff6f0785826fec6f5ee7bc95f4159b586')
+sha256sums=('387628289c4ebdc98053a525ff89bc40c7e36d2bfb80d241da567573d2d208bb')
 
 prepare() {
 	cd "${srcdir}/${_pkgname}"
