@@ -3,7 +3,7 @@
 _pkgname=physfs
 pkgname="libogc2-${_pkgname}"
 pkgver=3.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc='A library to provide abstract access to various archives.'
 arch=('any')
 url='https://github.com/icculus/physfs'

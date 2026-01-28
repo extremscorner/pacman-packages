@@ -3,7 +3,7 @@
 _pkgname=GRRLIB
 pkgname=(libogc2-${_pkgname,,}{,-docs,-examples})
 pkgver=4.6.1
-pkgrel=9
+pkgrel=10
 pkgdesc='C/C++ 2D/3D graphics library for Wii application developers.'
 arch=('any')
 url='https://grrlib.santo.fr/'

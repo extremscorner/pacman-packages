@@ -3,7 +3,7 @@
 _pkgname=libpsoarchive
 pkgname="ppc-${_pkgname}"
 pkgver=r20.53113b3
-pkgrel=10
+pkgrel=11
 pkgdesc='Library for reading and writing various archive formats used in the Phantasy Star Online series of games.'
 arch=('any')
 url='https://github.com/extremscorner/libpsoarchive'

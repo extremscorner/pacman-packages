@@ -3,7 +3,7 @@
 _pkgname=freetype
 pkgname="ppc-${_pkgname}"
 pkgver=2.14.1
-pkgrel=7
+pkgrel=8
 pkgdesc='TrueType font rendering library.'
 arch=('any')
 url='https://www.freetype.org/'

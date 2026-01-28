@@ -3,7 +3,7 @@
 _pkgname=opusfile
 pkgname="ppc-${_pkgname}"
 pkgver=0.12
-pkgrel=3
+pkgrel=4
 pkgdesc='Library for opening, seeking, and decoding .opus files.'
 arch=('any')
 url='https://www.opus-codec.org/'

@@ -3,7 +3,7 @@
 _pkgname=fftw
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.10
-pkgrel=5
+pkgrel=6
 pkgdesc='A library for computing the discrete Fourier transform (DFT).'
 arch=('any')
 url='https://www.fftw.org/'

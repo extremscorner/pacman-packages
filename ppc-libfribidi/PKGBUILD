@@ -3,7 +3,7 @@
 _pkgname=fribidi
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.0.16
-pkgrel=6
+pkgrel=7
 pkgdesc='A Free Implementation of the Unicode Bidirectional Algorithm.'
 arch=('any')
 url='https://github.com/fribidi/fribidi'

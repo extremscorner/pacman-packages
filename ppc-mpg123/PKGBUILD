@@ -3,7 +3,7 @@
 _pkgname=mpg123
 pkgname="ppc-${_pkgname}"
 pkgver=1.33.4
-pkgrel=3
+pkgrel=4
 pkgdesc='A real time MPEG 1.0/2.0/2.5 audio decoder for layers 1, 2 and 3.'
 arch=('any')
 url='https://www.mpg123.org/'

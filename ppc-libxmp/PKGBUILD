@@ -3,7 +3,7 @@
 _pkgname=libxmp
 pkgname="ppc-${_pkgname}"
 pkgver=4.6.3
-pkgrel=3
+pkgrel=4
 pkgdesc='A library that renders module files to PCM data.'
 arch=('any')
 url='https://github.com/libxmp/libxmp'

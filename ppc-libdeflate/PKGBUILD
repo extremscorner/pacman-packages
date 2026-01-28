@@ -3,7 +3,7 @@
 _pkgname=libdeflate
 pkgname="ppc-${_pkgname}"
 pkgver=1.25
-pkgrel=5
+pkgrel=6
 pkgdesc='Heavily optimized library for DEFLATE/zlib/gzip compression and decompression.'
 arch=('any')
 url='https://github.com/ebiggers/libdeflate'

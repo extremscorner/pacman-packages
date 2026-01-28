@@ -3,7 +3,7 @@
 _pkgname=glm
 pkgname="ppc-${_pkgname}"
 pkgver=1.0.3
-pkgrel=3
+pkgrel=4
 pkgdesc='C++ mathematics library for 3D software based on the OpenGL Shading Language (GLSL) specification.'
 arch=('any')
 url='https://github.com/g-truc/glm'

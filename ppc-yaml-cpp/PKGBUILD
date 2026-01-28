@@ -3,7 +3,7 @@
 _pkgname=yaml-cpp
 pkgname="ppc-${_pkgname//-/_}"
 pkgver=0.8.0
-pkgrel=2
+pkgrel=3
 pkgdesc='A YAML parser and emitter in C++ matching the YAML 1.2 spec.'
 arch=('any')
 url='https://github.com/jbeder/yaml-cpp'
