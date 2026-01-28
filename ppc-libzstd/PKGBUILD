@@ -3,7 +3,7 @@
 _pkgname=zstd
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.5.7
-pkgrel=5
+pkgrel=6
 pkgdesc='Zstandard - Fast real-time compression algorithm.'
 arch=('any')
 url='https://github.com/facebook/zstd'
@@ -26,7 +26,7 @@ build() {
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	CFLAGS="${CFLAGS/-O2/-O3 -DNDEBUG}"
 	CXXFLAGS="${CXXFLAGS/-O2/-O3 -DNDEBUG}"
-	powerpc-eabi-cmake build/cmake -B build-cmake -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZSTD_BUILD_PROGRAMS=OFF -DZSTD_BUILD_SHARED=OFF -DZSTD_MULTITHREAD_SUPPORT=OFF
+	powerpc-eabi-cmake build/cmake -B build-cmake -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DZSTD_BUILD_PROGRAMS=OFF -DZSTD_BUILD_SHARED=OFF
 	cmake --build build-cmake
 }
 

@@ -3,7 +3,7 @@
 _pkgname=wavpack
 pkgname="ppc-lib${_pkgname}"
 pkgver=5.9.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Audio compression format with lossless, lossy, and hybrid compression modes.'
 arch=('any')
 url='https://www.wavpack.com/'
@@ -18,7 +18,7 @@ sha256sums=('b5291bc4e6d69ebbd3da3800c5bf4a70f19bb92679b23e09b3b612c1e648d1ff')
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DWAVPACK_BUILD_PROGRAMS=OFF -DWAVPACK_ENABLE_THREADS=OFF -DWAVPACK_INSTALL_DOCS=OFF
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DWAVPACK_BUILD_PROGRAMS=OFF -DWAVPACK_INSTALL_DOCS=OFF
 	cmake --build build
 }
 

@@ -3,22 +3,28 @@
 _pkgname=xz
 pkgname=ppc-liblzma
 pkgver=5.8.2
-pkgrel=3
+pkgrel=4
 pkgdesc='A general-purpose data compression library.'
 arch=('any')
 url='https://github.com/tukaani-project/xz'
 license=('0BSD')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
-source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('f21fdf2c1ee004de30ca40377a273e3369186e6b7ab7b50a410eaa2e2bbefafb')
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('f21fdf2c1ee004de30ca40377a273e3369186e6b7ab7b50a410eaa2e2bbefafb'
+			'7ef135c724beadb71333c65176b77e2e60ed501aeea2227fbe7eab3da88966c0')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DTUKLIB_CPUCORES_DEFINITIONS= -DTUKLIB_PHYSMEM_DEFINITIONS= -DXZ_DOC=OFF -DXZ_THREADS=no -DXZ_TOOL_LZMADEC=OFF -DXZ_TOOL_LZMAINFO=OFF -DXZ_TOOL_XZ=OFF -DXZ_TOOL_XZDEC=OFF
+	powerpc-eabi-cmake -B build -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DTUKLIB_CPUCORES_DEFINITIONS= -DTUKLIB_PHYSMEM_DEFINITIONS= -DXZ_DOC=OFF -DXZ_TOOL_LZMADEC=OFF -DXZ_TOOL_LZMAINFO=OFF -DXZ_TOOL_XZ=OFF -DXZ_TOOL_XZDEC=OFF
 	cmake --build build
 }
 
