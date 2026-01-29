@@ -1,0 +1,13 @@
+--- fribidi-1.0.16/meson.build.orig	2024-09-25 18:03:03.000000000 +0000
++++ fribidi-1.0.16/meson.build	2024-09-25 18:03:03.000000000 +0000
+@@ -21,10 +21,6 @@
+ # C compiler. This is the cross compiler if we're cross-compiling
+ cc = meson.get_compiler('c')
+ 
+-if cc.get_id() == 'gcc' and cc.has_argument('-ansi')
+-  add_project_arguments('-ansi', language: 'c')
+-endif
+-
+ # Handle symbol visibility for Windows
+ fribidi_static_cargs = []
+ fribidi_build_cargs = []

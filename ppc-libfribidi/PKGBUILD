@@ -3,17 +3,23 @@
 _pkgname=fribidi
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.0.16
-pkgrel=7
+pkgrel=8
 pkgdesc='A Free Implementation of the Unicode Bidirectional Algorithm.'
 arch=('any')
 url='https://github.com/fribidi/fribidi'
 license=('LGPL-2.1-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('gcc' 'libogc2-dkp-toolchain-vars' 'meson')
+makedepends=('gcc' 'libogc2-dkp-toolchain-vars' 'meson' 'patch')
 options=(!strip libtool staticlibs)
-source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('5a1d187a33daa58fcee2ad77f0eb9d136dd6fa4096239199ba31e850d397e8a8')
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('5a1d187a33daa58fcee2ad77f0eb9d136dd6fa4096239199ba31e850d397e8a8'
+			'3814e368a9b41d2befeb2644934d90d927396e8ce4be83de8388f2ee8185d41e')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
