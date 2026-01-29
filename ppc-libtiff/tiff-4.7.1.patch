@@ -1,0 +1,101 @@
+--- tiff-4.7.1/cmake/TiffConfig.cmake.in.orig	2024-10-28 23:57:03.000000000 +0000
++++ tiff-4.7.1/cmake/TiffConfig.cmake.in	2024-10-28 23:57:03.000000000 +0000
+@@ -1,5 +1,19 @@
+-if(NOT "@BUILD_SHARED_LIBS@")
+-    # TODO: import dependencies
++if("@TIFF_BUILD_LIB_VALUE@" STREQUAL "STATIC")
++    include(CMakeFindDependencyMacro)
++
++    # For static builds, consumers must also link our codec dependencies.
++    #
++    # Libtiff ships custom Find-modules for some dependencies and also uses
++    # non-standard imported target names (e.g. liblzma::liblzma), so make sure
++    # our modules are discoverable when find_dependency() runs.
++    list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/modules")
++
++    set(_tiff_static_deps "@TIFF_STATIC_PACKAGE_DEPENDENCIES@")
++    foreach(_dep IN LISTS _tiff_static_deps)
++        find_dependency(${_dep})
++    endforeach()
++    unset(_dep)
++    unset(_tiff_static_deps)
+ endif()
+ 
+ function(set_variable_from_rel_or_absolute_path var root rel_or_abs_path)
+--- tiff-4.7.1/libtiff/CMakeLists.txt.orig	2025-06-12 13:02:11.000000000 +0000
++++ tiff-4.7.1/libtiff/CMakeLists.txt	2025-06-12 13:02:11.000000000 +0000
+@@ -222,6 +222,74 @@
+           DESTINATION ${TIFF_CONFIGDIR}
+   )
+ 
++  # For static builds, consumers must also link our codec dependencies.
++  # Teach the installed tiff-config.cmake which packages to find, and install
++  # the corresponding Find-modules we ship (when present).
++  set(TIFF_STATIC_PACKAGE_DEPENDENCIES "")
++  set(_tiff_find_modules "")
++  if(TIFF_BUILD_LIB_VALUE STREQUAL "STATIC")
++    # Derive package dependencies from the exported target interface. This keeps
++    # tiff-config.cmake and the exported link interface consistent.
++    get_target_property(_tiff_iface_libs tiff INTERFACE_LINK_LIBRARIES)
++    if(NOT _tiff_iface_libs OR _tiff_iface_libs STREQUAL "_tiff_iface_libs-NOTFOUND")
++      # Fallback: be explicit (should be rare; depends on CMake behavior).
++      if(ZIP_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES ZLIB)
++      endif()
++      if(LIBDEFLATE_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES Deflate)
++      endif()
++      if(JPEG_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES JPEG)
++      endif()
++      if(JBIG_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES JBIG)
++      endif()
++      if(LERC_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES LERC)
++      endif()
++      if(LZMA_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES liblzma)
++      endif()
++      if(ZSTD_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES ZSTD)
++      endif()
++      if(WEBP_SUPPORT)
++        list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES WebP)
++      endif()
++
++      foreach(_pkg IN LISTS TIFF_STATIC_PACKAGE_DEPENDENCIES)
++        if(EXISTS "${PROJECT_SOURCE_DIR}/cmake/Find${_pkg}.cmake")
++          list(APPEND _tiff_find_modules "${PROJECT_SOURCE_DIR}/cmake/Find${_pkg}.cmake")
++        endif()
++      endforeach()
++      unset(_pkg)
++    else()
++      foreach(_item IN LISTS _tiff_iface_libs)
++        # Exported static link interfaces may wrap dependencies with LINK_ONLY.
++        string(REGEX REPLACE "^\\$<LINK_ONLY:(.*)>$" "\\1" _item "${_item}")
++        if(_item MATCHES "^([^:]+)::")
++          set(_pkg "${CMAKE_MATCH_1}")
++          list(APPEND TIFF_STATIC_PACKAGE_DEPENDENCIES "${_pkg}")
++          if(EXISTS "${PROJECT_SOURCE_DIR}/cmake/Find${_pkg}.cmake")
++            list(APPEND _tiff_find_modules "${PROJECT_SOURCE_DIR}/cmake/Find${_pkg}.cmake")
++          endif()
++        endif()
++      endforeach()
++      unset(_item)
++      unset(_pkg)
++    endif()
++    unset(_tiff_iface_libs)
++
++    list(REMOVE_DUPLICATES TIFF_STATIC_PACKAGE_DEPENDENCIES)
++    list(REMOVE_DUPLICATES _tiff_find_modules)
++  endif()
++
++  if(_tiff_find_modules)
++    install(FILES ${_tiff_find_modules} DESTINATION ${TIFF_CONFIGDIR}/modules)
++  endif()
++  unset(_tiff_find_modules)
++
+   include(CMakePackageConfigHelpers)
+   write_basic_package_version_file(
+     TiffConfigVersion.cmake
