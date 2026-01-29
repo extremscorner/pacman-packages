@@ -1,0 +1,17 @@
+--- SDL2_image-2.8.8/src/IMG_webp.c.orig	2025-02-07 18:01:45.000000000 +0000
++++ SDL2_image-2.8.8/src/IMG_webp.c	2025-02-07 18:01:45.000000000 +0000
+@@ -36,6 +36,14 @@
+ 
+ #include "SDL_endian.h"
+ 
++#if !SDL_VERSION_ATLEAST(2,30,0)
++#if SDL_BYTEORDER == SDL_BIG_ENDIAN
++#define SDL_PIXELFORMAT_RGBX32 SDL_PIXELFORMAT_RGBX8888
++#else
++#define SDL_PIXELFORMAT_RGBX32 SDL_PIXELFORMAT_XBGR8888
++#endif
++#endif
++
+ #ifdef macintosh
+ #define MACOS
+ #endif
