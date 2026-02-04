@@ -3,7 +3,7 @@
 _pkgname=opus
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Codec designed for interactive speech and audio transmission over the Internet.'
 arch=('any')
 url='https://www.opus-codec.org/'
