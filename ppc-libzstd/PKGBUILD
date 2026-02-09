@@ -3,7 +3,7 @@
 _pkgname=zstd
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.5.7
-pkgrel=6
+pkgrel=7
 pkgdesc='Zstandard - Fast real-time compression algorithm.'
 arch=('any')
 url='https://github.com/facebook/zstd'
@@ -11,6 +11,9 @@ license=('BSD-3-Clause' 'GPL-2.0-only')
 groups=('ppc-portlibs')
 depends=('devkitPPC')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+provides=("ppc-${_pkgname}")
+conflicts=("ppc-${_pkgname}")
+replaces=("ppc-${_pkgname}")
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")

@@ -3,13 +3,13 @@
 _pkgname=tiff
 pkgname="ppc-lib${_pkgname}"
 pkgver=4.7.1
-pkgrel=6
+pkgrel=7
 pkgdesc='Library for manipulation of TIFF images.'
 arch=('any')
 url='http://www.simplesystems.org/libtiff/'
 license=('libtiff')
 groups=('ppc-portlibs')
-depends=('devkitPPC' 'ppc-libdeflate' 'ppc-libjpeg-turbo' 'ppc-libwebp' 'ppc-libzstd' 'ppc-zlib')
+depends=('devkitPPC' 'ppc-libdeflate' 'ppc-libjpeg-turbo' 'ppc-libwebp' 'ppc-zlib' 'ppc-zstd')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("https://download.osgeo.org/libtiff/${_pkgname}-${pkgver}.tar.xz"
