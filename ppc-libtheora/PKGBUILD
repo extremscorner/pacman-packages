@@ -1,0 +1,31 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libtheora
+pkgname="ppc-${_pkgname}"
+pkgver=1.2.0
+pkgrel=1
+pkgdesc='Reference implementation of the Theora video compression format.'
+arch=('any')
+url='https://www.theora.org/'
+license=('BSD-3-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-libogg')
+makedepends=('libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://ftp.osuosl.org/pub/xiph/releases/theora/${_pkgname}-${pkgver}.tar.xz")
+sha256sums=('ebdf77a8f5c0a8f7a9e42323844fa09502b34eb1d1fece7b5f54da41fe2122ec')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-doc --disable-spec --disable-examples
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
+	install -Dm 644 {COPYING,LICENSE} -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
