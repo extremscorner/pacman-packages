@@ -1,0 +1,12 @@
+--- lz4-1.10.0/lib/xxhash.c.orig	2024-07-21 17:29:49.000000000 +0000
++++ lz4-1.10.0/lib/xxhash.c	2024-07-21 17:29:49.000000000 +0000
+@@ -91,7 +91,8 @@
+  * or when alignment doesn't matter for performance.
+  */
+ #ifndef XXH_FORCE_ALIGN_CHECK /* can be defined externally */
+-#  if defined(__i386) || defined(_M_IX86) || defined(__x86_64__) || defined(_M_X64)
++#  if defined(__i386)  || defined(__x86_64__) || defined(__PPC__) \
++   || defined(_M_IX86) || defined(_M_X64)     || defined(_M_PPC) /* visual */
+ #    define XXH_FORCE_ALIGN_CHECK 0
+ #  else
+ #    define XXH_FORCE_ALIGN_CHECK 1

@@ -1,0 +1,42 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=lz4
+pkgname="ppc-lib${_pkgname}"
+pkgver=1.10.0
+pkgrel=1
+pkgdesc='Extremely fast compression algorithm.'
+arch=('any')
+url='https://github.com/lz4/lz4'
+license=('BSD-2-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+provides=("ppc-${_pkgname}")
+conflicts=("ppc-${_pkgname}")
+replaces=("ppc-${_pkgname}")
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('537512904744b35e232912055ccf8ec66d768639ff3abe5788d90d792ec5f48b'
+			'a89b53aacd008399a4fc475398be4e2b6fcd9eb11a91e93d1ddc0370fb854608')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	CFLAGS="${CFLAGS/-O2/-O3}"
+	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
+	powerpc-eabi-cmake build/cmake -B build-cmake -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DLZ4_BUILD_CLI=OFF -DLZ4_POSITION_INDEPENDENT_LIB=OFF
+	cmake --build build-cmake
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build-cmake
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
+	install -Dm 644 lib/LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
