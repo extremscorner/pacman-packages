@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libzip
+pkgname="ppc-${_pkgname}"
+pkgver=1.11.4
+pkgrel=1
+pkgdesc='C library for reading, creating, and modifying zip archives.'
+arch=('any')
+url='https://libzip.org/'
+license=('BSD-3-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-libbz2' 'ppc-liblzma' 'ppc-libzstd' 'ppc-zlib')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+options=(!strip libtool staticlibs)
+source=("${url}/download/${_pkgname}-${pkgver}.tar.xz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('8a247f57d1e3e6f6d11413b12a6f28a9d388de110adc0ec608d893180ed7097b'
+			'2bfb5d35900dcc2445b9d29118a91fd1ce49ba032bd808d21fc01867249c23c8')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DBUILD_DOC=OFF -DBUILD_EXAMPLES=OFF -DBUILD_OSSFUZZ=OFF -DBUILD_REGRESS=OFF -DBUILD_SHARED_LIBS=OFF -DBUILD_TOOLS=OFF -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}"
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}

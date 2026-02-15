@@ -1,0 +1,29 @@
+--- libzip-1.11.4/CMakeLists.txt.orig	2025-05-23 13:55:07.000000000 +0000
++++ libzip-1.11.4/CMakeLists.txt	2025-05-23 13:55:07.000000000 +0000
+@@ -236,11 +236,11 @@
+ 
+ if(ENABLE_LZMA)
+   find_package(LibLZMA 5.2)
+-  if(LIBLZMA_FOUND)
++  if(LibLZMA_FOUND)
+     set(HAVE_LIBLZMA 1)
+   else()
+     message(WARNING "-- lzma library not found; lzma/xz support disabled")
+-  endif(LIBLZMA_FOUND)
++  endif(LibLZMA_FOUND)
+ endif(ENABLE_LZMA)
+ 
+ if(ENABLE_ZSTD)
+--- libzip-1.11.4/libzip-config.cmake.in.orig	2025-05-23 13:55:07.000000000 +0000
++++ libzip-1.11.4/libzip-config.cmake.in	2025-05-23 13:55:07.000000000 +0000
+@@ -7,8 +7,8 @@
+   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/modules")
+ 
+   set(ENABLE_BZIP2 @BZIP2_FOUND@)
+-  set(ENABLE_LZMA @LIBLZMA_FOUND@)
+-  set(ENABLE_ZSTD @ZSTD_FOUND@)
++  set(ENABLE_LZMA @LibLZMA_FOUND@)
++  set(ENABLE_ZSTD @zstd_FOUND@)
+   set(ENABLE_GNUTLS @GNUTLS_FOUND@)
+   set(ENABLE_MBEDTLS @MBEDTLS_FOUND@)
+   set(ENABLE_OPENSSL @OPENSSL_FOUND@)
