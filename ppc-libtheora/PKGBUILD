@@ -3,7 +3,7 @@
 _pkgname=libtheora
 pkgname="ppc-${_pkgname}"
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Reference implementation of the Theora video compression format.'
 arch=('any')
 url='https://www.theora.org/'
@@ -18,6 +18,8 @@ sha256sums=('ebdf77a8f5c0a8f7a9e42323844fa09502b34eb1d1fece7b5f54da41fe2122ec')
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	CFLAGS="${CFLAGS/-O2/-O3}"
+	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
 	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-doc --disable-spec --disable-examples
 	make
 }
