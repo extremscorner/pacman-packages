@@ -3,7 +3,7 @@
 _pkgname=opengx
 pkgname="libogc2-${_pkgname}"
 pkgver=0.17.0
-pkgrel=9
+pkgrel=10
 pkgdesc='OpenGL-like wrapper for Nintendo Wii/GameCube.'
 arch=('any')
 url='https://github.com/extremscorner/opengx'
