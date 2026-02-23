@@ -2,23 +2,23 @@
 
 _pkgname=libid3tag
 pkgname="ppc-${_pkgname}"
-pkgver=0.16.3
-pkgrel=10
+pkgver=0.16.4
+pkgrel=1
 pkgdesc='A library for reading and (eventually) writing ID3 tags, both ID3v1 and the various versions of ID3v2.'
 arch=('any')
 url='https://codeberg.org/tenacityteam/libid3tag'
 license=('GPL-2.0-or-later')
 groups=('ppc-portlibs')
 depends=('devkitPPC' 'ppc-zlib')
-makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
+makedepends=('cmake' 'gperf' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('0561009778513a95d91dac33cee8418d6622f710450a7cb56a74636d53b588cb')
+sha256sums=('ceb88ada1aa867c87c1d748a8aa40e68db5b0d2df636a9dab0ab1f7741d5e009')
 
 build() {
 	cd "${srcdir}/${_pkgname}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}"
 	cmake --build build
 }
 
