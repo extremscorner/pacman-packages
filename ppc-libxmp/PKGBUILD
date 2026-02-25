@@ -2,8 +2,8 @@
 
 _pkgname=libxmp
 pkgname="ppc-${_pkgname}"
-pkgver=4.6.3
-pkgrel=4
+pkgver=4.7.0
+pkgrel=1
 pkgdesc='A library that renders module files to PCM data.'
 arch=('any')
 url='https://github.com/libxmp/libxmp'
@@ -12,8 +12,13 @@ groups=('ppc-portlibs')
 depends=('devkitPPC')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
-source=("${url}/releases/download/${_pkgname}-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
-sha256sums=('b189a2ff3f3eef0008512e0fb27c2cdc27480bc1066b82590a84d02548fab96d')
+source=("${url}/archive/refs/tags/${_pkgname}-${pkgver}.tar.gz")
+noextract=("${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('be5c6f76528b274e05c17f97354eda2872939fc1b6f4a8f0dd10c3a17ee65482')
+
+prepare() {
+	tar -xf "${_pkgname}-${pkgver}.tar.gz" --one-top-level --strip-components=1
+}
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
