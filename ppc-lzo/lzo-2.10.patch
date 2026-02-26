@@ -1,0 +1,72 @@
+--- lzo-2.10/CMakeLists.txt.orig	2017-03-01 19:54:14.000000000 +0000
++++ lzo-2.10/CMakeLists.txt	2017-03-01 19:54:14.000000000 +0000
+@@ -59,6 +59,9 @@
+ if(ENABLE_SHARED AND WIN32)
+     cmake_minimum_required(VERSION 3.4.3 FATAL_ERROR) # needed for WINDOWS_EXPORT_ALL_SYMBOLS
+ endif()
++option(ENABLE_TESTS "Build test programs." OFF)
++option(ENABLE_EXAMPLES "Build example programs." OFF)
++option(ENABLE_DOCS "Install documentation files." OFF)
+ 
+ # install directories
+ if(NOT CMAKE_INSTALL_PREFIX)
+@@ -127,16 +130,20 @@
+     endif()
+ endmacro()
+ # main test driver
+-lzo_add_executable(lzotest  lzotest/lzotest.c)
++if(ENABLE_TESTS)
++    lzo_add_executable(lzotest  lzotest/lzotest.c)
++endif()
+ # examples
+-lzo_add_executable(dict     examples/dict.c)
+-lzo_add_executable(lzopack  examples/lzopack.c)
+-lzo_add_executable(overlap  examples/overlap.c)
+-lzo_add_executable(precomp  examples/precomp.c)
+-lzo_add_executable(precomp2 examples/precomp2.c)
+-lzo_add_executable(simple   examples/simple.c)
++if(ENABLE_EXAMPLES)
++    lzo_add_executable(dict     examples/dict.c)
++    lzo_add_executable(lzopack  examples/lzopack.c)
++    lzo_add_executable(overlap  examples/overlap.c)
++    lzo_add_executable(precomp  examples/precomp.c)
++    lzo_add_executable(precomp2 examples/precomp2.c)
++    lzo_add_executable(simple   examples/simple.c)
++endif()
+ # some boring internal test programs
+-if(0)
++if(ENABLE_TESTS)
+     lzo_add_executable(align    tests/align.c)
+     lzo_add_executable(chksum   tests/chksum.c)
+     lzo_add_executable(promote  tests/promote.c)
+@@ -144,7 +151,7 @@
+ endif()
+ 
+ # miniLZO
+-if(1)
++if(ENABLE_TESTS)
+     add_executable(testmini minilzo/testmini.c minilzo/minilzo.c)
+     target_include_directories(testmini PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/lzo") # needed for "lzoconf.h"
+ endif()
+@@ -263,8 +270,10 @@
+ 
+ if(DEFINED CMAKE_INSTALL_FULL_LIBDIR)
+ 
+-set(f AUTHORS COPYING NEWS THANKS doc/LZO.FAQ doc/LZO.TXT doc/LZOAPI.TXT)
+-install(FILES ${f} DESTINATION "${CMAKE_INSTALL_FULL_DOCDIR}")
++if(ENABLE_DOCS)
++    set(f AUTHORS COPYING NEWS THANKS doc/LZO.FAQ doc/LZO.TXT doc/LZOAPI.TXT)
++    install(FILES ${f} DESTINATION "${CMAKE_INSTALL_FULL_DOCDIR}")
++endif()
+ 
+ set(f include/lzo/lzo1.h include/lzo/lzo1a.h include/lzo/lzo1b.h
+     include/lzo/lzo1c.h include/lzo/lzo1f.h include/lzo/lzo1x.h
+@@ -285,7 +294,7 @@
+     )
+ endif()
+ 
+-if(1)
++if(ENABLE_EXAMPLES)
+     set(f lzopack lzotest simple testmini) # examples
+     install(TARGETS ${f} DESTINATION "${CMAKE_INSTALL_FULL_LIBEXECDIR}/lzo/examples")
+ endif()

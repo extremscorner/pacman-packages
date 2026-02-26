@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=lzo
+pkgname="ppc-${_pkgname}"
+pkgver=2.10
+pkgrel=1
+pkgdesc='A real-time data compression library.'
+arch=('any')
+url='https://www.oberhumer.com/opensource/lzo/'
+license=('GPL-2.0-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+options=(!strip libtool staticlibs)
+source=("${url}/download/${_pkgname}-${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072'
+			'40f27b6f70b076eaba767ca17f26237485bbdc5fbc151be57f7edf4d69501942')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
