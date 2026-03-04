@@ -2,8 +2,8 @@
 
 _pkgname=libdvm
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r64.9b3de4c
-pkgrel=2
+pkgver=r65.9d24806
+pkgrel=1
 pkgdesc='FAT and disk/volume management library for GameCube and Wii.'
 arch=('any')
 url='https://github.com/extremscorner/libdvm'
@@ -15,14 +15,17 @@ provides=("libogc2-${_pkgname}" 'libogc2-libfat')
 conflicts=("libogc2-${_pkgname}" 'libogc2-libfat')
 options=(!strip libtool staticlibs !buildflags)
 source=("git+${url}.git"
-		'git+https://github.com/extremscorner/fatfs-mod.git')
+		'git+https://github.com/extremscorner/fatfs-mod.git'
+		'git+https://github.com/extremscorner/lwext4.git')
 sha256sums=('SKIP'
+			'SKIP'
 			'SKIP')
 
 prepare() {
 	cd "${srcdir}/${_pkgname}"
 	git submodule init
 	git config submodule.fatfs.url "${srcdir}/fatfs-mod"
+	git config submodule.lwext4.url "${srcdir}/lwext4"
 	git -c protocol.file.allow=always submodule update
 }
 
