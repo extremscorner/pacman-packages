@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=zziplib
+pkgname="ppc-${_pkgname}"
+pkgver=0.13.80
+pkgrel=1
+pkgdesc='A lightweight library that offers the ability to easily extract data from files archived in a single zip file.'
+arch=('any')
+url='https://github.com/gdraheim/zziplib'
+license=('LGPL-2.0-or-later' 'MPL-1.1')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-zlib')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('21f40d111c0f7a398cfee3b0a30b20c5d92124b08ea4290055fbfe7bdd53a22c'
+			'95adb619cc299ae799ca9fd49363e705f07cc27e5759305cb68deab1f9b8d3a1')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}" -DZZIPBINS=OFF -DZZIPDOCS=OFF -DZZIPMMAPPED=OFF -DZZIPSDL=OFF -DZZIPTEST=OFF -DZZIPWRAP=OFF -DZZIP_PKGCONFIG=ON
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 docs/COPYING.{LIB,MPL} -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}

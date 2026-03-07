@@ -1,0 +1,42 @@
+--- zziplib-0.13.80/zzip/CMakeLists.txt.orig	2025-05-30 06:42:56.000000000 +0000
++++ zziplib-0.13.80/zzip/CMakeLists.txt	2025-05-30 06:42:56.000000000 +0000
+@@ -242,16 +242,16 @@
+ add_custom_target(libzzipmmapped.gcov DEPENDS libzzipmmapped.so.gcov)
+ endif()
+ 
+-set_target_properties(libzzip PROPERTIES OUTPUT_NAME "zzip" RELEASE_POSTFIX "-${RELNUM}")
++set_target_properties(libzzip PROPERTIES OUTPUT_NAME "zzip")
+ SET_TARGET_PROPERTIES(libzzip PROPERTIES VERSION ${VERNUM}.${FIXNUM} SOVERSION ${VERNUM})
+ 
+ if(ZZIPFSEEKO)
+-set_target_properties(libzzipfseeko PROPERTIES OUTPUT_NAME "zzipfseeko" RELEASE_POSTFIX "-${RELNUM}")
++set_target_properties(libzzipfseeko PROPERTIES OUTPUT_NAME "zzipfseeko")
+ SET_TARGET_PROPERTIES(libzzipfseeko PROPERTIES VERSION ${VERNUM}.${FIXNUM} SOVERSION ${VERNUM})
+ endif()
+ 
+ if(ZZIPMMAPPED)
+-set_target_properties(libzzipmmapped PROPERTIES OUTPUT_NAME "zzipmmapped" RELEASE_POSTFIX "-${RELNUM}")
++set_target_properties(libzzipmmapped PROPERTIES OUTPUT_NAME "zzipmmapped")
+ SET_TARGET_PROPERTIES(libzzipmmapped PROPERTIES VERSION ${VERNUM}.${FIXNUM} SOVERSION ${VERNUM})
+ endif()
+ 
+@@ -458,7 +458,7 @@
+ ## messages ##############################################
+ 
+ message(STATUS "lib zzipfseeko  to be compiled: ${ZZIPFSEEKO}")
+-message(STATUS "lib zzipmmapped to be compiled: ${ZZIPFSEEKO}")
++message(STATUS "lib zzipmmapped to be compiled: ${ZZIPMMAPPED}")
+ message(STATUS "lib zzip symlinks as by libtool: ${ZZIP_LIBTOOL}")
+ message(STATUS "installing zzip compat headers: ${ZZIP_COMPAT}")
+ message(STATUS "installing zzip pkgconfig files: ${ZZIP_PKGCONFIG}")
+--- zziplib-0.13.80/zzipwrap/CMakeLists.txt.orig	2025-05-30 06:42:56.000000000 +0000
++++ zziplib-0.13.80/zzipwrap/CMakeLists.txt	2025-05-30 06:42:56.000000000 +0000
+@@ -53,7 +53,7 @@
+ target_link_libraries(libzzipwrap libzzip ZLIB::ZLIB )
+ target_include_directories(libzzipwrap PRIVATE "${CMAKE_SOURCE_DIR}" "${CMAKE_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}")
+ 
+-set_target_properties(libzzipwrap PROPERTIES OUTPUT_NAME "zzipwrap" RELEASE_POSTFIX "-${RELNUM}")
++set_target_properties(libzzipwrap PROPERTIES OUTPUT_NAME "zzipwrap")
+ SET_TARGET_PROPERTIES(libzzipwrap PROPERTIES VERSION ${VERNUM}.${FIXNUM} SOVERSION ${VERNUM})
+ set_target_properties(libzzipwrap PROPERTIES DEFINE_SYMBOL "libzzip_EXPORTS")
+ 
