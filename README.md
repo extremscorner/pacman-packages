@@ -17,7 +17,8 @@ Using `sudo` is not necessary with MSYS2 and always uses `pacman-key`.
 Append to `/etc/pacman.conf` if using `pacman`, or `/opt/devkitpro/pacman/etc/pacman.conf` if using `dkp-pacman`.
 
 ```ini
-[extremscorner-devkitpro]
+[libogc2-devkitpro]
+Server = https://packages.libogc2.org/devkitpro/linux/$arch
 Server = https://packages.extremscorner.org/devkitpro/linux/$arch
 ```
 
@@ -26,7 +27,8 @@ Server = https://packages.extremscorner.org/devkitpro/linux/$arch
 Append to `/opt/devkitpro/pacman/etc/pacman.conf`.
 
 ```ini
-[extremscorner-devkitpro]
+[libogc2-devkitpro]
+Server = https://packages.libogc2.org/devkitpro/macos/$arch
 Server = https://packages.extremscorner.org/devkitpro/macos/$arch
 ```
 
@@ -35,11 +37,12 @@ Server = https://packages.extremscorner.org/devkitpro/macos/$arch
 Append to `/etc/pacman.conf` relative to MSYS2 installation.
 
 ```ini
-[extremscorner-devkitpro]
+[libogc2-devkitpro]
+Server = https://packages.libogc2.org/devkitpro/windows/$arch
 Server = https://packages.extremscorner.org/devkitpro/windows/$arch
 ```
 
-Many packages are updates for existing devkitPro packages. To use these, `[extremscorner-devkitpro]` must be placed before `[dkp-libs]`.
+Many packages are updates for existing devkitPro packages. To use these, `[libogc2-devkitpro]` must be placed before `[dkp-libs]`.
 You can switch back to devkitPro-provided packages at any time by swapping the order around and using `sudo (dkp-)pacman -Syuu`.
 
 It is recommended to prioritize this repository when using more than the base packages in a libogc2 project.
