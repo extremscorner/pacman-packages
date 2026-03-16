@@ -3,7 +3,7 @@
 _pkgname=openobex
 pkgname="libogc2-${_pkgname}"
 pkgver=1.7.2.r12.g34f2ee0
-pkgrel=1
+pkgrel=2
 pkgdesc='Implementation of the OBject EXchange (OBEX) protocol.'
 arch=('any')
 url='http://dev.zuckschwerdt.org/openobex/'
@@ -18,7 +18,7 @@ sha256sums=('fff25a5f0cfc5eb53deb2759e5ef672d3972d299f00cb396255988e2a4eb4922')
 build() {
 	cd "${srcdir}/${_pkgname}"
 	source "${DEVKITPRO}/libogc2/wiivars.sh"
-	powerpc-eabi-cmake -B build -DBUILD_DOCUMENTATION=OFF -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DLIBS_PRIVATE=-lwiisocket -DOPENOBEX_FD=OFF -DOPENOBEX_INET=OFF
+	powerpc-eabi-cmake -B build -DBUILD_DOCUMENTATION=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DLIBS_PRIVATE=-lwiisocket -DOPENOBEX_FD=OFF -DOPENOBEX_INET=OFF
 	cmake --build build
 }
 
