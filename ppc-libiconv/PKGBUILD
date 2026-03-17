@@ -2,8 +2,8 @@
 
 _pkgname=libiconv
 pkgname="ppc-${_pkgname}"
-pkgver=1.18
-pkgrel=8
+pkgver=1.19
+pkgrel=1
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'
@@ -14,8 +14,8 @@ makedepends=('libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("https://ftp.gnu.org/pub/gnu/libiconv/${_pkgname}-${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('3b08f5f4f9b4eb82f151a7040bfd6fe6c6fb922efe4b1659c66ea933276965e8'
-			'661eda41702700aebf534a8a33c5891f3ac748c066ec2aa1991d30639daee41b')
+sha256sums=('88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6'
+			'b982689f93273e01812eaccf17410d1555b83033ee02064afc1f88f89155e372')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
