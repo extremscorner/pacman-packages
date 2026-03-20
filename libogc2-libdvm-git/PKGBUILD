@@ -2,7 +2,7 @@
 
 _pkgname=libdvm
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r65.9d24806
+pkgver=r82.49cf165
 pkgrel=1
 pkgdesc='FAT and disk/volume management library for GameCube and Wii.'
 arch=('any')
@@ -44,5 +44,6 @@ package() {
 	DESTDIR="${pkgdir}" catnip install gamecube wii
 	for platform in gamecube wii; do
 		install -Dm 644 COPYING -t "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/licenses/${_pkgname}"
+		install -Dm 644 lwext4/LICENSE -t "${pkgdir}${DEVKITPRO}/libogc2/${platform}/share/licenses/lwext4"
 	done
 }
