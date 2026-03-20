@@ -2,8 +2,8 @@
 
 _pkgname=jsoncpp
 pkgname="ppc-${_pkgname}"
-pkgver=1.9.6
-pkgrel=2
+pkgver=1.9.7
+pkgrel=1
 pkgdesc='A C++ library for interacting with JSON.'
 arch=('any')
 url='https://github.com/open-source-parsers/jsoncpp'
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('f93b6dd7ce796b13d02c108bc9f79812245a82e577581c4c9aabe57075c90ea2')
+sha256sums=('830bf352d822d8558e9d0eb19d640d2e38536b4b6699c30a4488da09d5b1df18')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
