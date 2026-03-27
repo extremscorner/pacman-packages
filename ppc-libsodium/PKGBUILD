@@ -1,0 +1,30 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libsodium
+pkgname="ppc-${_pkgname}"
+pkgver=1.0.21
+pkgrel=1
+pkgdesc='A modern, portable, easy to use crypto library.'
+arch=('any')
+url='https://libsodium.org/'
+license=('ISC')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://download.libsodium.org/libsodium/releases/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('9e4285c7a419e82dedb0be63a72eea357d6943bc3e28e6735bf600dd4883feaf')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi ac_cv_tls=none
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
