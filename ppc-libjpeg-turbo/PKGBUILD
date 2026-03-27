@@ -2,7 +2,7 @@
 
 _pkgname=libjpeg-turbo
 pkgname="ppc-${_pkgname}"
-pkgver=3.1.4
+pkgver=3.1.4.1
 pkgrel=1
 pkgdesc='JPEG image codec with accelerated baseline compression and decompression.'
 arch=('any')
@@ -16,7 +16,7 @@ conflicts=('ppc-libjpeg')
 replaces=('ppc-libjpeg')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('3a581ad5a3060cee69487aae0bc71a1f3be94b89f92215e32b43742ec4a5055c')
+sha256sums=('a7da42b640377c2a9a9665e2c4b0ea60cd5599afb48c2521e6df0c9dc9d15a25')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
