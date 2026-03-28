@@ -1,0 +1,33 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libopenmpt
+pkgname="ppc-${_pkgname}"
+pkgver=0.8.6
+pkgrel=1
+pkgdesc='A library to render tracker music to a PCM audio stream.'
+arch=('any')
+url='https://lib.openmpt.org/libopenmpt/'
+license=('BSD-3-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-libogg' 'ppc-libvorbis' 'ppc-mpg123' 'ppc-zlib')
+makedepends=('libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://lib.openmpt.org/files/libopenmpt/src/${_pkgname}-${pkgver}+release.autotools.tar.gz")
+sha256sums=('caa2fa959e389f4374d9e2df3af5c633452c12dd80442cba2e89cb7ff2b93c5b')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}+release.autotools"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	CFLAGS="${CFLAGS/-g/}"
+	CXXFLAGS="${CXXFLAGS/-g/}"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-openmpt123 --disable-examples --disable-tests --disable-doxygen-doc
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}+release.autotools"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
