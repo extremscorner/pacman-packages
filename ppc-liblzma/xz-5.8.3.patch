@@ -1,5 +1,5 @@
---- xz-5.8.2/src/common/mythread.h.orig	2025-12-17 11:36:42.000000000 +0000
-+++ xz-5.8.2/src/common/mythread.h	2025-12-17 11:36:42.000000000 +0000
+--- xz-5.8.3/src/common/mythread.h.orig	2026-03-31 14:30:50.000000000 +0000
++++ xz-5.8.3/src/common/mythread.h	2026-03-31 14:30:50.000000000 +0000
 @@ -165,7 +165,7 @@
  mythread_sigmask(int how, const sigset_t *restrict set,
  		sigset_t *restrict oset)
