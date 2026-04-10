@@ -2,7 +2,7 @@
 
 _pkgname=libsodium
 pkgname="ppc-${_pkgname}"
-pkgver=1.0.21
+pkgver=1.0.22
 pkgrel=1
 pkgdesc='A modern, portable, easy to use crypto library.'
 arch=('any')
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("https://download.libsodium.org/libsodium/releases/${_pkgname}-${pkgver}.tar.gz")
-sha256sums=('9e4285c7a419e82dedb0be63a72eea357d6943bc3e28e6735bf600dd4883feaf')
+sha256sums=('adbdd8f16149e81ac6078a03aca6fc03b592b89ef7b5ed83841c086191be3349')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
