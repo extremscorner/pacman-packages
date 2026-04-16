@@ -2,8 +2,8 @@
 
 _pkgname=libpng
 pkgname="ppc-${_pkgname}-apng"
-pkgver=1.6.57
-pkgrel=2
+pkgver=1.6.58
+pkgrel=1
 pkgdesc='A collection of routines used to create PNG format graphics files. (with APNG support)'
 arch=('any')
 url='https://sourceforge.net/projects/libpng-apng/'
@@ -15,12 +15,12 @@ provides=("ppc-${_pkgname}")
 conflicts=("ppc-${_pkgname}")
 options=(!strip libtool staticlibs)
 source=("https://downloads.sourceforge.net/sourceforge/libpng/${_pkgname}-${pkgver}.tar.xz"
-		"https://downloads.sourceforge.net/sourceforge/libpng-apng/${_pkgname}-${pkgver}-apng-v2.patch.gz")
-sha256sums=('d10c20d7171569804cae8dfc13ba6dcd0662c41ed39d43d4d429314aafb10a80'
-			'daca2e1f9edc694c359f392a25ecee37a9d46919240d3541cf11c096aa3ff883')
+		"https://downloads.sourceforge.net/sourceforge/libpng-apng/${_pkgname}-${pkgver}-apng.patch.gz")
+sha256sums=('28eb403f51f0f7405249132cecfe82ea5c0ef97f1b32c5a65828814ae0d34775'
+			'eee7dea22ed502868017971c86c63c4ed1e6085de0baebfdcc3d3322f00f3eb0')
 
 prepare() {
-	patch -Np 0 -i "${_pkgname}-${pkgver}-apng-v2.patch"
+	patch -Np 0 -i "${_pkgname}-${pkgver}-apng.patch"
 }
 
 build() {
