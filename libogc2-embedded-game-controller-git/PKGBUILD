@@ -1,0 +1,44 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=embedded-game-controller
+pkgname="libogc2-${_pkgname}-git"
+pkgver=r79.d364abd
+pkgrel=1
+pkgdesc='Game controller library for embedded devices.'
+arch=('any')
+url='https://github.com/extremscorner/embedded-game-controller'
+license=('GPL-2.0-or-later')
+groups=('wii-portlibs')
+depends=('devkitPPC' 'libogc2' 'libogc2-bt-embedded')
+makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("git+${url}.git"
+		'git+https://github.com/extremscorner/bt-embedded.git')
+sha256sums=('SKIP'
+			'SKIP')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	git submodule init
+	git config submodule.bt-embedded.url "${srcdir}/bt-embedded"
+	git -c protocol.file.allow=always submodule update
+}
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/libogc2/wiivars.sh"
+	powerpc-eabi-cmake -B build
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/libogc2/wiivars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE.txt -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+}
