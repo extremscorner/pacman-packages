@@ -3,7 +3,7 @@
 _pkgname=embedded-game-controller
 pkgname="libogc2-${_pkgname}-git"
 pkgver=r79.d364abd
-pkgrel=1
+pkgrel=2
 pkgdesc='Game controller library for embedded devices.'
 arch=('any')
 url='https://github.com/extremscorner/embedded-game-controller'
@@ -11,6 +11,8 @@ license=('GPL-2.0-or-later')
 groups=('wii-portlibs')
 depends=('devkitPPC' 'libogc2' 'libogc2-bt-embedded')
 makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
+provides=("libogc2-${_pkgname}")
+conflicts=("libogc2-${_pkgname}")
 options=(!strip libtool staticlibs)
 source=("git+${url}.git"
 		'git+https://github.com/extremscorner/bt-embedded.git')
