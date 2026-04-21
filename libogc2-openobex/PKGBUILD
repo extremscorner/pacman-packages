@@ -3,7 +3,7 @@
 _pkgname=openobex
 pkgname="libogc2-${_pkgname}"
 pkgver=1.7.2.r12.g34f2ee0
-pkgrel=2
+pkgrel=3
 pkgdesc='Implementation of the OBject EXchange (OBEX) protocol.'
 arch=('any')
 url='http://dev.zuckschwerdt.org/openobex/'
@@ -14,6 +14,11 @@ makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}::git+https://gitlab.com/mardy/mainline.git#commit=34f2ee0e7b16907fc66e703765e2521588fa0a40")
 sha256sums=('fff25a5f0cfc5eb53deb2759e5ef672d3972d299f00cb396255988e2a4eb4922')
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	git describe --long --abbrev=7 | sed 's/-/.r/;s/-/./'
+}
 
 build() {
 	cd "${srcdir}/${_pkgname}"
