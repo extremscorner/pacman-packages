@@ -1,0 +1,35 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=sh4zam
+pkgname="ppc-${_pkgname}"
+pkgver=0.6.r72.gbab16ac
+pkgrel=1
+pkgdesc='Fast linear algebra and math library for the Hitachi SuperH4 Processor.'
+arch=('any')
+url='https://github.com/gyrovorbis/sh4zam'
+license=('MIT')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("git+${url}.git#commit=bab16ac1b19111b5e61b2b582c4723a0fb25f59e")
+sha256sums=('ba5737592fe2bfa7b99d3e17120dab559827f229db6e640925d0a3d5e5a984a7')
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	git describe --long --abbrev=7 | sed 's/^v//;s/-/.r/;s/-/./'
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DSHZ_TLS_MODEL=DISABLED
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
