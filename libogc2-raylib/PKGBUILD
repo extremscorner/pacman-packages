@@ -1,0 +1,27 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=raylib
+pkgname="libogc2-${_pkgname}"
+pkgver=6.0
+pkgrel=1
+pkgdesc='Simple and easy-to-use game programming library.'
+arch=('any')
+url='https://www.raylib.com/'
+license=('Zlib')
+groups=('gamecube-portlibs')
+depends=('devkitPPC' 'libogc2' 'libogc2-libfat' 'libogc2-opengx')
+makedepends=('git')
+options=(!strip libtool staticlibs)
+source=('git+https://github.com/raylib4Consoles/raylib.git#commit=16b57ca2875af42f0affffb31cdbbe7c42aba5f1')
+sha256sums=('d61ab98cf9b036354f7fe695a5f7b25557aa2e6ead8649ee1f0d52c2cde1fd09')
+
+build() {
+	cd "${srcdir}/${_pkgname}/src"
+	make PLATFORM=PLATFORM_GAMECUBE
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}/src"
+	DESTDIR="${pkgdir}" make install PLATFORM=PLATFORM_GAMECUBE
+	install -Dm 644 ../LICENSE -t "${pkgdir}${DEVKITPRO}/libogc2/gamecube/share/licenses/${_pkgname}"
+}
