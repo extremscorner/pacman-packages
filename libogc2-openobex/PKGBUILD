@@ -3,7 +3,7 @@
 _pkgname=openobex
 pkgname="libogc2-${_pkgname}"
 pkgver=1.7.2.r12.g34f2ee0
-pkgrel=3
+pkgrel=4
 pkgdesc='Implementation of the OBject EXchange (OBEX) protocol.'
 arch=('any')
 url='http://dev.zuckschwerdt.org/openobex/'

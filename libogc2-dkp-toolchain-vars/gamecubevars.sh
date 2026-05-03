@@ -5,7 +5,7 @@ export PORTLIBS_CUBE=${PORTLIBS_ROOT}/gamecube
 export PORTLIBS_PPC=${PORTLIBS_ROOT}/ppc
 
 export CFLAGS="-g -O2 -mogc -mcpu=750 -meabi -msdata=sysv -mhard-float -ffunction-sections -fdata-sections"
-export CXXFLAGS="${CFLAGS}"
+export CXXFLAGS="${CFLAGS/-g /}"
 export CPPFLAGS="-D__GAMECUBE__ -I${PORTLIBS_PREFIX}/include -I${PORTLIBS_CUBE}/include -I${PORTLIBS_PPC}/include"
 export LDFLAGS="-L${PORTLIBS_PREFIX}/lib -L${PORTLIBS_CUBE}/lib -L${PORTLIBS_PPC}/lib"
 export LIBS="-logc -lm"

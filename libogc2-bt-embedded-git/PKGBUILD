@@ -2,7 +2,7 @@
 
 _pkgname=bt-embedded
 pkgname=(libogc2-${_pkgname}{,-obex}-git)
-pkgver=r283.fe0a03a
+pkgver=r300.d17507c
 pkgrel=2
 pkgdesc='Bluetooth classic library for embedded devices.'
 arch=('any')

@@ -3,7 +3,7 @@
 _pkgname=sh4zam
 pkgname="ppc-${_pkgname}"
 pkgver=0.6.r76.g7d6ccc7
-pkgrel=1
+pkgrel=2
 pkgdesc='Fast linear algebra and math library for the Hitachi SuperH4 Processor.'
 arch=('any')
 url='https://github.com/gyrovorbis/sh4zam'

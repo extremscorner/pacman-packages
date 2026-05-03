@@ -3,7 +3,7 @@
 _pkgname=raylib
 pkgname="libogc2-${_pkgname}"
 pkgver=6.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Simple and easy-to-use game programming library.'
 arch=('any')
 url='https://www.raylib.com/'

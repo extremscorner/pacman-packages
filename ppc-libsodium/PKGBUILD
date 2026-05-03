@@ -3,7 +3,7 @@
 _pkgname=libsodium
 pkgname="ppc-${_pkgname}"
 pkgver=1.0.22
-pkgrel=1
+pkgrel=2
 pkgdesc='A modern, portable, easy to use crypto library.'
 arch=('any')
 url='https://libsodium.org/'

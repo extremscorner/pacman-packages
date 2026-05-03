@@ -3,7 +3,7 @@
 _pkgname=libconfig
 pkgname="ppc-${_pkgname}"
 pkgver=1.8.2
-pkgrel=1
+pkgrel=2
 pkgdesc='A simple library for manipulating structured configuration files.'
 arch=('any')
 url='https://github.com/hyperrealm/libconfig'

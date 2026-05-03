@@ -3,7 +3,7 @@
 _pkgname=zstd
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.5.7
-pkgrel=7
+pkgrel=8
 pkgdesc='Zstandard - Fast real-time compression algorithm.'
 arch=('any')
 url='https://github.com/facebook/zstd'

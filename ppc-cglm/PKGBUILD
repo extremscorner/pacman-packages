@@ -3,7 +3,7 @@
 _pkgname=cglm
 pkgname="ppc-${_pkgname}"
 pkgver=0.9.6
-pkgrel=1
+pkgrel=2
 pkgdesc='OpenGL Mathematics (glm) for C.'
 arch=('any')
 url='https://github.com/recp/cglm'

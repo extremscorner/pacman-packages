@@ -3,7 +3,7 @@
 _pkgname=libzip
 pkgname="ppc-${_pkgname}"
 pkgver=1.11.4
-pkgrel=1
+pkgrel=2
 pkgdesc='C library for reading, creating, and modifying zip archives.'
 arch=('any')
 url='https://libzip.org/'

@@ -3,7 +3,7 @@
 _pkgname=lz4
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.10.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Extremely fast compression algorithm.'
 arch=('any')
 url='https://github.com/lz4/lz4'

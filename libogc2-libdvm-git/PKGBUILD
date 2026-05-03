@@ -2,8 +2,8 @@
 
 _pkgname=libdvm
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r82.49cf165
-pkgrel=1
+pkgver=r83.c7c27e1
+pkgrel=2
 pkgdesc='FAT and disk/volume management library for GameCube and Wii.'
 arch=('any')
 url='https://github.com/extremscorner/libdvm'

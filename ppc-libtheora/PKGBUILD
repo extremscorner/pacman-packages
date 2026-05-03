@@ -3,7 +3,7 @@
 _pkgname=libtheora
 pkgname="ppc-${_pkgname}"
 pkgver=1.2.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Reference implementation of the Theora video compression format.'
 arch=('any')
 url='https://www.theora.org/'

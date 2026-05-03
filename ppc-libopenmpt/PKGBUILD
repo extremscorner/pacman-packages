@@ -3,7 +3,7 @@
 _pkgname=libopenmpt
 pkgname="ppc-${_pkgname}"
 pkgver=0.8.6
-pkgrel=1
+pkgrel=2
 pkgdesc='A library to render tracker music to a PCM audio stream.'
 arch=('any')
 url='https://lib.openmpt.org/libopenmpt/'
@@ -18,8 +18,6 @@ sha256sums=('caa2fa959e389f4374d9e2df3af5c633452c12dd80442cba2e89cb7ff2b93c5b')
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}+release.autotools"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	CFLAGS="${CFLAGS/-g/}"
-	CXXFLAGS="${CXXFLAGS/-g/}"
 	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-openmpt123 --disable-examples --disable-tests --disable-doxygen-doc
 	make
 }

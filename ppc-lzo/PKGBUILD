@@ -3,7 +3,7 @@
 _pkgname=lzo
 pkgname="ppc-${_pkgname}"
 pkgver=2.10
-pkgrel=1
+pkgrel=2
 pkgdesc='A real-time data compression library.'
 arch=('any')
 url='https://www.oberhumer.com/opensource/lzo/'

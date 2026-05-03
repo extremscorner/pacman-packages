@@ -3,7 +3,7 @@
 _pkgname=brotli
 pkgname="ppc-lib${_pkgname}"
 pkgver=1.2.0
-pkgrel=8
+pkgrel=9
 pkgdesc='A generic-purpose lossless compression algorithm.'
 arch=('any')
 url='https://github.com/google/brotli'
