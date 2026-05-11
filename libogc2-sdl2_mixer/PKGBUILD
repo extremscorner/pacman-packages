@@ -2,24 +2,18 @@
 
 _pkgname=SDL2_mixer
 pkgname=(libogc2-${_pkgname,,}{,-full})
-pkgver=2.8.1
-pkgrel=9
+pkgver=2.8.2
+pkgrel=1
 pkgdesc='A simple multi-channel audio mixer. (Version 2)'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_mixer'
 license=('Zlib')
 groups=('gamecube-portlibs' 'gamecube-sdl2-libs' 'wii-portlibs' 'wii-sdl2-libs')
 depends=('devkitPPC' 'libogc2-sdl2' 'ppc-flac' 'ppc-libmodplug' 'ppc-libvorbisidec' 'ppc-libxmp' 'ppc-opusfile')
-makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch' 'ppc-libgme' 'ppc-libvorbis' 'ppc-libwavpack' 'ppc-mpg123')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'ppc-libgme' 'ppc-libvorbis' 'ppc-libwavpack' 'ppc-mpg123')
 options=(!strip libtool staticlibs)
-source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz"
-		"${_pkgname}-${pkgver}.patch")
-sha256sums=('cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660'
-			'69bfa1ad0f8cbbc028efc79af91278b2e2f9a6663869f2eb3b302731887dce90')
-
-prepare() {
-	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
-}
+source=("${url}/releases/download/release-${pkgver}/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('938dff531d00ace2296557a6599abe6f34599e2f34f0a4a08a397e2ccac8b8f7')
 
 build() {
 	for platform in gamecube wii; do
