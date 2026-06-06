@@ -2,13 +2,13 @@
 
 _pkgname=embedded-game-controller
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r95.ef6cc37
+pkgver=r127.f92a7b7
 pkgrel=1
 pkgdesc='Game controller library for embedded devices.'
 arch=('any')
 url='https://github.com/extremscorner/embedded-game-controller'
 license=('MIT')
-groups=('wii-portlibs')
+groups=('gamecube-portlibs' 'wii-portlibs')
 depends=('devkitPPC' 'libogc2' 'libogc2-bt-embedded')
 makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
 provides=("libogc2-${_pkgname}")
@@ -23,15 +23,23 @@ pkgver() {
 }
 
 build() {
-	cd "${srcdir}/${_pkgname}"
-	source "${DEVKITPRO}/libogc2/wiivars.sh"
-	powerpc-eabi-cmake -B build
-	cmake --build build
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		if [ ${platform} == gamecube ]; then
+			powerpc-eabi-cmake -B build-${platform} -DWITH_BLUETOOTH=OFF -DWITH_DRIVER_DS3=OFF -DWITH_DRIVER_DS4=OFF -DWITH_DRIVER_GENERIC=OFF -DWITH_DRIVER_NINTENDO_SWITCH=OFF
+		else
+			powerpc-eabi-cmake -B build-${platform}
+		fi
+		cmake --build build-${platform}
+	done
 }
 
 package() {
-	cd "${srcdir}/${_pkgname}"
-	source "${DEVKITPRO}/libogc2/wiivars.sh"
-	DESTDIR="${pkgdir}" cmake --install build
-	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" cmake --install build-${platform}
+		install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+	done
 }
