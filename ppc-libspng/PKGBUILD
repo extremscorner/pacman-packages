@@ -1,0 +1,31 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libspng
+pkgname="ppc-${_pkgname}"
+pkgver=0.7.4
+pkgrel=1
+pkgdesc='Simple, modern libpng alternative.'
+arch=('any')
+url='https://github.com/randy408/libspng'
+license=('BSD-2-Clause')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-zlib')
+makedepends=('libogc2-dkp-toolchain-vars' 'meson')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('47ec02be6c0a6323044600a9221b049f63e1953faf816903e7383d4dc4234487')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	meson env2mfile -o meson.cross --cross --system=bare --subsystem=bare --kernel=none --cpu=ppc --cpu-family=ppc --endian=big
+	meson setup --prefix="${PORTLIBS_PREFIX}" --buildtype=plain --default-library=static -Db_staticpic=false -Dbuild_examples=false -Denable_opt=false --cross-file=meson.cross build
+	meson compile -C build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" meson install -C build
+	install -Dm 644 LICENSE -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
