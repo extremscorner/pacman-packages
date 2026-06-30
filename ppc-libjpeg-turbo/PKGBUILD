@@ -2,28 +2,28 @@
 
 _pkgname=libjpeg-turbo
 pkgname="ppc-${_pkgname}"
-pkgver=3.1.4.1
-pkgrel=2
+pkgver=3.2.0
+pkgrel=1
 pkgdesc='JPEG image codec with accelerated baseline compression and decompression.'
 arch=('any')
 url='https://github.com/libjpeg-turbo/libjpeg-turbo'
 license=('BSD-3-Clause' 'IJG')
 groups=('ppc-portlibs')
-depends=('devkitPPC')
+depends=('devkitPPC' 'ppc-libspng')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 provides=('ppc-libjpeg')
 conflicts=('ppc-libjpeg')
 replaces=('ppc-libjpeg')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('a7da42b640377c2a9a9665e2c4b0ea60cd5599afb48c2521e6df0c9dc9d15a25')
+sha256sums=('980dd81f425082aa6d7c9e47fef27554ce7a9ffc8e2f6e863b97d263c5c50858')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	CFLAGS="${CFLAGS/-O2/-O3}"
 	CXXFLAGS="${CXXFLAGS/-O2/-O3}"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DENABLE_SHARED=OFF -DHAVE_THREAD_LOCAL=OFF -DWITH_SIMD=OFF -DWITH_TOOLS=OFF
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_PREFIX_PATH="${PORTLIBS_PREFIX}" -DENABLE_SHARED=OFF -DHAVE_THREAD_LOCAL=OFF -DWITH_SIMD=OFF -DWITH_SYSTEM_SPNG=ON -DWITH_TOOLS=OFF
 	cmake --build build
 }
 
