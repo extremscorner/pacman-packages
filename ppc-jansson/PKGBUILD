@@ -2,8 +2,8 @@
 
 _pkgname=jansson
 pkgname="ppc-${_pkgname}"
-pkgver=2.15.0
-pkgrel=3
+pkgver=2.15.1
+pkgrel=1
 pkgdesc='C library for encoding, decoding and manipulating JSON data.'
 arch=('any')
 url='https://github.com/akheron/jansson'
@@ -14,8 +14,8 @@ makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('73ac12bbc62ff536e40c7a3e15ed007993c5ca4d23897de23f1906f891b5a4bb'
-			'f0d75766751d71d15bcde2ff2869356c470d3e528c63349cecefb61f92e32848')
+sha256sums=('dbf95cb0af903f4fb8b61507d96b45b67db7d1479688ede352e1d571394d06f7'
+			'503749c2ea14557f27470691fd727e96e104eb304bc544a519a93349901f5f34')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"

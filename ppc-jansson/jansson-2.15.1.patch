@@ -1,6 +1,6 @@
---- jansson-2.15.0/CMakeLists.txt.orig	2026-01-24 20:54:44.000000000 +0000
-+++ jansson-2.15.0/CMakeLists.txt	2026-01-24 20:54:44.000000000 +0000
-@@ -349,8 +349,6 @@
+--- jansson-2.15.1/CMakeLists.txt.orig	2026-07-01 18:35:44.000000000 +0000
++++ jansson-2.15.1/CMakeLists.txt	2026-07-01 18:35:44.000000000 +0000
+@@ -352,8 +352,6 @@
        ${JANSSON_SRC}
        ${JANSSON_HDR_PRIVATE}
        ${JANSSON_HDR_PUBLIC})
