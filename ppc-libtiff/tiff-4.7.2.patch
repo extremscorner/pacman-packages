@@ -1,5 +1,5 @@
---- tiff-4.7.1/cmake/TiffConfig.cmake.in.orig	2024-10-28 23:57:03.000000000 +0000
-+++ tiff-4.7.1/cmake/TiffConfig.cmake.in	2024-10-28 23:57:03.000000000 +0000
+--- tiff-4.7.2/cmake/tiff-config.cmake.in.orig	2026-06-27 12:36:34.000000000 +0000
++++ tiff-4.7.2/cmake/tiff-config.cmake.in	2026-06-27 12:36:34.000000000 +0000
 @@ -1,5 +1,19 @@
 -if(NOT "@BUILD_SHARED_LIBS@")
 -    # TODO: import dependencies
@@ -22,9 +22,9 @@
  endif()
  
  function(set_variable_from_rel_or_absolute_path var root rel_or_abs_path)
---- tiff-4.7.1/libtiff/CMakeLists.txt.orig	2025-06-12 13:02:11.000000000 +0000
-+++ tiff-4.7.1/libtiff/CMakeLists.txt	2025-06-12 13:02:11.000000000 +0000
-@@ -222,6 +222,74 @@
+--- tiff-4.7.2/libtiff/CMakeLists.txt.orig	2026-06-27 12:36:34.000000000 +0000
++++ tiff-4.7.2/libtiff/CMakeLists.txt	2026-06-27 12:36:34.000000000 +0000
+@@ -253,6 +253,74 @@
            DESTINATION ${TIFF_CONFIGDIR}
    )
  
@@ -98,4 +98,4 @@
 +
    include(CMakePackageConfigHelpers)
    write_basic_package_version_file(
-     TiffConfigVersion.cmake
+     tiff-config-version.cmake

@@ -2,8 +2,8 @@
 
 _pkgname=tiff
 pkgname="ppc-lib${_pkgname}"
-pkgver=4.7.1
-pkgrel=8
+pkgver=4.7.2
+pkgrel=1
 pkgdesc='Library for manipulation of TIFF images.'
 arch=('any')
 url='http://www.simplesystems.org/libtiff/'
@@ -14,8 +14,8 @@ makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("https://download.osgeo.org/libtiff/${_pkgname}-${pkgver}.tar.xz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('b92017489bdc1db3a4c97191aa4b75366673cb746de0dce5d7a749d5954681ba'
-			'fa78dbc8cbeb3334dbd684a91cf471941b1a111fffdbb1f6e69233e5d957a390')
+sha256sums=('4996f0c4f93094719b1ca5c6279b20e588773ba8a247533e486416fb662ddb88'
+			'eb2715f2448b05441c44b9303207a3b4432283958cdaf08377ae28cf6893ffeb')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
