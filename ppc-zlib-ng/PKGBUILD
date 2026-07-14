@@ -3,7 +3,7 @@
 _pkgname=zlib-ng
 pkgname=(ppc-${_pkgname}{,-compat})
 pkgver=2.3.3
-pkgrel=2
+pkgrel=3
 pkgdesc='zlib replacement with optimizations for "next generation" systems.'
 arch=('any')
 url='https://github.com/zlib-ng/zlib-ng'
@@ -35,7 +35,6 @@ package_ppc-zlib-ng-compat() {
 	pkgdesc+=' (zlib compat)'
 	provides=('ppc-zlib')
 	conflicts=('ppc-zlib')
-	replaces=('ppc-zlib')
 
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"

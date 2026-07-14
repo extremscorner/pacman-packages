@@ -1,0 +1,33 @@
+--- zlib-1.3.2/CMakeLists.txt.orig	2026-02-17 13:01:19.000000000 +0000
++++ zlib-1.3.2/CMakeLists.txt	2026-02-17 13:01:19.000000000 +0000
+@@ -203,7 +203,7 @@
+ if(ZLIB_BUILD_STATIC)
+     add_library(zlibstatic STATIC ${ZLIB_SRCS} ${ZLIB_PUBLIC_HDRS}
+                                   ${ZLIB_PRIVATE_HDRS})
+-    add_library(ZLIB::ZLIBSTATIC ALIAS zlibstatic)
++    add_library(ZLIB::ZLIB ALIAS zlibstatic)
+     target_include_directories(
+         zlibstatic
+         PUBLIC $<BUILD_INTERFACE:${zlib_BINARY_DIR}>
+@@ -218,8 +218,8 @@
+                 $<$<BOOL:${MSVC}>:_CRT_NONSTDC_NO_DEPRECATE>
+         PUBLIC $<$<BOOL:${HAVE_OFF64_T}>:_LARGEFILE64_SOURCE=1>)
+     set_target_properties(
+-        zlibstatic PROPERTIES EXPORT_NAME ZLIBSTATIC OUTPUT_NAME
+-                                                     z${zlib_static_suffix})
++        zlibstatic PROPERTIES EXPORT_NAME ZLIB OUTPUT_NAME
++                                               z${zlib_static_suffix})
+ endif(ZLIB_BUILD_STATIC)
+ 
+ if(ZLIB_INSTALL)
+--- zlib-1.3.2/zlibConfig.cmake.in.orig	2026-02-17 13:01:19.000000000 +0000
++++ zlib-1.3.2/zlibConfig.cmake.in	2026-02-17 13:01:19.000000000 +0000
+@@ -13,6 +13,7 @@
+     endforeach(_comp ${ZLIB_FIND_COMPONENTS})
+ else(ZLIB_FIND_COMPONENTS)
+     foreach(_component_config IN LISTS _ZLIB_supported_components)
+-        include("${CMAKE_CURRENT_LIST_DIR}/ZLIB-${_component_config}.cmake")
++        include("${CMAKE_CURRENT_LIST_DIR}/ZLIB-${_component_config}.cmake"
++                OPTIONAL)
+     endforeach(_component_config IN LISTS _ZLIB_supported_components)
+ endif(ZLIB_FIND_COMPONENTS)
