@@ -2,7 +2,7 @@
 
 _pkgname=sh4zam
 pkgname="ppc-${_pkgname}"
-pkgver=0.7.0.r69.g8dce946
+pkgver=0.7.0.r73.g68ee265
 pkgrel=1
 pkgdesc='Fast linear algebra and math library for the Hitachi SuperH4 Processor.'
 arch=('any')
@@ -12,8 +12,8 @@ groups=('ppc-portlibs')
 depends=('devkitPPC')
 makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
-source=("git+${url}.git#commit=8dce9467f6a577e06dda3e5bd444628238ce01a9")
-sha256sums=('d11627e3d450bc4fb1183a700f6a8d2ef4a2edcec6b42dde101532d2480c722a')
+source=("git+${url}.git#commit=68ee2652f65b72c9c04cc76fbcfc4dba86e90401")
+sha256sums=('7c90cf2e229f908cd931cd76c1e7d592824c473912ce237e654dd3fd1b5bd1d1')
 
 pkgver() {
 	cd "${srcdir}/${_pkgname}"
