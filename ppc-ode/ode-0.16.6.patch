@@ -1,0 +1,32 @@
+--- ode-0.16.6/CMakeLists.txt.orig	2025-01-16 22:41:41.000000000 +0000
++++ ode-0.16.6/CMakeLists.txt	2025-01-16 22:41:41.000000000 +0000
+@@ -518,7 +518,6 @@
+ 	ODE
+ 	PROPERTIES
+ 	OUTPUT_NAME ode
+-	POSITION_INDEPENDENT_CODE ON
+ 	SOVERSION ${SOVERSION_MAJOR}
+ 	VERSION ${SOVERSION}
+ )
+--- ode-0.16.6/build/config-default.h.orig	2025-01-16 22:41:41.000000000 +0000
++++ ode-0.16.6/build/config-default.h	2025-01-16 22:41:41.000000000 +0000
+@@ -75,8 +75,6 @@
+   #define ODE_PLATFORM_OSX
+ #elif defined(__FreeBSD__)
+   #define ODE_PLATFORM_FREEBSD
+-#else
+-  #error "Need some help identifying the platform!"
+ #endif
+ 
+ /* Additional platform defines used in the code */
+--- ode-0.16.6/config.h.cmake.in.orig	2025-01-16 22:41:41.000000000 +0000
++++ ode-0.16.6/config.h.cmake.in	2025-01-16 22:41:41.000000000 +0000
+@@ -73,8 +73,6 @@
+ #define ODE_PLATFORM_OSX
+ #elif defined(__FreeBSD__)
+ #define ODE_PLATFORM_FREEBSD
+-#else
+-#error "Need some help identifying the platform!"
+ #endif
+ 
+ /* Additional platform defines used in the code */

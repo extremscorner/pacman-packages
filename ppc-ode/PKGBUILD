@@ -1,0 +1,36 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=ode
+pkgname="ppc-${_pkgname}"
+pkgver=0.16.6
+pkgrel=1
+pkgdesc='A free, industrial quality library for simulating articulated rigid body dynamics.'
+arch=('any')
+url='https://github.com/odedevs/ode'
+license=('BSD-3-Clause' 'LGPL-2.1-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+options=(!strip libtool staticlibs)
+source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('91fa10c811db757c113ba5ced02e578587f84331d51041b9fd4cadb1522fcef6'
+			'2a0b0d348ef8454cec9256a869f94e878b14deab24c4e13e1dd243fe836cc17e')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build-cmake -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DODE_WITH_DEMOS=OFF -DODE_WITH_TESTS=OFF
+	cmake --build build-cmake
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build-cmake
+	install -Dm 644 LICENSE*.TXT -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
