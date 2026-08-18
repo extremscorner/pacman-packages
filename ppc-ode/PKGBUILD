@@ -3,7 +3,7 @@
 _pkgname=ode
 pkgname="ppc-${_pkgname}"
 pkgver=0.16.6
-pkgrel=1
+pkgrel=2
 pkgdesc='A free, industrial quality library for simulating articulated rigid body dynamics.'
 arch=('any')
 url='https://github.com/odedevs/ode'
@@ -15,10 +15,10 @@ options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
 sha256sums=('91fa10c811db757c113ba5ced02e578587f84331d51041b9fd4cadb1522fcef6'
-			'2a0b0d348ef8454cec9256a869f94e878b14deab24c4e13e1dd243fe836cc17e')
+			'5a987ccbb014baa8c936eff6543d0c11b47dd257a0d88327b9616eea50b27dcd')
 
 prepare() {
-	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch" --binary
 }
 
 build() {
