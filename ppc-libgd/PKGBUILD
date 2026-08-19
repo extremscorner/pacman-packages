@@ -1,0 +1,40 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=gd
+pkgname="ppc-lib${_pkgname}"
+pkgver=2.3.3
+pkgrel=4
+pkgdesc='Library for the dynamic creation of images by programmers.'
+arch=('any')
+url='https://github.com/libgd/libgd'
+license=('GD')
+groups=('ppc-portlibs')
+depends=('devkitPPC' 'ppc-freetype' 'ppc-libjpeg-turbo' 'ppc-libpng' 'ppc-libtiff' 'ppc-libwebp' 'ppc-zlib')
+makedepends=('libogc2-dkp-toolchain-vars' 'patch')
+options=(!strip libtool staticlibs)
+source=("${url}/archive/refs/tags/${_pkgname}-${pkgver}.tar.gz"
+		"${_pkgname}-${pkgver}.patch")
+noextract=("${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('24429f9d0dbe0f865aaa4b1a63558242396ba9134e6cfd32ca5e486a84483350'
+			'2cd7c38f4a065a3e19fb3d7a3abaa78b45d7648ae4ddbae556d2c82ff44f06c7')
+
+prepare() {
+	tar -xf "${_pkgname}-${pkgver}.tar.gz" --one-top-level --strip-components=1
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	./bootstrap.sh
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --enable-gd-formats am_cv_func_iconv=no
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" make install
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}

@@ -1,0 +1,95 @@
+--- gd-2.3.3/cmake/modules/AC_HEADER_STDC.cmake.orig	2021-09-11 05:09:44.000000000 +0000
++++ gd-2.3.3/cmake/modules/AC_HEADER_STDC.cmake	2021-09-11 05:09:44.000000000 +0000
+@@ -4,6 +4,7 @@
+ check_include_files(inttypes.h HAVE_INTTYPES_H)
+ check_include_files(stdint.h HAVE_STDINT_H)
+ check_include_files(strings.h HAVE_STRINGS_H)
++check_include_files(syslog.h HAVE_SYSLOG_H)
+ check_include_files(unistd.h HAVE_UNISTD_H)
+ 
+ check_include_files(sys/stat.h HAVE_SYS_STAT_H)
+--- gd-2.3.3/configure.ac.orig	2021-09-11 05:09:44.000000000 +0000
++++ gd-2.3.3/configure.ac	2021-09-11 05:09:44.000000000 +0000
+@@ -66,6 +66,7 @@
+ 	inttypes.h
+ 	stdint.h
+ 	strings.h
++	syslog.h
+ 	unistd.h
+ 	sys/stat.h
+ 	sys/types.h
+--- gd-2.3.3/src/Makefile.am.orig	2021-09-11 05:09:44.000000000 +0000
++++ gd-2.3.3/src/Makefile.am	2021-09-11 05:09:44.000000000 +0000
+@@ -1,44 +1,7 @@
+ ## Process this file with automake to produce Makefile.in -*-Makefile-*-
+ 
+-bin_PROGRAMS = gdcmpgif
+-check_PROGRAMS = gifanimtest
+-
+-if HAVE_LIBPNG
+-bin_PROGRAMS += gdtopng pngtogd webpng
+-check_PROGRAMS += circletexttest fontsizetest fontwheeltest gddemo testac
+-if HAVE_LIBZ
+-bin_PROGRAMS += gdparttopng gd2topng pngtogd2
+-check_PROGRAMS += gdtest
+-endif
+-endif
+-
+-if HAVE_LIBJPEG
+-if !HAVE_LIBPNG
+-check_PROGRAMS += fontsizetest fontwheeltest
+-endif
+-endif
+-
+-if HAVE_LIBFONTCONFIG
+-check_PROGRAMS += fontconfigtest
+-endif
+-
+-if HAVE_LIBFREETYPE
+-if HAVE_LIBJPEG
+-bin_PROGRAMS += annotate
+-endif
+-check_PROGRAMS += gdtestft testtr
+-endif
+-
+-if HAVE_LIBZ
+-bin_PROGRAMS += gd2copypal gd2togif giftogd2
+-endif
+-
+ bin_SCRIPTS = bdftogd
+ 
+-if HAVE_LIBZ
+-check_PROGRAMS += gd2time
+-endif
+-
+ EXTRA_DIST = \
+ 	bdftogd \
+ 	demoin.png \
+--- gd-2.3.3/src/gd_errors.h.orig	2021-09-11 05:09:44.000000000 +0000
++++ gd-2.3.3/src/gd_errors.h	2021-09-11 05:09:44.000000000 +0000
+@@ -1,7 +1,7 @@
+ #ifndef GD_ERRORS_H
+ #define GD_ERRORS_H
+ 
+-#ifndef _WIN32
++#ifdef HAVE_SYSLOG_H
+ # include <syslog.h>
+ #else
+ /*
+--- gd-2.3.3/src/gd_intern.h.orig	2021-09-11 05:09:44.000000000 +0000
++++ gd-2.3.3/src/gd_intern.h	2021-09-11 05:09:44.000000000 +0000
+@@ -29,12 +29,8 @@
+ # endif
+ #endif
+ 
+-#ifdef _MSC_VER
+-#define  ssize_t SSIZE_T
+-#define MAXSIZE_T ((SIZE_T)~ ((SIZE_T)0))
+-#define MAXSSIZE_T ((SSIZE_T) (MAXSIZE_T >> 1))
+-#define MINSSIZE_T ((SSIZE_T)~MAXSSIZE_T)
+-#define SSIZE_MAX MAXSSIZE_T
++#ifndef SSIZE_MAX
++#define SSIZE_MAX ((ssize_t) (SIZE_MAX >> 1))
+ #endif
+ 
+ #include "gd.h"
