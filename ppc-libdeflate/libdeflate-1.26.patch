@@ -1,0 +1,31 @@
+--- libdeflate-1.26/common_defs.h.orig	2026-08-22 16:05:42.000000000 +0000
++++ libdeflate-1.26/common_defs.h	2026-08-22 16:05:42.000000000 +0000
+@@ -65,6 +65,8 @@
+ #undef ARCH_X86_32
+ #undef ARCH_ARM64
+ #undef ARCH_ARM32
++#undef ARCH_PPC64
++#undef ARCH_PPC32
+ #undef ARCH_RISCV
+ #ifdef _MSC_VER
+    /* Way too many things are broken in ARM64EC to pretend that it is x86_64. */
+@@ -86,6 +88,10 @@
+ #    define ARCH_ARM64
+ #  elif defined(__arm__)
+ #    define ARCH_ARM32
++#  elif defined(__powerpc64__) || defined(__ppc64__) || defined(__PPC64__)
++#    define ARCH_PPC64
++#  elif defined(__powerpc__) || defined(__ppc__) || defined(__PPC__)
++#    define ARCH_PPC32
+ #  elif defined(__riscv)
+ #    define ARCH_RISCV
+ #  endif
+@@ -389,7 +395,7 @@
+ #if (defined(__GNUC__) || defined(__clang__)) && \
+ 	(defined(ARCH_X86_64) || defined(ARCH_X86_32) || \
+ 	 defined(__ARM_FEATURE_UNALIGNED) || \
+-	 defined(__powerpc64__) || defined(__powerpc__) || defined(__POWERPC__) || \
++	 defined(ARCH_PPC64) || defined(ARCH_PPC32) || \
+ 	 defined(__riscv_misaligned_fast) || \
+ 	 /*
+ 	  * For all compilation purposes, WebAssembly behaves like any other CPU
