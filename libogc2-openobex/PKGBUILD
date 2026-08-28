@@ -3,7 +3,7 @@
 _pkgname=openobex
 pkgname="libogc2-${_pkgname}"
 pkgver=1.7.2.r12.g34f2ee0
-pkgrel=4
+pkgrel=5
 pkgdesc='Implementation of the OBject EXchange (OBEX) protocol.'
 arch=('any')
 url='http://dev.zuckschwerdt.org/openobex/'
@@ -17,7 +17,7 @@ sha256sums=('fff25a5f0cfc5eb53deb2759e5ef672d3972d299f00cb396255988e2a4eb4922')
 
 pkgver() {
 	cd "${srcdir}/${_pkgname}"
-	git describe --long --abbrev=7 | sed 's/-/.r/;s/-/./'
+	git describe --tags --abbrev=7 | sed 's/-/.r/;s/-/./'
 }
 
 build() {

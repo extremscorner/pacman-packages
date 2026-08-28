@@ -2,7 +2,7 @@
 
 _pkgname=libdvm
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r83.c7c27e1
+pkgver=r85.420b9ae
 pkgrel=2
 pkgdesc='FAT and disk/volume management library for GameCube and Wii.'
 arch=('any')

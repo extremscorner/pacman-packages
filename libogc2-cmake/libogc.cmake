@@ -10,7 +10,7 @@ include(Platform/Generic-dkP)
 # Platform settings
 set(OGC_ARCH_SETTINGS "-m${OGC_MACHINE} -mcpu=750 -meabi -msdata=sysv -mhard-float")
 set(OGC_COMMON_FLAGS  "-ffunction-sections -fdata-sections -D__${OGC_CONSOLE}__ -DGEKKO")
-set(OGC_LINKER_FLAGS  "-L${OGC_ROOT}/lib/${OGC_SUBDIR} -L${DEVKITPRO}/portlibs/${OGC_CONSOLE}/lib -L${DEVKITPRO}/portlibs/ppc/lib")
+set(OGC_LINKER_FLAGS  "-L${OGC_ROOT}/lib/${OGC_SUBDIR} -L${OGC_PORTLIBS}/lib -L${DEVKITPRO}/portlibs/ppc/lib")
 set(OGC_STANDARD_LIBRARIES "${OGC_EXTRA_LIBS} -logc -lm")
 set(OGC_STANDARD_INCLUDE_DIRECTORIES "${OGC_ROOT}/include")
 

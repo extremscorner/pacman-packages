@@ -27,22 +27,24 @@ list(APPEND CMAKE_TRY_COMPILE_PLATFORM_VARIABLES DKP_OGC_PLATFORM_LIBRARY)
 
 if("${DKP_OGC_PLATFORM_LIBRARY}" STREQUAL "libogc")
     set(OGC_ROOT "${DEVKITPRO}/libogc")
-    set(DKP_INSTALL_PREFIX_INIT "${DEVKITPRO}/portlibs/${OGC_CONSOLE}")
+    set(OGC_PORTLIBS "${DEVKITPRO}/portlibs/${OGC_CONSOLE}")
 elseif("${DKP_OGC_PLATFORM_LIBRARY}" STREQUAL "libogc2")
-    set(OGC_SUBDIR "")
     set(OGC_ROOT "${DEVKITPRO}/libogc2/${OGC_CONSOLE}")
-    set(DKP_INSTALL_PREFIX_INIT "${OGC_ROOT}")
+    set(OGC_SUBDIR "")
+    set(OGC_PORTLIBS "${OGC_ROOT}")
 else()
     message(FATAL_ERROR "Unsupported OGC platform library: '${DKP_OGC_PLATFORM_LIBRARY}'")
 endif()
 
+set(DKP_INSTALL_PREFIX_INIT "${OGC_PORTLIBS}")
+
 __dkp_platform_prefix(
     ${OGC_ROOT}
-    ${DEVKITPRO}/portlibs/${OGC_CONSOLE}
+    ${OGC_PORTLIBS}
     ${DEVKITPRO}/portlibs/ppc
 )
 
-find_program(PKG_CONFIG_EXECUTABLE NAMES powerpc-eabi-pkg-config HINTS "${DKP_INSTALL_PREFIX_INIT}/bin")
+find_program(PKG_CONFIG_EXECUTABLE NAMES powerpc-eabi-pkg-config HINTS "${OGC_PORTLIBS}/bin")
 if (NOT PKG_CONFIG_EXECUTABLE)
     message(FATAL_ERROR "Could not find powerpc-eabi-pkg-config: try installing ${OGC_CONSOLE}-pkg-config")
 endif()

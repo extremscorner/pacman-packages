@@ -2,8 +2,8 @@
 
 _pkgname=embedded-game-controller
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r127.f92a7b7
-pkgrel=1
+pkgver=r147.1f11afb
+pkgrel=2
 pkgdesc='Game controller library for embedded devices.'
 arch=('any')
 url='https://github.com/extremscorner/embedded-game-controller'
