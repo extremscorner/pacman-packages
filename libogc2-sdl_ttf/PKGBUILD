@@ -1,0 +1,40 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=SDL_ttf
+pkgname="libogc2-${_pkgname,,}"
+pkgver=2.0.11.r47.g3af6dd2
+pkgrel=1
+pkgdesc='A library that allows you to use TrueType fonts in your SDL applications.'
+arch=('any')
+url='https://github.com/libsdl-org/SDL_ttf'
+license=('Zlib')
+groups=('gamecube-portlibs' 'gamecube-sdl-libs' 'wii-portlibs' 'wii-sdl-libs')
+depends=('devkitPPC' 'libogc2-sdl' 'ppc-freetype')
+makedepends=('git' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("git+${url}.git#commit=3af6dd26174bb719c241447d1ea55e40597bb9a6")
+sha256sums=('9d784023a8525f13adfeb0a446b037fc39a8c44ddbcc4707833006cd5ef046f5')
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	git describe --tags --abbrev=7 | sed 's/^release-//;s/-/.r/;s/-/./'
+}
+
+build() {
+	for platform in gamecube wii; do
+		mkdir -p "${srcdir}/${_pkgname}/build-${platform}"
+		cd "${srcdir}/${_pkgname}/build-${platform}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		../configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
+		make
+	done
+}
+
+package() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}/build-${platform}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" make install
+		install -Dm 644 ../COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+	done
+}
