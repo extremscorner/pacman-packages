@@ -1,0 +1,56 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=SDL_image
+pkgname=(libogc2-${_pkgname,,}{,-full})
+pkgver=1.2.12.r114.g2ffb2e3
+pkgrel=1
+pkgdesc='A simple library to load images of various formats as SDL surfaces.'
+arch=('any')
+url='https://github.com/libsdl-org/SDL_image'
+license=('Zlib')
+groups=('gamecube-portlibs' 'gamecube-sdl-libs' 'wii-portlibs' 'wii-sdl-libs')
+depends=('devkitPPC' 'libogc2-sdl' 'ppc-libjpeg-turbo' 'ppc-libpng')
+makedepends=('git' 'libogc2-dkp-toolchain-vars' 'ppc-libtiff' 'ppc-libwebp')
+options=(!strip libtool staticlibs)
+source=("git+${url}.git#commit=2ffb2e3e1eba037897164e3ac6c67570d8bccd79")
+sha256sums=('fb45e167bfef90381f4629dc0b4278ccac745488ebe02f1ce11b6788c29af846')
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	git describe --tags --abbrev=7 | sed 's/^release-//;s/-/.r/;s/-/./'
+}
+
+build() {
+	for platform in gamecube wii; do
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		mkdir -p "${srcdir}/${_pkgname}/build-${platform}" && cd "${_}"
+		../configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-tif --disable-webp
+		make
+		mkdir -p "${srcdir}/${_pkgname}/build-${platform}-full" && cd "${_}"
+		../configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
+		make
+	done
+}
+
+package_libogc2-sdl_image() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}/build-${platform}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" make install
+		install -Dm 644 ../COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+	done
+}
+
+package_libogc2-sdl_image-full() {
+	groups=()
+	depends+=('ppc-libtiff' 'ppc-libwebp')
+	provides=("libogc2-${_pkgname,,}")
+	conflicts=("libogc2-${_pkgname,,}")
+
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}/build-${platform}-full"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" make install
+		install -Dm 644 ../COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+	done
+}
