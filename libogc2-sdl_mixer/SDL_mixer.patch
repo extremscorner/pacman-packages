@@ -1,0 +1,28 @@
+ load_ogg.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/load_ogg.c b/load_ogg.c
+index e1622f18..c1516079 100644
+--- a/load_ogg.c
++++ b/load_ogg.c
+@@ -103,7 +103,7 @@ SDL_AudioSpec *Mix_LoadOGG_RW (SDL_RWops *src, int freesrc,
+     *audio_len = 0;
+     memset(spec, '\0', sizeof (SDL_AudioSpec));
+ 
+-    spec->format = AUDIO_S16;
++    spec->format = AUDIO_S16SYS;
+     spec->channels = info->channels;
+     spec->freq = info->rate;
+     spec->samples = 4096; /* buffer size */
+@@ -122,9 +122,9 @@ SDL_AudioSpec *Mix_LoadOGG_RW (SDL_RWops *src, int freesrc,
+ 	 read > 0;
+ 	 read = vorbis.ov_read(&vf, (char *)buf, to_read, &bitstream))
+ #else
+-    for (read = vorbis.ov_read(&vf, (char *)buf, to_read, 0/*LE*/, 2/*16bit*/, 1/*signed*/, &bitstream);
++    for (read = vorbis.ov_read(&vf, (char *)buf, to_read, SDL_BYTEORDER == SDL_BIG_ENDIAN, 2, 1, &bitstream);
+          read > 0;
+-         read = vorbis.ov_read(&vf, (char *)buf, to_read, 0, 2, 1, &bitstream))
++         read = vorbis.ov_read(&vf, (char *)buf, to_read, SDL_BYTEORDER == SDL_BIG_ENDIAN, 2, 1, &bitstream))
+ #endif	 
+     {
+         if (read == OV_HOLE || read == OV_EBADLINK)

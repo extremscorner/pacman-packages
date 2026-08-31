@@ -1,0 +1,46 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=SDL_mixer
+pkgname="libogc2-${_pkgname,,}"
+pkgver=1.2.12.r183.g5051774
+pkgrel=1
+pkgdesc='A simple multi-channel audio mixer.'
+arch=('any')
+url='https://github.com/libsdl-org/SDL_mixer'
+license=('Zlib')
+groups=('gamecube-portlibs' 'gamecube-sdl-libs' 'wii-portlibs' 'wii-sdl-libs')
+depends=('devkitPPC' 'libogc2-sdl' 'ppc-flac' 'ppc-libmikmod' 'ppc-libvorbis' 'ppc-mpg123')
+makedepends=('git' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("git+${url}.git#commit=50517740a3916e5ffd719c053c6e7b65f933e23a"
+		"${_pkgname}.patch")
+sha256sums=('20a3de2b1540d94ecf95e2b20656ba88547a48100a924cae8770bd8b950f5d64'
+			'3d15bab46ff0b575f2a54ec133f42923865c39b4c53b3f8d0e0650db3d1ffc82')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	git apply "${srcdir}/${_pkgname}.patch"
+}
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	git describe --tags --abbrev=7 | sed 's/^release-//;s/-/.r/;s/-/./'
+}
+
+build() {
+	for platform in gamecube wii; do
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		mkdir -p "${srcdir}/${_pkgname}/build-${platform}" && cd "${_}"
+		../configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --disable-music-cmd
+		make
+	done
+}
+
+package() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}/build-${platform}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" make install
+		install -Dm 644 ../COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+	done
+}
