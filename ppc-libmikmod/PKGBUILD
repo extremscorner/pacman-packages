@@ -1,0 +1,31 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libmikmod
+pkgname="ppc-${_pkgname}"
+pkgver=3.3.13
+pkgrel=1
+pkgdesc='Module player library supporting many formats, including MOD, S3M, IT and XM.'
+arch=('any')
+url='https://mikmod.sourceforge.net/'
+license=('LGPL-2.0-or-later')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("https://downloads.sourceforge.net/sourceforge/mikmod/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('9fc1799f7ea6a95c7c5882de98be85fc7d20ba0a4a6fcacae11c8c6b382bb207')
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DENABLE_DOC=OFF -DENABLE_SHARED=OFF -DHAVE_PTHREAD=ON
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	install -Dm 644 libmikmod.m4 -t "${pkgdir}${PORTLIBS_PREFIX}/share/aclocal"
+	install -Dm 644 COPYING.{LESSER,LIB} -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
