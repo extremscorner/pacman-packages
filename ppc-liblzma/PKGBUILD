@@ -2,8 +2,8 @@
 
 _pkgname=xz
 pkgname=ppc-liblzma
-pkgver=5.8.3
-pkgrel=2
+pkgver=5.8.4
+pkgrel=1
 pkgdesc='A general-purpose data compression library.'
 arch=('any')
 url='https://github.com/tukaani-project/xz'
@@ -14,8 +14,8 @@ makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('8ec1767fa517642ecb4cf08b891ce667ba6f143551e382b07c7ef437bda335e2'
-			'7c2bfee2c7f3427cc31f9c2cab922ad825cac39bafe1ab74a8f35340d882623d')
+sha256sums=('b6b34c52e672e810d339db14e0c10b5b6f5f67a30d8d05cdac5d8cb4d82f78d5'
+			'165504b4a518bb2998bb626d1a011bf20e2946fd242722518eb9be3dbac37787')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
