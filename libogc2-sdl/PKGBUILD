@@ -3,7 +3,7 @@
 _pkgname=SDL
 pkgname="libogc2-${_pkgname,,}"
 pkgver=1.2.15
-pkgrel=23
+pkgrel=24
 pkgdesc='A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard.'
 arch=('any')
 url='https://www.libsdl.org/'
@@ -15,8 +15,8 @@ optdepends=('libogc2-glu: OpenGL support'
 			'libogc2-opengx: OpenGL support'
 			'ppc-libiconv: iconv support')
 options=(!strip libtool staticlibs)
-source=('git+https://github.com/extremscorner/SDL.git#commit=1dd9ada824eead9da2e76fd29ccccd0252630461')
-sha256sums=('e6a8aaefe7bdbab2dc090af156e5cb1cc290f0628606313b4370e71f070debb7')
+source=('git+https://github.com/extremscorner/SDL.git#commit=2d901a1e7d9f962bb19f25e5ff1477c081c08e0e')
+sha256sums=('fc5ec30067ec413492e776b0d81163611e3f7072f3950838822b7fa6f78e75ed')
 
 prepare() {
 	cd "${srcdir}/${_pkgname}"
