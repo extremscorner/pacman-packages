@@ -1,0 +1,24 @@
+ src/platforms/rcore_gamecube.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/platforms/rcore_gamecube.c b/src/platforms/rcore_gamecube.c
+index f8053233..1d4bf6e3 100644
+--- a/src/platforms/rcore_gamecube.c
++++ b/src/platforms/rcore_gamecube.c
+@@ -335,6 +335,7 @@ void DisableCursor(void)
+ // Swap back buffer with front buffer (screen drawing)
+ void SwapScreenBuffer(void)
+ {
++    GX_SetCopyFilter(rmode->aa, rmode->sample_pattern, GX_TRUE, rmode->vfilter);
+     GX_CopyDisp(xfb[which_fb], GX_TRUE);
+     GX_DrawDone();
+ 
+@@ -421,7 +422,7 @@ static const struct {
+ 
+ static void MapControls(int padIndex, int index) 
+ {
+-    uint16_t gcButton=PAD_ButtonsDown(index);
++    uint16_t gcButton = PAD_ButtonsHeld(index);
+     // Iterate over the button map and update button states
+     for (int j = 0; j < sizeof(buttonMap) / sizeof(buttonMap[0]); j++) {
+         if (gcButton & buttonMap[j].gcButton) {

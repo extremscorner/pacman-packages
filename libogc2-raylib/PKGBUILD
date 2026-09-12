@@ -3,7 +3,7 @@
 _pkgname=raylib
 pkgname="libogc2-${_pkgname}"
 pkgver=6.0
-pkgrel=3
+pkgrel=4
 pkgdesc='Simple and easy-to-use game programming library.'
 arch=('any')
 url='https://www.raylib.com/'
@@ -12,8 +12,15 @@ groups=('gamecube-portlibs')
 depends=('devkitPPC' 'libogc2' 'libogc2-libfat' 'libogc2-opengx')
 makedepends=('git')
 options=(!strip libtool staticlibs)
-source=('git+https://github.com/raylib4Consoles/raylib.git#commit=16b57ca2875af42f0affffb31cdbbe7c42aba5f1')
-sha256sums=('d61ab98cf9b036354f7fe695a5f7b25557aa2e6ead8649ee1f0d52c2cde1fd09')
+source=('git+https://github.com/raylib4Consoles/raylib.git#commit=8d41c3edecbbd8baa8df7d2fb02d59006b453af6'
+		"${_pkgname}.patch")
+sha256sums=('fe02110c80fe6c05aad1a520000849435038c1fa7e948e66bc3370c1f1647dc1'
+			'7db6350cb3b5465ae24b506dbaf3e17e9debd391cc534483e79292bf1a823b1c')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	git apply "${srcdir}/${_pkgname}.patch"
+}
 
 build() {
 	cd "${srcdir}/${_pkgname}/src"
