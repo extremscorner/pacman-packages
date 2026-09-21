@@ -1,0 +1,22 @@
+--- uchardet-0.0.8/CMakeLists.txt.orig	2022-12-08 20:52:25.000000000 +0000
++++ uchardet-0.0.8/CMakeLists.txt	2022-12-08 20:52:25.000000000 +0000
+@@ -3,7 +3,7 @@
+ include(CheckCCompilerFlag)
+ set (PACKAGE_NAME uchardet)
+ project (${PACKAGE_NAME} CXX C)
+-enable_testing()
++include(CTest)
+ 
+ ######## Package information
+ set (PACKAGE_URL https://www.freedesktop.org/wiki/Software/uchardet/)
+@@ -71,7 +71,9 @@
+ 
+ add_subdirectory(src)
+ add_subdirectory(doc)
+-add_subdirectory(test)
++if (BUILD_TESTING)
++	add_subdirectory(test)
++endif (BUILD_TESTING)
+ 
+ ######## Exported targets
+ 

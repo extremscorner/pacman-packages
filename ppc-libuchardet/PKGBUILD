@@ -1,0 +1,37 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=uchardet
+pkgname="ppc-lib${_pkgname}"
+pkgver=0.0.8
+pkgrel=1
+pkgdesc='An encoding detector library ported from Mozilla.'
+arch=('any')
+url='https://www.freedesktop.org/wiki/Software/uchardet/'
+license=('GPL-2.0-or-later' 'LGPL-2.1-or-later' 'MPL-1.1')
+groups=('ppc-portlibs')
+depends=('devkitPPC')
+makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
+options=(!strip libtool staticlibs)
+source=("https://www.freedesktop.org/software/uchardet/releases/${_pkgname}-${pkgver}.tar.xz"
+		"${_pkgname}-${pkgver}.patch")
+sha256sums=('e97a60cfc00a1c147a674b097bb1422abd9fa78a2d9ce3f3fdcc2e78a34ac5f0'
+			'788a0df065377d7047efcf7e82be433a0153439f33314b76dbad5964dba21aa7')
+
+prepare() {
+	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	powerpc-eabi-cmake -B build -DBUILD_BINARY=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	source "${DEVKITPRO}/libogc2/ppcvars.sh"
+	DESTDIR="${pkgdir}" cmake --install build
+	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
+	install -Dm 644 COPYING -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
+}
