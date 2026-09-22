@@ -3,7 +3,7 @@
 _pkgname=libiconv
 pkgname="ppc-${_pkgname}"
 pkgver=1.19
-pkgrel=2
+pkgrel=3
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'
@@ -26,7 +26,7 @@ prepare() {
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --enable-extra-encodings
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
 	make
 }
 
