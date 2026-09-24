@@ -3,7 +3,7 @@
 _pkgname=libiconv
 pkgname="ppc-${_pkgname}"
 pkgver=1.19
-pkgrel=3
+pkgrel=4
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'
@@ -13,11 +13,14 @@ depends=('devkitPPC')
 makedepends=('libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("https://ftp.gnu.org/pub/gnu/libiconv/${_pkgname}-${pkgver}.tar.gz"
-		"${_pkgname}-${pkgver}.patch")
+		"${_pkgname}-${pkgver}.patch"
+		'iconv.pc.in')
 sha256sums=('88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6'
-			'b982689f93273e01812eaccf17410d1555b83033ee02064afc1f88f89155e372')
+			'b982689f93273e01812eaccf17410d1555b83033ee02064afc1f88f89155e372'
+			'c359368cfe5c3eaeb4bde6946e9f73090211a0e42f6e3a93c2e7511a3a5a7149')
 
 prepare() {
+	sed "s/@VERSION@/${pkgver}/g" iconv.pc.in > iconv.pc
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
 	cd "${srcdir}/${_pkgname}-${pkgver}"
 	sed -i '/cd src/d' Makefile.in
@@ -35,5 +38,6 @@ package() {
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install
 	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
+	install -Dm 644 ../iconv.pc -t "${pkgdir}${PORTLIBS_PREFIX}/lib/pkgconfig"
 	install -Dm 644 COPYING.LIB -t "${pkgdir}${PORTLIBS_PREFIX}/licenses/${pkgname}"
 }
