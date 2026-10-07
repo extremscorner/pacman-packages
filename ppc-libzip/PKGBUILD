@@ -2,8 +2,8 @@
 
 _pkgname=libzip
 pkgname="ppc-${_pkgname}"
-pkgver=1.11.4
-pkgrel=3
+pkgver=1.12
+pkgrel=1
 pkgdesc='C library for reading, creating, and modifying zip archives.'
 arch=('any')
 url='https://libzip.org/'
@@ -14,8 +14,8 @@ makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("${url}/download/${_pkgname}-${pkgver}.tar.xz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('8a247f57d1e3e6f6d11413b12a6f28a9d388de110adc0ec608d893180ed7097b'
-			'2bfb5d35900dcc2445b9d29118a91fd1ce49ba032bd808d21fc01867249c23c8')
+sha256sums=('376908d0f0fda13180a19fdc4f7062a1abfb59e09ca07a392d361253b8e60c2b'
+			'3bdcfe7a4fb1735e9ff344023db63629e7a4c799410ddeaa1c336b44b0e21e94')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
