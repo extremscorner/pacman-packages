@@ -1,40 +1,43 @@
 # Maintainer: Extrems <extrems@extremscorner.org>
 
 _pkgname=libiconv
-pkgname="ppc-${_pkgname}"
+pkgname="ppc-${_pkgname}-lite"
 pkgver=1.19
-pkgrel=5
+pkgrel=1
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'
 license=('LGPL-2.1-or-later')
-groups=('ppc-portlibs')
 depends=('devkitPPC')
-makedepends=('libogc2-dkp-toolchain-vars' 'patch')
+makedepends=('gcc' 'git' 'gperf' 'groff' 'libogc2-dkp-toolchain-vars')
+provides=("ppc-${_pkgname}")
+conflicts=("ppc-${_pkgname}")
 options=(!strip libtool staticlibs)
-source=("https://ftp.gnu.org/pub/gnu/libiconv/${_pkgname}-${pkgver}.tar.gz"
-		"${_pkgname}-${pkgver}.patch"
+source=('git+https://git.savannah.gnu.org/git/gnulib.git'
+		'git+https://git.savannah.gnu.org/git/libiconv.git#commit=a8850dc314a906b7bbe49a7c60424c7b10f57236'
+		"${_pkgname}.patch"
 		'iconv.pc.in')
-sha256sums=('88dd96a8c0464eca144fc791ae60cd31cd8ee78321e67397e25fc095c4a19aa6'
-			'b982689f93273e01812eaccf17410d1555b83033ee02064afc1f88f89155e372'
+sha256sums=('SKIP'
+			'ea79aca087c40a6b79a72ec016134fd7419c13a8232a926e3042ed740bed9193'
+			'c41dc2ef5681975f283b4e3652557b95884b5afeab1b7f4c852f420847c6c354'
 			'c359368cfe5c3eaeb4bde6946e9f73090211a0e42f6e3a93c2e7511a3a5a7149')
 
 prepare() {
 	sed "s/@VERSION@/${pkgver}/g" iconv.pc.in > iconv.pc
-	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
-	cd "${srcdir}/${_pkgname}-${pkgver}"
-	sed -i '/cd src/d' Makefile.in
+	cd "${srcdir}/${_pkgname}"
+	git apply "${srcdir}/${_pkgname}.patch"
+	GNULIB_SRCDIR="${srcdir}/gnulib" ./autogen.sh
 }
 
 build() {
-	cd "${srcdir}/${_pkgname}-${pkgver}"
+	cd "${srcdir}/${_pkgname}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi --enable-extra-encodings
+	./configure --prefix="${PORTLIBS_PREFIX}" --host=powerpc-eabi
 	make
 }
 
 package() {
-	cd "${srcdir}/${_pkgname}-${pkgver}"
+	cd "${srcdir}/${_pkgname}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
 	DESTDIR="${pkgdir}" make install
 	rm -r "${pkgdir}${PORTLIBS_PREFIX}/share"
