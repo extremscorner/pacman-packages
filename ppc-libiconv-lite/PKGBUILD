@@ -3,7 +3,7 @@
 _pkgname=libiconv
 pkgname="ppc-${_pkgname}-lite"
 pkgver=1.19
-pkgrel=2
+pkgrel=3
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'
@@ -19,7 +19,7 @@ source=('git+https://git.savannah.gnu.org/git/gnulib.git'
 		'iconv.pc.in')
 sha256sums=('SKIP'
 			'ea79aca087c40a6b79a72ec016134fd7419c13a8232a926e3042ed740bed9193'
-			'67830ede327218ad101d8f9edafda90db521010707418e463a31d0f8f85c39e8'
+			'9f7c7325eba5d750d4d4a7a61f0b4d3f4c306c0c477439236be7e45fa2098622'
 			'c359368cfe5c3eaeb4bde6946e9f73090211a0e42f6e3a93c2e7511a3a5a7149')
 
 prepare() {
