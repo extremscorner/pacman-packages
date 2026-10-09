@@ -1,11 +1,28 @@
- Makefile.in        |  22 --
- lib/converters.h   | 231 -------------
- lib/encodings.def  | 932 -----------------------------------------------------
- lib/genflags.c     |  14 -
- lib/iconv.c        |   3 -
- lib/loop_unicode.h |  80 -----
- 6 files changed, 1282 deletions(-)
+ Makefile.devel            |   4 +-
+ Makefile.in               |  22 --
+ lib/converters.h          | 231 ------------
+ lib/encodings.def         | 932 ----------------------------------------------
+ lib/genflags.c            |  14 -
+ lib/iconv.c               |   3 -
+ lib/loop_unicode.h        |  80 ----
+ libcharset/Makefile.devel |   2 +-
+ 8 files changed, 3 insertions(+), 1285 deletions(-)
 
+diff --git a/Makefile.devel b/Makefile.devel
+index efcf358..d43157a 100644
+--- a/Makefile.devel
++++ b/Makefile.devel
+@@ -13,8 +13,8 @@ SHELL = /bin/sh
+ MAKE = make
+ AUTOCONF = autoconf
+ AUTOHEADER = autoheader
+-AUTOMAKE = automake-1.18
+-ACLOCAL = aclocal-1.18
++AUTOMAKE = automake
++ACLOCAL = aclocal
+ GPERF = gperf
+ 
+ # Ignore the built-in default for CC. Also ignore $(CC) if it is empty.
 diff --git a/Makefile.in b/Makefile.in
 index 32d9f07..eb33ea3 100644
 --- a/Makefile.in
@@ -1500,3 +1517,16 @@ index e001033..031733b 100644
    if (wc >= 0x2018 && wc <= 0x201a) {
      /* Special case for quotation marks 0x2018, 0x2019, 0x201a */
      ucs4_t substitute =
+diff --git a/libcharset/Makefile.devel b/libcharset/Makefile.devel
+index e1f5cba..506421a 100644
+--- a/libcharset/Makefile.devel
++++ b/libcharset/Makefile.devel
+@@ -5,7 +5,7 @@ SHELL = /bin/sh
+ MAKE = make
+ AUTOCONF = autoconf
+ AUTOHEADER = autoheader
+-ACLOCAL = aclocal-1.18
++ACLOCAL = aclocal
+ CP = cp
+ RM = rm -f
+ 
