@@ -2,8 +2,8 @@
 
 _pkgname=libmad
 pkgname="ppc-${_pkgname}"
-pkgver=0.16.4
-pkgrel=12
+pkgver=0.16.5
+pkgrel=1
 pkgdesc='A high-quality MPEG audio decoder.'
 arch=('any')
 url='https://codeberg.org/tenacityteam/libmad'
@@ -14,8 +14,8 @@ makedepends=('cmake' 'libogc2-dkp-toolchain-vars' 'patch')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('f4eb229452252600ce48f3c2704c9e6d97b789f81e31c37b0c67dd66f445ea35'
-			'11fbc95febe4dac0300a099c6c0ec5fd69a830cb9e6408ac9b086f702e70c9a0')
+sha256sums=('e32320a010e3cc00bfa66e0cde523a969313cddfd81e07ec4e3ef06d10ad3fe0'
+			'ac94319d51a1227563b3246b18b88c3786c1dfb8d7102cb0396b4f8897b94000')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
@@ -24,7 +24,7 @@ prepare() {
 build() {
 	cd "${srcdir}/${_pkgname}"
 	source "${DEVKITPRO}/libogc2/ppcvars.sh"
-	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}" -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+	powerpc-eabi-cmake -B build -DCMAKE_INSTALL_PREFIX="${PORTLIBS_PREFIX}"
 	cmake --build build
 }
 

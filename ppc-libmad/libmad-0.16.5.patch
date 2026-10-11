@@ -1,6 +1,6 @@
---- libmad/CMakeLists.txt.orig	2023-09-24 01:51:31.000000000 +0000
-+++ libmad/CMakeLists.txt	2023-09-24 01:51:31.000000000 +0000
-@@ -84,7 +84,7 @@
+--- libmad/CMakeLists.txt.orig	2026-10-11 16:17:26.000000000 +0000
++++ libmad/CMakeLists.txt	2026-10-11 16:17:26.000000000 +0000
+@@ -100,7 +100,7 @@
  elseif(CMAKE_SYSTEM_PROCESSOR MATCHES ".*(sparc|SPARC).*")
    message(STATUS "Using SPARC fixed point math")
    option(FPM_SPARC "SPARC fixed point math" ON)
