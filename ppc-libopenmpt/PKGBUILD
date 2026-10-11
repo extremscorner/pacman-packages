@@ -3,7 +3,7 @@
 _pkgname=libopenmpt
 pkgname="ppc-${_pkgname}"
 pkgver=0.8.9
-pkgrel=1
+pkgrel=2
 pkgdesc='A library to render tracker music to a PCM audio stream.'
 arch=('any')
 url='https://lib.openmpt.org/libopenmpt/'

@@ -3,7 +3,7 @@
 _pkgname=libiconv
 pkgname="ppc-${_pkgname}-lite"
 pkgver=1.19
-pkgrel=3
+pkgrel=4
 pkgdesc='GNU charset conversion library.'
 arch=('any')
 url='https://www.gnu.org/software/libiconv/'

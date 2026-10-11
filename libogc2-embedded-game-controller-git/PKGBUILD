@@ -2,7 +2,7 @@
 
 _pkgname=embedded-game-controller
 pkgname="libogc2-${_pkgname}-git"
-pkgver=r147.1f11afb
+pkgver=r183.6140839
 pkgrel=2
 pkgdesc='Game controller library for embedded devices.'
 arch=('any')

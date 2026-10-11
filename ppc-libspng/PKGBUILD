@@ -3,7 +3,7 @@
 _pkgname=libspng
 pkgname="ppc-${_pkgname}"
 pkgver=0.7.4
-pkgrel=1
+pkgrel=2
 pkgdesc='Simple, modern libpng alternative.'
 arch=('any')
 url='https://github.com/randy408/libspng'

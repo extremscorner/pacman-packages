@@ -3,7 +3,7 @@
 _pkgname=SDL_image
 pkgname=(libogc2-${_pkgname,,}{,-full})
 pkgver=1.2.12.r114.g2ffb2e3
-pkgrel=1
+pkgrel=2
 pkgdesc='A simple library to load images of various formats as SDL surfaces.'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_image'

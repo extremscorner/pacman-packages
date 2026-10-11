@@ -3,7 +3,7 @@
 _pkgname=ode
 pkgname="ppc-${_pkgname}"
 pkgver=0.16.6
-pkgrel=2
+pkgrel=3
 pkgdesc='A free, industrial quality library for simulating articulated rigid body dynamics.'
 arch=('any')
 url='https://github.com/odedevs/ode'

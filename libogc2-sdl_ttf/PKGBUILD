@@ -3,7 +3,7 @@
 _pkgname=SDL_ttf
 pkgname="libogc2-${_pkgname,,}"
 pkgver=2.0.11.r47.g3af6dd2
-pkgrel=2
+pkgrel=3
 pkgdesc='A library that allows you to use TrueType fonts in your SDL applications.'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_ttf'

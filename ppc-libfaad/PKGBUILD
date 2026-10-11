@@ -3,7 +3,7 @@
 _pkgname=faad2
 pkgname="ppc-lib${_pkgname%?}"
 pkgver=2.11.4
-pkgrel=1
+pkgrel=2
 pkgdesc='ISO AAC audio decoder.'
 arch=('any')
 url='https://github.com/knik0/faad2'

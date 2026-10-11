@@ -3,7 +3,7 @@
 _pkgname=box2d
 pkgname="ppc-${_pkgname}"
 pkgver=2.4.2
-pkgrel=1
+pkgrel=2
 pkgdesc='2D rigid body simulation library for games.'
 arch=('any')
 url='https://github.com/erincatto/box2d'

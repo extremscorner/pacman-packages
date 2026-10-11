@@ -3,7 +3,7 @@
 _pkgname=libmikmod
 pkgname="ppc-${_pkgname}"
 pkgver=3.3.15
-pkgrel=1
+pkgrel=2
 pkgdesc='Module player library supporting many formats, including MOD, S3M, IT and XM.'
 arch=('any')
 url='https://mikmod.sourceforge.net/'

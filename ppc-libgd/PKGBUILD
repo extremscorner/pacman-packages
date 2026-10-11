@@ -3,7 +3,7 @@
 _pkgname=gd
 pkgname="ppc-lib${_pkgname}"
 pkgver=2.3.3
-pkgrel=4
+pkgrel=5
 pkgdesc='Library for the dynamic creation of images by programmers.'
 arch=('any')
 url='https://github.com/libgd/libgd'
