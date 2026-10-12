@@ -2,8 +2,8 @@
 
 _pkgname=freetype
 pkgname="ppc-${_pkgname}"
-pkgver=2.14.3
-pkgrel=3
+pkgver=2.15.0
+pkgrel=1
 pkgdesc='TrueType font rendering library.'
 arch=('any')
 url='https://www.freetype.org/'
@@ -13,7 +13,7 @@ depends=('devkitPPC' 'ppc-libbrotli' 'ppc-libbz2' 'ppc-libpng' 'ppc-zlib')
 makedepends=('libogc2-dkp-toolchain-vars' 'meson')
 options=(!strip libtool staticlibs)
 source=("https://download.savannah.gnu.org/releases/freetype/${_pkgname}-${pkgver}.tar.xz")
-sha256sums=('36bc4f1cc413335368ee656c42afca65c5a3987e8768cc28cf11ba775e785a5f')
+sha256sums=('93cd47eb719c325107f2d3cf087d06299e944c3b48a40b55537302304dea1dd5')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
