@@ -2,7 +2,7 @@
 
 _pkgname=bt-embedded
 pkgname=(libogc2-${_pkgname}{,-obex}-git)
-pkgver=r318.bb8fc62
+pkgver=r319.177994b
 pkgrel=2
 pkgdesc='Bluetooth classic library for embedded devices.'
 arch=('any')
@@ -43,8 +43,8 @@ package_libogc2-bt-embedded-obex-git() {
 	license=('LGPL-2.1-or-later')
 	groups=()
 	depends+=('libogc2-openobex')
-	provides+=("libogc2-${_pkgname}-git")
-	conflicts+=("libogc2-${_pkgname}-git")
+	provides+=(libogc2-${_pkgname}{-obex,-git})
+	conflicts+=(libogc2-${_pkgname}{-obex,-git})
 
 	cd "${srcdir}/${_pkgname}"
 	source "${DEVKITPRO}/libogc2/wiivars.sh"
