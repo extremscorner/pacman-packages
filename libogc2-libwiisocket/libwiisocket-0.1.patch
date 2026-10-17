@@ -31,7 +31,42 @@
  dist-src:
 --- libwiisocket-v0.1/source/wiisocket_heap.c.orig	2021-02-27 21:31:52.000000000 +0000
 +++ libwiisocket-v0.1/source/wiisocket_heap.c	2021-02-27 21:31:52.000000000 +0000
-@@ -34,16 +34,14 @@
+@@ -2,23 +2,20 @@
+ 
+ #define WIISOCKET_HEAP_SIZE     (64 * 1024)
+ 
+-int
+-__wiisocket_heap_initialized = 0;
+-
+-heap_cntrl
++static mspace
+ __wiisocket_heap;
+ 
+ void *
+ __wiisocket_malloc(size_t size)
+ {
+-    return __lwp_heap_allocate(&__wiisocket_heap, size);
++    return mspace_malloc(__wiisocket_heap, size);
+ }
+ 
+ void
+ __wiisocket_free(void *ptr)
+ {
+-    __lwp_heap_free(&__wiisocket_heap, ptr);
+-} 
++    mspace_free(__wiisocket_heap, ptr);
++}
+ 
+ int
+ __wiisocket_heap_init(void)
+@@ -28,28 +25,23 @@
+     
+     _CPU_ISR_Disable(level);
+     
+-    if (__wiisocket_heap_initialized)
++    if (__wiisocket_heap)
+     {
+         _CPU_ISR_Restore(level);
          return 0;
      }
      
@@ -47,6 +82,25 @@
      
 -    SYS_SetArena2Hi(__wiisocket_heap_ptr);
 -    
-     __lwp_heap_init(&__wiisocket_heap,
-                     __wiisocket_heap_ptr,
-                     WIISOCKET_HEAP_SIZE,
+-    __lwp_heap_init(&__wiisocket_heap,
+-                    __wiisocket_heap_ptr,
+-                    WIISOCKET_HEAP_SIZE,
+-                    32);
+-    
+-    __wiisocket_heap_initialized = 1;
++    __wiisocket_heap = create_mspace_with_base(__wiisocket_heap_ptr,
++                                               WIISOCKET_HEAP_SIZE,
++                                               1);
+     
+     _CPU_ISR_Restore(level);
+     
+--- libwiisocket-v0.1/source/wiisocket_internal.h.orig	2021-02-27 21:31:52.000000000 +0000
++++ libwiisocket-v0.1/source/wiisocket_internal.h	2021-02-27 21:31:52.000000000 +0000
+@@ -2,7 +2,6 @@
+ #include <ogc/machine/processor.h>
+ #include <ogc/ipc.h>
+ #include <ogc/lwp.h>
+-#include <ogc/lwp_heap.h>
+ #include <ogc/system.h>
+ #include <sys/iosupport.h>
+ #include <sys/socket.h>
