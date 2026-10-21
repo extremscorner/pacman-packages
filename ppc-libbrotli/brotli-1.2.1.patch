@@ -1,5 +1,5 @@
---- brotli-1.2.0/c/common/platform.h.orig	2025-10-27 13:07:48.000000000 +0000
-+++ brotli-1.2.0/c/common/platform.h	2025-10-27 13:07:48.000000000 +0000
+--- brotli-1.2.1/c/common/platform.h.orig	2026-10-21 13:10:51.000000000 +0000
++++ brotli-1.2.1/c/common/platform.h	2026-10-21 13:10:51.000000000 +0000
 @@ -191,6 +191,10 @@
  #define BROTLI_TARGET_X64
  #endif
