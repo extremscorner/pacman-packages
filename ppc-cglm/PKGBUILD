@@ -2,8 +2,8 @@
 
 _pkgname=cglm
 pkgname="ppc-${_pkgname}"
-pkgver=0.9.6
-pkgrel=3
+pkgver=0.9.7
+pkgrel=1
 pkgdesc='OpenGL Mathematics (glm) for C.'
 arch=('any')
 url='https://github.com/recp/cglm'
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('be5e7d384561eb0fca59724a92b7fb44bf03e588a7eae5123a7d796002928184')
+sha256sums=('cc0862eee2885d2a2b4870eb29b97c6e9b9ebc7c66e8854e1fa8f3d18d9d8475')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
