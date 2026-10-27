@@ -2,8 +2,8 @@
 
 _pkgname=libogc2
 pkgname=(${_pkgname}{,-docs}-git)
-pkgver=r2474.8a0c14e
-pkgrel=2
+pkgver=r2491.171fed5
+pkgrel=1
 pkgdesc='C library for GameCube and Wii targeting devkitPPC.'
 arch=('any')
 url='https://github.com/extremscorner/libogc2'
@@ -33,6 +33,9 @@ package_libogc2-git() {
 
 	cd "${srcdir}/${_pkgname}"
 	DESTDIR="${pkgdir}" make install
+	install -Dm 644 lwip/COPYING -t "${pkgdir}${DEVKITPRO}/libogc2/gamecube/share/licenses/lwip"
+	install -Dm 644 lwbt/copying -t "${pkgdir}${DEVKITPRO}/libogc2/wii/share/licenses/lwbt"
+	install -Dm 644 wiiuse/license_libogc.txt -t "${pkgdir}${DEVKITPRO}/libogc2/wii/share/licenses/wiiuse"
 }
 
 package_libogc2-docs-git() {
