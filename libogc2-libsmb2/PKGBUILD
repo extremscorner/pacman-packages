@@ -1,0 +1,39 @@
+# Maintainer: Extrems <extrems@extremscorner.org>
+
+_pkgname=libsmb2
+pkgname="libogc2-${_pkgname}"
+pkgver=6.3.1
+pkgrel=1
+pkgdesc='SMB2/3 userspace client.'
+arch=('any')
+url='https://github.com/sahlberg/libsmb2'
+license=('LGPL-2.1-or-later')
+groups=('gamecube-portlibs' 'wii-portlibs')
+depends=('devkitPPC' 'libogc2')
+makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
+options=(!strip libtool staticlibs)
+source=("git+${url}.git#tag=${_pkgname}-${pkgver}")
+sha256sums=('7711f2c12d75b07cb7022764efa3e915c79c439630a84d195a224c7a011a5821')
+
+prepare() {
+	cd "${srcdir}/${_pkgname}"
+	git cherry-pick -n 79f79d4ae3820e00e2545411d9a5b70d3e6f96a5
+}
+
+build() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		powerpc-eabi-cmake -B build-${platform}
+		cmake --build build-${platform}
+	done
+}
+
+package() {
+	for platform in gamecube wii; do
+		cd "${srcdir}/${_pkgname}"
+		source "${DEVKITPRO}/libogc2/${platform}vars.sh"
+		DESTDIR="${pkgdir}" cmake --install build-${platform}
+		install -Dm 644 LICENCE-LGPL-2.1.txt -t "${pkgdir}${PORTLIBS_PREFIX}/share/licenses/${_pkgname}"
+	done
+}
