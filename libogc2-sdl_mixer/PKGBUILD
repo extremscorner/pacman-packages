@@ -2,8 +2,8 @@
 
 _pkgname=SDL_mixer
 pkgname="libogc2-${_pkgname,,}"
-pkgver=1.2.12.r187.g4936c70
-pkgrel=2
+pkgver=1.2.12.r191.g1640765
+pkgrel=1
 pkgdesc='A simple multi-channel audio mixer.'
 arch=('any')
 url='https://github.com/libsdl-org/SDL_mixer'
@@ -12,9 +12,9 @@ groups=('gamecube-portlibs' 'gamecube-sdl-libs' 'wii-portlibs' 'wii-sdl-libs')
 depends=('devkitPPC' 'libogc2-sdl' 'ppc-flac' 'ppc-libmikmod' 'ppc-libvorbis' 'ppc-mpg123')
 makedepends=('git' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
-source=("git+${url}.git#commit=4936c70895f464e68941fc9dbf097bfb4579475a"
+source=("git+${url}.git#commit=16407659fd7a3af53171d6561fd7681593591509"
 		"${_pkgname}.patch")
-sha256sums=('4c33f28a5356f810a0094e7ffa1dc31eb5062d33df225d6d3529da80a5c5747b'
+sha256sums=('7100ef760ffcbd738233e8282e973b621fc68cdd2a2e573113e08729c4754e4c'
 			'3d15bab46ff0b575f2a54ec133f42923865c39b4c53b3f8d0e0650db3d1ffc82')
 
 prepare() {

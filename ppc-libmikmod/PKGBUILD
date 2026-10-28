@@ -2,8 +2,8 @@
 
 _pkgname=libmikmod
 pkgname="ppc-${_pkgname}"
-pkgver=3.3.15
-pkgrel=2
+pkgver=3.3.16
+pkgrel=1
 pkgdesc='Module player library supporting many formats, including MOD, S3M, IT and XM.'
 arch=('any')
 url='https://mikmod.sourceforge.net/'
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("https://downloads.sourceforge.net/sourceforge/mikmod/${_pkgname}-${pkgver}.tar.gz")
-sha256sums=('dc27b338154b8f88dc9e6317196d42c6abc13bf63c4e055257a18d4e38e1afa2')
+sha256sums=('7b24e41468b0dfe7fae1104ae6a0d7c52e04a65e1851b268c7074e4d06685a53')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
