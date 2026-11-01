@@ -2,8 +2,8 @@
 
 _pkgname=libopenmpt
 pkgname="ppc-${_pkgname}"
-pkgver=0.8.9
-pkgrel=2
+pkgver=0.8.10
+pkgrel=1
 pkgdesc='A library to render tracker music to a PCM audio stream.'
 arch=('any')
 url='https://lib.openmpt.org/libopenmpt/'
@@ -13,7 +13,7 @@ depends=('devkitPPC' 'ppc-libogg' 'ppc-libvorbis' 'ppc-mpg123' 'ppc-zlib')
 makedepends=('libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("https://lib.openmpt.org/files/libopenmpt/src/${_pkgname}-${pkgver}+release.autotools.tar.gz")
-sha256sums=('d7ce84fd05d686c4bcf66af40eae857afa371442db60eeda3f874bd6cf6fc318')
+sha256sums=('976d259288c40cd285771f77d09eff3d02514511d5677ecfcfb53be5013317e2')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}+release.autotools"
