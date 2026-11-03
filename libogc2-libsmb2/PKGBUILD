@@ -2,7 +2,7 @@
 
 _pkgname=libsmb2
 pkgname="libogc2-${_pkgname}"
-pkgver=6.3.1
+pkgver=6.3.2
 pkgrel=1
 pkgdesc='SMB2/3 userspace client.'
 arch=('any')
@@ -13,7 +13,7 @@ depends=('devkitPPC' 'libogc2')
 makedepends=('cmake' 'git' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("git+${url}.git#tag=${_pkgname}-${pkgver}")
-sha256sums=('7711f2c12d75b07cb7022764efa3e915c79c439630a84d195a224c7a011a5821')
+sha256sums=('3fbfba9c341c2e910ee6c9f9411e9d9a7e36add4dee49d62a3fbed020105b72c')
 
 prepare() {
 	cd "${srcdir}/${_pkgname}"
