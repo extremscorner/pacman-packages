@@ -2,8 +2,8 @@
 
 _pkgname=lz4
 pkgname="ppc-lib${_pkgname}"
-pkgver=1.10.0
-pkgrel=3
+pkgver=1.11.0
+pkgrel=1
 pkgdesc='Extremely fast compression algorithm.'
 arch=('any')
 url='https://github.com/lz4/lz4'
@@ -17,8 +17,8 @@ replaces=("ppc-${_pkgname}")
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz"
 		"${_pkgname}-${pkgver}.patch")
-sha256sums=('537512904744b35e232912055ccf8ec66d768639ff3abe5788d90d792ec5f48b'
-			'a89b53aacd008399a4fc475398be4e2b6fcd9eb11a91e93d1ddc0370fb854608')
+sha256sums=('247e5fa64da5f7b75ee3dd3bed484076396c9ebe8254d9ccf693eb62800c5e26'
+			'87812cd9250777f7d33c8fec0fe382c6427d3ecf4131c064c6fe4f5d2c100e0c')
 
 prepare() {
 	patch -Np 0 -i "${_pkgname}-${pkgver}.patch"
