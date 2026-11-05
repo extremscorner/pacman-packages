@@ -1,0 +1,20 @@
+--- zlib-1.4/CMakeLists.txt.orig	2026-11-05 04:32:10.000000000 +0000
++++ zlib-1.4/CMakeLists.txt	2026-11-05 04:32:10.000000000 +0000
+@@ -301,7 +301,7 @@
+ if(ZLIB_BUILD_STATIC)
+     add_library(zlibstatic STATIC ${ZLIB_SRCS} ${ZLIB_PUBLIC_HDRS}
+                                   ${ZLIB_PRIVATE_HDRS})
+-    add_library(ZLIB::ZLIBSTATIC ALIAS zlibstatic)
++    add_library(ZLIB::ZLIB ALIAS zlibstatic)
+     target_include_directories(
+         zlibstatic
+         PUBLIC $<BUILD_INTERFACE:${zlib_BINARY_DIR}>
+@@ -333,7 +333,7 @@
+ 
+     set_target_properties(zlibstatic
+         PROPERTIES
+-            EXPORT_NAME ZLIBSTATIC
++            EXPORT_NAME ZLIB
+             PUBLIC_HEADER "${ZLIB_PUBLIC_HDRS}")
+ endif(ZLIB_BUILD_STATIC)
+ 
