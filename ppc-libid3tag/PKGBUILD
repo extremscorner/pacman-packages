@@ -3,7 +3,7 @@
 _pkgname=libid3tag
 pkgname="ppc-${_pkgname}"
 pkgver=0.16.4
-pkgrel=3
+pkgrel=4
 pkgdesc='A library for reading and (eventually) writing ID3 tags, both ID3v1 and the various versions of ID3v2.'
 arch=('any')
 url='https://codeberg.org/tenacityteam/libid3tag'
@@ -13,7 +13,7 @@ depends=('devkitPPC' 'ppc-zlib')
 makedepends=('cmake' 'gperf' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('ceb88ada1aa867c87c1d748a8aa40e68db5b0d2df636a9dab0ab1f7741d5e009')
+sha256sums=('2e9058af51e5f3881c13c55a9790abb9870812cc0f5917b6f3e825c6ae9b9f39')
 
 build() {
 	cd "${srcdir}/${_pkgname}"
