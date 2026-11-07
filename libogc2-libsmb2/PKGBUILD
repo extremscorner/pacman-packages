@@ -3,7 +3,7 @@
 _pkgname=libsmb2
 pkgname="libogc2-${_pkgname}"
 pkgver=6.3.2
-pkgrel=1
+pkgrel=2
 pkgdesc='SMB2/3 userspace client.'
 arch=('any')
 url='https://github.com/sahlberg/libsmb2'
@@ -18,6 +18,7 @@ sha256sums=('3fbfba9c341c2e910ee6c9f9411e9d9a7e36add4dee49d62a3fbed020105b72c')
 prepare() {
 	cd "${srcdir}/${_pkgname}"
 	git cherry-pick -n 79f79d4ae3820e00e2545411d9a5b70d3e6f96a5
+	git cherry-pick -n 30fa5ae58e0de0d12379887f3d2f9b92b72c65cb
 }
 
 build() {
