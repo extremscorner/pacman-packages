@@ -2,8 +2,8 @@
 
 _pkgname=fmt
 pkgname="ppc-${_pkgname}"
-pkgver=12.2.0
-pkgrel=2
+pkgver=12.2.1
+pkgrel=1
 pkgdesc='A modern formatting library.'
 arch=('any')
 url='https://github.com/fmtlib/fmt'
@@ -13,7 +13,7 @@ depends=('devkitPPC')
 makedepends=('cmake' 'libogc2-dkp-toolchain-vars')
 options=(!strip libtool staticlibs)
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('8b852bb5aa6e7d8564f9e81394055395dd1d1936d38dfd3a17792a02bebd7af0')
+sha256sums=('449374d74f31b67796dece454d59b93e6f1538efcce0e9ac78000c98142c139e')
 
 build() {
 	cd "${srcdir}/${_pkgname}-${pkgver}"
